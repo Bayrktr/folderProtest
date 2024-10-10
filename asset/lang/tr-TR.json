@@ -1,0 +1,11 @@
+{
+  "general": {
+    "settings": "Ayarlar"
+  },
+  "settings": {
+    "theme": "Tema"
+  },
+  "errors": {
+    "nullErrorMessage": ""
+  }
+}
