@@ -20,9 +20,12 @@ PdfModel _$PdfModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PdfModel {
+  @HiveField(1)
   int? get id => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  String? get url => throw _privateConstructorUsedError;
+  @HiveField(2)
+  String? get name => throw _privateConstructorUsedError;
+  @HiveField(3)
+  String? get path => throw _privateConstructorUsedError;
 
   /// Serializes this PdfModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +42,10 @@ abstract class $PdfModelCopyWith<$Res> {
   factory $PdfModelCopyWith(PdfModel value, $Res Function(PdfModel) then) =
       _$PdfModelCopyWithImpl<$Res, PdfModel>;
   @useResult
-  $Res call({int? id, String? title, String? url});
+  $Res call(
+      {@HiveField(1) int? id,
+      @HiveField(2) String? name,
+      @HiveField(3) String? path});
 }
 
 /// @nodoc
@@ -58,21 +64,21 @@ class _$PdfModelCopyWithImpl<$Res, $Val extends PdfModel>
   @override
   $Res call({
     Object? id = freezed,
-    Object? title = freezed,
-    Object? url = freezed,
+    Object? name = freezed,
+    Object? path = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -86,7 +92,10 @@ abstract class _$$PdfModelImplCopyWith<$Res>
       __$$PdfModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? title, String? url});
+  $Res call(
+      {@HiveField(1) int? id,
+      @HiveField(2) String? name,
+      @HiveField(3) String? path});
 }
 
 /// @nodoc
@@ -103,21 +112,21 @@ class __$$PdfModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? title = freezed,
-    Object? url = freezed,
+    Object? name = freezed,
+    Object? path = freezed,
   }) {
     return _then(_$PdfModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -126,21 +135,26 @@ class __$$PdfModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PdfModelImpl extends _PdfModel {
-  _$PdfModelImpl({this.id, this.title, this.url}) : super._();
+  _$PdfModelImpl(
+      {@HiveField(1) this.id, @HiveField(2) this.name, @HiveField(3) this.path})
+      : super._();
 
   factory _$PdfModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PdfModelImplFromJson(json);
 
   @override
+  @HiveField(1)
   final int? id;
   @override
-  final String? title;
+  @HiveField(2)
+  final String? name;
   @override
-  final String? url;
+  @HiveField(3)
+  final String? path;
 
   @override
   String toString() {
-    return 'PdfModel(id: $id, title: $title, url: $url)';
+    return 'PdfModel(id: $id, name: $name, path: $path)';
   }
 
   @override
@@ -149,13 +163,13 @@ class _$PdfModelImpl extends _PdfModel {
         (other.runtimeType == runtimeType &&
             other is _$PdfModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.url, url) || other.url == url));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.path, path) || other.path == path));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, url);
+  int get hashCode => Object.hash(runtimeType, id, name, path);
 
   /// Create a copy of PdfModel
   /// with the given fields replaced by the non-null parameter values.
@@ -174,19 +188,24 @@ class _$PdfModelImpl extends _PdfModel {
 }
 
 abstract class _PdfModel extends PdfModel {
-  factory _PdfModel({final int? id, final String? title, final String? url}) =
-      _$PdfModelImpl;
+  factory _PdfModel(
+      {@HiveField(1) final int? id,
+      @HiveField(2) final String? name,
+      @HiveField(3) final String? path}) = _$PdfModelImpl;
   _PdfModel._() : super._();
 
   factory _PdfModel.fromJson(Map<String, dynamic> json) =
       _$PdfModelImpl.fromJson;
 
   @override
+  @HiveField(1)
   int? get id;
   @override
-  String? get title;
+  @HiveField(2)
+  String? get name;
   @override
-  String? get url;
+  @HiveField(3)
+  String? get path;
 
   /// Create a copy of PdfModel
   /// with the given fields replaced by the non-null parameter values.

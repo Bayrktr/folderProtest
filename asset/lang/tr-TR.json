@@ -1,11 +1,27 @@
 {
   "general": {
-    "settings": "Ayarlar"
+    "settings": "Ayarlar",
+    "save": "Kaydet",
+    "cancel": "Cancel",
+    "okey": "Tamam",
+    "edit": "Düzenle",
+    "delete": "Sil"
   },
   "settings": {
     "theme": "Tema"
   },
   "errors": {
-    "nullErrorMessage": ""
+    "nullErrorMessage": "",
+    "folderAlreadyExists": "Bu klasör zaten mevcut"
+  },
+  "validate": {
+    "directoryNameCannotEmpty": "Klasör adı boş veya yalnızca boşluk olamaz",
+    "thereIsAnotherDirectoryWithThisName": "Bu isme sahip başka bir klasör var"
+  },
+  "home": {
+    "selectDirectory": "Klasör seç"
+  },
+  "directoryOpen": {
+    "selectPdf": "Pdf seç"
   }
 }

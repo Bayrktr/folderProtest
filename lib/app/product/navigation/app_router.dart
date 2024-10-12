@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/view/features/homePdfOpen/view/home_pdf_open_view.dart';
+import 'package:flutter/material.dart';
+import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
+import 'package:pdf_app/app/features/directory_add/view/directory_add_view.dart';
+import 'package:pdf_app/app/features/home/view/features/homePdf/view/features/home_directory_open/view/directory_open_view.dart';
 import 'package:pdf_app/app/features/home/view/features/homePdf/view/home_pdf_view.dart';
+import 'package:pdf_app/app/features/home/view/features/settings/view/settings_view.dart';
 import 'package:pdf_app/app/features/home/view/home_view.dart';
 import 'package:pdf_app/app/features/language/view/language_view.dart';
 import 'package:pdf_app/app/features/login/view/login_view.dart';
-import 'package:pdf_app/app/features/settings/view/settings_view.dart';
 
 part 'app_router.gr.dart';
 
@@ -22,6 +25,14 @@ class AppRouter extends RootStackRouter {
           path: RoutePath.language.path,
         ),
         AdaptiveRoute(
+          page: DirectoryAddRoute.page,
+          path: RoutePath.directoryAdd.path,
+        ),
+        AdaptiveRoute(
+          page: DirectoryOpenRoute.page,
+          path: RoutePath.directoryOpen.path,
+        ),
+        AdaptiveRoute(
           page: HomeRoute.page,
           path: RoutePath.home.path,
           initial: true,
@@ -29,12 +40,6 @@ class AppRouter extends RootStackRouter {
             AdaptiveRoute(
               page: HomePdfRoute.page,
               path: RoutePath.homePdf.path,
-              children: [
-                AdaptiveRoute(
-                  page: HomePdfOpenRoute.page,
-                  path: RoutePath.homePdfOpen.path,
-                ),
-              ],
             ),
             AdaptiveRoute(
               page: SettingsRoute.page,
@@ -50,9 +55,10 @@ enum RoutePath {
   login('/login'),
   home('/home'),
   language('/language'),
+  directoryAdd('/directoryAdd'),
   settings('settings'),
   homePdf('homePdf'),
-  homePdfOpen('homePdfOpen');
+  directoryOpen('/directoryOpen');
 
   const RoutePath(this.path);
 

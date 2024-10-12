@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
 import 'package:pdf_app/app/core/extention/localization/localization_extention.dart';
 import 'package:pdf_app/app/core/extention/string/null_string_extention.dart';
-import 'package:pdf_app/app/features/settings/view/component/settings_list_tile.dart';
-import 'package:pdf_app/app/features/settings/view/settings_view_mixin.dart';
+import 'package:pdf_app/app/features/home/view/features/settings/view/component/settings_list_tile.dart';
+import 'package:pdf_app/app/features/home/view/features/settings/view/settings_view_mixin.dart';
 import 'package:pdf_app/app/product/bloc/theme/theme_cubit.dart';
 import 'package:pdf_app/app/product/bloc/theme/theme_state.dart';
 import 'package:pdf_app/app/product/component/text/locale_text.dart';
@@ -79,6 +79,7 @@ class SettingsView extends StatelessWidget with SettingsViewMixin {
     required BuildContext context,
   }) =>
       AppBar(
+        automaticallyImplyLeading: false,
         title: LocaleText(
           text: LocaleKeys.general_settings,
           textStyle: context.theme.getTextStyle.headline1,

@@ -1,0 +1,114 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pdf_app/app/core/extention/string/string_extention.dart';
+import 'package:pdf_app/app/features/directory_add/bloc/directory_add_cubit_mixin.dart';
+import 'package:pdf_app/app/features/directory_add/bloc/directory_add_state.dart';
+import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
+import 'package:pdf_app/app/features/home/view/features/homePdf/model/all_directory_model.dart';
+import 'package:pdf_app/app/product/cache/hive/operation/all_directory_operation.dart';
+import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
+import 'package:pdf_app/generated/locale_keys.g.dart';
+
+class DirectoryAddCubit extends Cubit<DirectoryAddState>
+    with DirectoryAddCubitMixin {
+  DirectoryAddCubit() : super(DirectoryAddState());
+
+  final AllDirectoryOperation _allDirectoryOperation =
+      GetItManager.getIt<AllDirectoryOperation>();
+
+  final TextEditingController _directoryNameController =
+      TextEditingController();
+
+  TextEditingController get directoryNameController => _directoryNameController;
+
+  Future<void> initDatabase() async {
+    emit(
+      state.copyWith(
+        status: DirectoryAddStatus.loading,
+      ),
+    );
+    await _allDirectoryOperation.start(AllDirectoryModel.allDirectoryKey);
+
+    emit(
+      state.copyWith(
+        status: DirectoryAddStatus.initial,
+      ),
+    );
+  }
+
+  void updateDirectoryName(String? value) {
+    if (value == null) return;
+    directoryNameController.text = value;
+  }
+
+  void allReset() {
+    resetPopUpStatus();
+    resetStatus();
+  }
+
+  void resetPopUpStatus() {
+    emit(
+      state.copyWith(
+        popUpStatus: DirectoryAddPopUpStatus.initial,
+      ),
+    );
+  }
+
+  void resetStatus() {
+    emit(
+      state.copyWith(
+        status: DirectoryAddStatus.initial,
+      ),
+    );
+  }
+
+  Future<void> updateAllDirectory(DirectoryModel? newDirectoryModel) async {
+    emit(
+      state.copyWith(
+        status: DirectoryAddStatus.loading,
+      ),
+    );
+
+    final response =
+        _allDirectoryOperation.getItem(AllDirectoryModel.allDirectoryKey);
+
+    if (response?.allDirectory == null || newDirectoryModel == null) {
+      emit(
+        state.copyWith(
+          status: DirectoryAddStatus.error,
+          statusMessage: LocaleKeys.errors_folderAlreadyExists.lang.tr,
+        ),
+      );
+    } else {
+      final mutableAllDirectory =
+          List<DirectoryModel>.from(response!.allDirectory!);
+
+      if (!isDuplicate(
+        mutableAllDirectory,
+        newDirectoryModel,
+      )) {
+        mutableAllDirectory.insert(0, newDirectoryModel);
+
+        await _allDirectoryOperation.addOrUpdateItem(
+          response.copyWith(
+            allDirectory: mutableAllDirectory,
+          ),
+        );
+        emit(
+          state.copyWith(
+            status: DirectoryAddStatus.finish,
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            popUpStatus: DirectoryAddPopUpStatus.show,
+            popUpStatusMessage: LocaleKeys.validate_thereIsAnotherDirectoryWithThisName.lang.tr,
+            status: DirectoryAddStatus.initial,
+          ),
+        );
+        resetPopUpStatus();
+      }
+    }
+  }
+}

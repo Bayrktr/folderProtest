@@ -5,6 +5,7 @@ class ThemeState with EquatableMixin {
   ThemeState({
     required this.theme,
   });
+
   final ThemeData theme;
 
   @override
@@ -15,5 +16,7 @@ class ThemeState with EquatableMixin {
   ThemeState copyWith({
     ThemeData? theme,
   }) =>
-      ThemeState(theme: theme ?? this.theme);
+      ThemeState(
+        theme: theme ?? this.theme,
+      );
 }

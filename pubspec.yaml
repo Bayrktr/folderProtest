@@ -60,6 +60,25 @@ dependencies:
   flutter_bloc: ^8.1.6
 
 
+  #Injection
+  get_it: ^8.0.0
+
+  #File
+  file_picker: ^5.0.0
+  path_provider: ^2.0.0
+
+
+  #Permission
+  permission_handler: ^10.0.0
+
+
+  #Other
+  uuid: ^3.0.6  
+
+
+
+
+
 
 dev_dependencies:
   flutter_test:

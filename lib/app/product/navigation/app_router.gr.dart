@@ -10,22 +10,85 @@
 part of 'app_router.dart';
 
 /// generated route for
-/// [HomePdfOpenView]
-class HomePdfOpenRoute extends PageRouteInfo<void> {
-  const HomePdfOpenRoute({List<PageRouteInfo>? children})
-      : super(
-          HomePdfOpenRoute.name,
+/// [DirectoryAddView]
+class DirectoryAddRoute extends PageRouteInfo<DirectoryAddRouteArgs> {
+  DirectoryAddRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DirectoryAddRoute.name,
+          args: DirectoryAddRouteArgs(key: key),
           initialChildren: children,
         );
 
-  static const String name = 'HomePdfOpenRoute';
+  static const String name = 'DirectoryAddRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const HomePdfOpenView();
+      final args = data.argsAs<DirectoryAddRouteArgs>(
+          orElse: () => const DirectoryAddRouteArgs());
+      return DirectoryAddView(key: args.key);
     },
   );
+}
+
+class DirectoryAddRouteArgs {
+  const DirectoryAddRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DirectoryAddRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [DirectoryOpenView]
+class DirectoryOpenRoute extends PageRouteInfo<DirectoryOpenRouteArgs> {
+  DirectoryOpenRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DirectoryOpenRoute.name,
+          args: DirectoryOpenRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DirectoryOpenRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DirectoryOpenRouteArgs>(
+          orElse: () => const DirectoryOpenRouteArgs());
+      return DirectoryOpenView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+      );
+    },
+  );
+}
+
+class DirectoryOpenRouteArgs {
+  const DirectoryOpenRouteArgs({
+    this.key,
+    this.directoryModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  @override
+  String toString() {
+    return 'DirectoryOpenRouteArgs{key: $key, directoryModel: $directoryModel}';
+  }
 }
 
 /// generated route for

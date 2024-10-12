@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_app/app/core/constant/settings.dart';
 import 'package:pdf_app/app/product/bloc/theme/theme_cubit.dart';
 import 'package:pdf_app/app/product/bloc/theme/theme_state.dart';
+import 'package:pdf_app/app/product/init/app_init.dart';
 import 'package:pdf_app/app/product/navigation/app_router.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
 
-  await EasyLocalization.ensureInitialized();
+  AppInit.mainInit();
 
   runApp(
     EasyLocalization(
