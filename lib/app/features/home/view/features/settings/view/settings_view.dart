@@ -9,9 +9,7 @@ import 'package:pdf_app/app/features/home/view/features/settings/view/component/
 import 'package:pdf_app/app/features/home/view/features/settings/view/settings_view_mixin.dart';
 import 'package:pdf_app/app/product/bloc/theme/theme_cubit.dart';
 import 'package:pdf_app/app/product/bloc/theme/theme_state.dart';
-import 'package:pdf_app/app/product/component/text/locale_text.dart';
 import 'package:pdf_app/app/product/navigation/app_router.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
 
 @RoutePage()
 class SettingsView extends StatelessWidget with SettingsViewMixin {
@@ -19,70 +17,59 @@ class SettingsView extends StatelessWidget with SettingsViewMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _getAppBar(
-        context: context,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: context.sized.widthNormalValue,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.sized.widthNormalValue,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(
-              height: 30,
-            ),
-            BlocBuilder<ThemeCubit, ThemeState>(
-              builder: (context, state) {
-                return SettingsListTile(
-                  leading: Icon(
-                    isThemeLight(state.theme)
-                        ? Icons.sunny
-                        : Icons.sunny_snowing,
-                    size: 30,
-                    color: context.theme.getColor.iconColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          const SizedBox(
+            height: 30,
+          ),
+          BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return SettingsListTile(
+
+                leading: Icon(
+                  isThemeLight(
+                    state.theme.themeData ?? ThemeData.dark(),
+                  )
+                      ? Icons.sunny
+                      : Icons.sunny_snowing,
+                  size: 30,
+                  color: context.theme.getColor.iconColor,
+                ),
+                traling: Switch(
+                  value: isThemeLight(
+                    state.theme.themeData ?? ThemeData.dark(),
                   ),
-                  traling: Switch(
-                    value: isThemeLight(state.theme),
-                    onChanged: (bool value) {
-                      context.read<ThemeCubit>().setTheme();
-                    },
-                    activeColor: context.theme.getColor.focusColor,
-                  ),
-                );
-              },
+                  onChanged: (bool value) {
+                    context.read<ThemeCubit>().setTheme();
+                  },
+                  activeColor: context.theme.getColor.focusColor,
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          SettingsListTile(
+            onTap: () {
+              context.router.push(const LanguageRoute());
+            },
+            leading: Icon(
+              Icons.language,
+              size: 30,
+              color: context.theme.getColor.iconColor,
             ),
-            const SizedBox(
-              height: 10,
+            traling: Image.asset(
+              context.locale.getFlagAsset.forNull.getImageNotFoundAsset,
             ),
-            SettingsListTile(
-              onTap: () {
-                context.router.push(const LanguageRoute());
-              },
-              leading: Icon(
-                Icons.language,
-                size: 30,
-                color: context.theme.getColor.iconColor,
-              ),
-              traling: Image.asset(
-                context.locale.getFlagAsset.forNull.getImageNotFoundAsset,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
-
-  AppBar _getAppBar({
-    required BuildContext context,
-  }) =>
-      AppBar(
-        automaticallyImplyLeading: false,
-        title: LocaleText(
-          text: LocaleKeys.general_settings,
-          textStyle: context.theme.getTextStyle.headline1,
-        ),
-      );
 }

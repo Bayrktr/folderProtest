@@ -19,7 +19,7 @@ class DirectoryModelAdapter extends TypeAdapter<DirectoryModel> {
     return DirectoryModel(
       id: fields[1] as int?,
       name: fields[2] as String?,
-      pdfList: (fields[3] as List?)?.cast<PdfModel?>(),
+      pdfListKey: fields[3] as int?,
       tagColor: fields[4] as Color?,
     );
   }
@@ -33,7 +33,7 @@ class DirectoryModelAdapter extends TypeAdapter<DirectoryModel> {
       ..writeByte(2)
       ..write(obj.name)
       ..writeByte(3)
-      ..write(obj.pdfList)
+      ..write(obj.pdfListKey)
       ..writeByte(4)
       ..write(obj.tagColor);
   }
@@ -57,10 +57,7 @@ _$DirectoryModelImpl _$$DirectoryModelImplFromJson(Map<String, dynamic> json) =>
     _$DirectoryModelImpl(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      pdfList: (json['pdfList'] as List<dynamic>?)
-          ?.map((e) =>
-              e == null ? null : PdfModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      pdfListKey: (json['pdfListKey'] as num?)?.toInt(),
       tagColor: _colorFromJson((json['tagColor'] as num?)?.toInt()),
     );
 
@@ -69,6 +66,6 @@ Map<String, dynamic> _$$DirectoryModelImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'pdfList': instance.pdfList,
+      'pdfListKey': instance.pdfListKey,
       'tagColor': _colorToJson(instance.tagColor),
     };

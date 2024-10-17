@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/bloc/home_pdf_state.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/model/all_directory_model.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/bloc/home_pdf_state.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
 import 'package:pdf_app/app/product/cache/hive/operation/all_directory_operation.dart';
 import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
 import 'package:pdf_app/app/product/package/uuid/id_generator.dart';
@@ -11,6 +11,14 @@ class HomePdfCubit extends Cubit<HomePdfState> {
 
   final AllDirectoryOperation _allDirectoryOperation =
       GetItManager.getIt<AllDirectoryOperation>();
+
+  void resetSnackBarStatus() {
+    emit(
+      state.copyWith(
+        snackBarStatus: HomePdfSnackBarStatus.inital,
+      ),
+    );
+  }
 
   Future<void> initDatabase() async {
     // await _allDirectoryOperation.start(AllDirectoryModel.allDirectoryKey);
@@ -91,7 +99,9 @@ class HomePdfCubit extends Cubit<HomePdfState> {
       state.copyWith(
         status: HomePdfStatus.initial,
         allDirectory: newAllDirectoryModel,
+        snackBarStatus: HomePdfSnackBarStatus.deletedSuccess,
       ),
     );
+    resetSnackBarStatus();
   }
 }

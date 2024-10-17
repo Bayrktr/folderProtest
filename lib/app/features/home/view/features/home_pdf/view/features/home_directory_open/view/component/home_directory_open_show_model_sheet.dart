@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
 import 'package:pdf_app/app/product/component/text/locale_text.dart';
 import 'package:pdf_app/generated/locale_keys.g.dart';
 
-class HomePdfShowModelSheet extends StatelessWidget {
-  final DirectoryModel directoryModel;
+class HomeDirectoryOpenShowModelSheet extends StatelessWidget {
+  final PdfModel pdfModel;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
 
-  const HomePdfShowModelSheet({
+  const HomeDirectoryOpenShowModelSheet({
     super.key,
-    required this.directoryModel,
+    required this.pdfModel,
     required this.onDelete,
     required this.onEdit,
   });
@@ -19,6 +20,7 @@ class HomePdfShowModelSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       children: <Widget>[
+
         ListTile(
           leading: const Icon(Icons.edit),
           title: const LocaleText(
@@ -39,7 +41,6 @@ class HomePdfShowModelSheet extends StatelessWidget {
             onDelete();
           },
         ),
-
       ],
     );
   }

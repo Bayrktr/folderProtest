@@ -17,8 +17,16 @@ abstract class  LocaleKeys {
   static const validate_thereIsAnotherDirectoryWithThisName = 'validate.thereIsAnotherDirectoryWithThisName';
   static const validate = 'validate';
   static const home_selectDirectory = 'home.selectDirectory';
+  static const home_directoryDeletedSuccessfully = 'home.directoryDeletedSuccessfully';
   static const home = 'home';
+  static const directoryAdd_directoryAdd = 'directoryAdd.directoryAdd';
+  static const directoryAdd = 'directoryAdd';
   static const directoryOpen_selectPdf = 'directoryOpen.selectPdf';
+  static const directoryOpen_addPdfd = 'directoryOpen.addPdfd';
   static const directoryOpen = 'directoryOpen';
+  static const pdfAdd_pdfAdd = 'pdfAdd.pdfAdd';
+  static const pdfAdd_fileWasNotAddedOrIncorrecty = 'pdfAdd.fileWasNotAddedOrIncorrecty';
+  static const pdfAdd_thereIsAnotherPdfWithName = 'pdfAdd.thereIsAnotherPdfWithName';
+  static const pdfAdd = 'pdfAdd';
 
 }

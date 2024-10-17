@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
 import 'package:pdf_app/app/core/extention/string/null_string_extention.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/bloc/home_pdf_cubit.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/bloc/home_pdf_state.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/view/component/home_pdf_show_model_sheet.dart';
+import 'package:pdf_app/app/core/extention/string/string_extention.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/bloc/home_pdf_cubit.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/bloc/home_pdf_state.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/view/component/home_pdf_show_model_sheet.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/view/component/home_pdf_snack_bar.dart';
 import 'package:pdf_app/app/product/component/alert_dialog/show_dialog.dart';
 import 'package:pdf_app/app/product/component/text/locale_text.dart';
 import 'package:pdf_app/app/product/navigation/app_router.dart';
@@ -53,7 +55,7 @@ class HomePdfView extends StatelessWidget {
                               child: ListTile(
                                 onTap: () {
                                   context.router.push(
-                                    DirectoryOpenRoute(
+                                    HomeDirectoryOpenRoute(
                                       directoryModel: item,
                                     ),
                                   );
@@ -70,6 +72,13 @@ class HomePdfView extends StatelessWidget {
                                       context: context,
                                       widget: HomePdfShowModelSheet(
                                         directoryModel: item,
+                                        onAdd: () {
+                                          context.router.push(
+                                            AddPdfRoute(
+                                              directoryModel: item,
+                                            ),
+                                          );
+                                        },
                                         onDelete: () {
                                           context
                                               .read<HomePdfCubit>()
@@ -104,7 +113,16 @@ class HomePdfView extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
             }
           },
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state.snackBarStatus == HomePdfSnackBarStatus.deletedSuccess) {
+              HomePdfSnackBar(
+                message: LocaleKeys.home_directoryDeletedSuccessfully.lang.tr,
+                duration: const Duration(
+                  seconds: 1,
+                ),
+              ).show(context);
+            }
+          },
         ),
       ),
     );

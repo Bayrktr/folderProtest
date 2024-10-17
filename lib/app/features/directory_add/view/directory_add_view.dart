@@ -9,9 +9,11 @@ import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
 import 'package:pdf_app/app/features/directory_add/view/directory_add_view_mixin.dart';
 import 'package:pdf_app/app/product/component/alert_dialog/custom_pop_up.dart';
 import 'package:pdf_app/app/product/component/alert_dialog/show_dialog.dart';
+import 'package:pdf_app/app/product/component/text/locale_text.dart';
 import 'package:pdf_app/app/product/navigation/app_router.dart';
 import 'package:pdf_app/app/product/package/uuid/id_generator.dart';
 import 'package:pdf_app/app/product/utility/validator/text_form_field_validator.dart';
+import 'package:pdf_app/generated/locale_keys.g.dart';
 
 @RoutePage()
 class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
@@ -78,7 +80,7 @@ class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
                                       .read<DirectoryAddCubit>()
                                       .directoryNameController
                                       .text,
-                                  pdfList: [],
+                                  pdfListKey: IdGenerator.randomIntId,
                                   tagColor: Colors.red,
                                 ),
                               );
@@ -99,11 +101,12 @@ class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
               IShowDialog(
                 context: context,
                 widget: CustomPopup(
-                  title:  context
+                  title: context
                       .read<DirectoryAddCubit>()
                       .directoryNameController
                       .text,
-                  message: state.popUpStatusMessage.forNull.getGeneralNullMessage,
+                  message:
+                      state.popUpStatusMessage.forNull.getGeneralNullMessage,
                   onConfirm: () {
                     context.router.maybePop();
                   },
@@ -111,7 +114,12 @@ class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
               ).getDialog();
             }
             if (state.status == DirectoryAddStatus.finish) {
-              context.router.popAndPush(const HomeRoute());
+              context.router.pushAndPopUntil(
+                const HomeRoute(),
+                predicate: (Route<dynamic> route) {
+                  return false;
+                },
+              );
             }
           },
         ),
@@ -123,6 +131,7 @@ class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
     required BuildContext context,
   }) {
     return AppBar(
+      title: const LocaleText(text: LocaleKeys.directoryAdd_directoryAdd),
       leading: IconButton(
         onPressed: () {
           context.router.popAndPush(const HomeRoute());

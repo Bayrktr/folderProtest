@@ -4,7 +4,7 @@ import 'package:pdf_app/app/core/extention/string/string_extention.dart';
 import 'package:pdf_app/app/features/directory_add/bloc/directory_add_cubit_mixin.dart';
 import 'package:pdf_app/app/features/directory_add/bloc/directory_add_state.dart';
 import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/model/all_directory_model.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
 import 'package:pdf_app/app/product/cache/hive/operation/all_directory_operation.dart';
 import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
 import 'package:pdf_app/generated/locale_keys.g.dart';

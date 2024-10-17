@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/model/pdf_model.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
 
 part 'directory_model.freezed.dart';
 part 'directory_model.g.dart';
@@ -12,7 +12,7 @@ class DirectoryModel with _$DirectoryModel {
   factory DirectoryModel({
     @HiveField(1) int? id,
     @HiveField(2) String? name,
-    @HiveField(3) List<PdfModel?>? pdfList,
+    @HiveField(3) int? pdfListKey,
     @HiveField(4)
     @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
     Color? tagColor,

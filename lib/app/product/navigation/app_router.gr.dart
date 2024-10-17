@@ -10,6 +10,53 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [AddPdfView]
+class AddPdfRoute extends PageRouteInfo<AddPdfRouteArgs> {
+  AddPdfRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AddPdfRoute.name,
+          args: AddPdfRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AddPdfRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<AddPdfRouteArgs>(orElse: () => const AddPdfRouteArgs());
+      return AddPdfView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+      );
+    },
+  );
+}
+
+class AddPdfRouteArgs {
+  const AddPdfRouteArgs({
+    this.key,
+    this.directoryModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  @override
+  String toString() {
+    return 'AddPdfRouteArgs{key: $key, directoryModel: $directoryModel}';
+  }
+}
+
+/// generated route for
 /// [DirectoryAddView]
 class DirectoryAddRoute extends PageRouteInfo<DirectoryAddRouteArgs> {
   DirectoryAddRoute({
@@ -45,29 +92,29 @@ class DirectoryAddRouteArgs {
 }
 
 /// generated route for
-/// [DirectoryOpenView]
-class DirectoryOpenRoute extends PageRouteInfo<DirectoryOpenRouteArgs> {
-  DirectoryOpenRoute({
+/// [EditDirectoryView]
+class EditDirectoryRoute extends PageRouteInfo<EditDirectoryRouteArgs> {
+  EditDirectoryRoute({
     Key? key,
     DirectoryModel? directoryModel,
     List<PageRouteInfo>? children,
   }) : super(
-          DirectoryOpenRoute.name,
-          args: DirectoryOpenRouteArgs(
+          EditDirectoryRoute.name,
+          args: EditDirectoryRouteArgs(
             key: key,
             directoryModel: directoryModel,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'DirectoryOpenRoute';
+  static const String name = 'EditDirectoryRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<DirectoryOpenRouteArgs>(
-          orElse: () => const DirectoryOpenRouteArgs());
-      return DirectoryOpenView(
+      final args = data.argsAs<EditDirectoryRouteArgs>(
+          orElse: () => const EditDirectoryRouteArgs());
+      return EditDirectoryView(
         key: args.key,
         directoryModel: args.directoryModel,
       );
@@ -75,8 +122,8 @@ class DirectoryOpenRoute extends PageRouteInfo<DirectoryOpenRouteArgs> {
   );
 }
 
-class DirectoryOpenRouteArgs {
-  const DirectoryOpenRouteArgs({
+class EditDirectoryRouteArgs {
+  const EditDirectoryRouteArgs({
     this.key,
     this.directoryModel,
   });
@@ -87,7 +134,101 @@ class DirectoryOpenRouteArgs {
 
   @override
   String toString() {
-    return 'DirectoryOpenRouteArgs{key: $key, directoryModel: $directoryModel}';
+    return 'EditDirectoryRouteArgs{key: $key, directoryModel: $directoryModel}';
+  }
+}
+
+/// generated route for
+/// [EditPdfView]
+class EditPdfRoute extends PageRouteInfo<EditPdfRouteArgs> {
+  EditPdfRoute({
+    Key? key,
+    PdfModel? pdfModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditPdfRoute.name,
+          args: EditPdfRouteArgs(
+            key: key,
+            pdfModel: pdfModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditPdfRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<EditPdfRouteArgs>(orElse: () => const EditPdfRouteArgs());
+      return EditPdfView(
+        key: args.key,
+        pdfModel: args.pdfModel,
+      );
+    },
+  );
+}
+
+class EditPdfRouteArgs {
+  const EditPdfRouteArgs({
+    this.key,
+    this.pdfModel,
+  });
+
+  final Key? key;
+
+  final PdfModel? pdfModel;
+
+  @override
+  String toString() {
+    return 'EditPdfRouteArgs{key: $key, pdfModel: $pdfModel}';
+  }
+}
+
+/// generated route for
+/// [HomeDirectoryOpenView]
+class HomeDirectoryOpenRoute extends PageRouteInfo<HomeDirectoryOpenRouteArgs> {
+  HomeDirectoryOpenRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          HomeDirectoryOpenRoute.name,
+          args: HomeDirectoryOpenRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeDirectoryOpenRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<HomeDirectoryOpenRouteArgs>(
+          orElse: () => const HomeDirectoryOpenRouteArgs());
+      return HomeDirectoryOpenView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+      );
+    },
+  );
+}
+
+class HomeDirectoryOpenRouteArgs {
+  const HomeDirectoryOpenRouteArgs({
+    this.key,
+    this.directoryModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  @override
+  String toString() {
+    return 'HomeDirectoryOpenRouteArgs{key: $key, directoryModel: $directoryModel}';
   }
 }
 
@@ -163,6 +304,25 @@ class LoginRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const LoginView();
+    },
+  );
+}
+
+/// generated route for
+/// [SettingsHomeView]
+class SettingsHomeRoute extends PageRouteInfo<void> {
+  const SettingsHomeRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingsHomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingsHomeRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SettingsHomeView();
     },
   );
 }

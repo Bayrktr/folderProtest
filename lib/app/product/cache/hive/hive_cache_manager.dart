@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/model/all_directory_model.dart';
-import 'package:pdf_app/app/features/home/view/features/homePdf/model/pdf_model.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
+import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
 import 'package:pdf_app/app/product/cache/hive/adapter/material_color_adapter.dart';
-import 'package:pdf_app/app/product/cache/hive/operation/all_directory_operation.dart';
+import 'package:pdf_app/app/product/cache/hive/adapter/theme_data_adapter.dart';
 import 'package:pdf_app/app/product/manager/directory/directory_manager.dart';
+import 'package:pdf_app/app/product/model/theme/theme_model.dart';
 
 abstract class IDatabaseManager {
   Future<void> start();
@@ -29,6 +31,9 @@ final class HiveCacheManager implements IDatabaseManager {
 
   @override
   Future<void> clear() async {
+    await Hive.close();
+
+
     await Hive.deleteFromDisk();
     await DirectoryManager.instance.removeSubDirectory(_subDirectory);
   }
@@ -48,7 +53,12 @@ final class HiveCacheManager implements IDatabaseManager {
     //Hive.registerAdapter(UserAdapter());
     Hive.registerAdapter(AllDirectoryModelAdapter());
     Hive.registerAdapter(DirectoryModelAdapter());
+    Hive.registerAdapter(AllPdfModelAdapter());
     Hive.registerAdapter(PdfModelAdapter());
     Hive.registerAdapter(MaterialColorAdapter());
+    Hive.registerAdapter(ThemeModelAdapter());
+    Hive.registerAdapter(ThemeDataAdapter());
+
+
   }
 }

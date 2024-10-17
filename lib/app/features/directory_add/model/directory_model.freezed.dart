@@ -25,7 +25,7 @@ mixin _$DirectoryModel {
   @HiveField(2)
   String? get name => throw _privateConstructorUsedError;
   @HiveField(3)
-  List<PdfModel?>? get pdfList => throw _privateConstructorUsedError;
+  int? get pdfListKey => throw _privateConstructorUsedError;
   @HiveField(4)
   @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
   Color? get tagColor => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $DirectoryModelCopyWith<$Res> {
   $Res call(
       {@HiveField(1) int? id,
       @HiveField(2) String? name,
-      @HiveField(3) List<PdfModel?>? pdfList,
+      @HiveField(3) int? pdfListKey,
       @HiveField(4)
       @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
       Color? tagColor});
@@ -72,7 +72,7 @@ class _$DirectoryModelCopyWithImpl<$Res, $Val extends DirectoryModel>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? pdfList = freezed,
+    Object? pdfListKey = freezed,
     Object? tagColor = freezed,
   }) {
     return _then(_value.copyWith(
@@ -84,10 +84,10 @@ class _$DirectoryModelCopyWithImpl<$Res, $Val extends DirectoryModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      pdfList: freezed == pdfList
-          ? _value.pdfList
-          : pdfList // ignore: cast_nullable_to_non_nullable
-              as List<PdfModel?>?,
+      pdfListKey: freezed == pdfListKey
+          ? _value.pdfListKey
+          : pdfListKey // ignore: cast_nullable_to_non_nullable
+              as int?,
       tagColor: freezed == tagColor
           ? _value.tagColor
           : tagColor // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$DirectoryModelImplCopyWith<$Res>
   $Res call(
       {@HiveField(1) int? id,
       @HiveField(2) String? name,
-      @HiveField(3) List<PdfModel?>? pdfList,
+      @HiveField(3) int? pdfListKey,
       @HiveField(4)
       @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
       Color? tagColor});
@@ -128,7 +128,7 @@ class __$$DirectoryModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? pdfList = freezed,
+    Object? pdfListKey = freezed,
     Object? tagColor = freezed,
   }) {
     return _then(_$DirectoryModelImpl(
@@ -140,10 +140,10 @@ class __$$DirectoryModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      pdfList: freezed == pdfList
-          ? _value._pdfList
-          : pdfList // ignore: cast_nullable_to_non_nullable
-              as List<PdfModel?>?,
+      pdfListKey: freezed == pdfListKey
+          ? _value.pdfListKey
+          : pdfListKey // ignore: cast_nullable_to_non_nullable
+              as int?,
       tagColor: freezed == tagColor
           ? _value.tagColor
           : tagColor // ignore: cast_nullable_to_non_nullable
@@ -158,12 +158,11 @@ class _$DirectoryModelImpl extends _DirectoryModel {
   _$DirectoryModelImpl(
       {@HiveField(1) this.id,
       @HiveField(2) this.name,
-      @HiveField(3) final List<PdfModel?>? pdfList,
+      @HiveField(3) this.pdfListKey,
       @HiveField(4)
       @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
       this.tagColor})
-      : _pdfList = pdfList,
-        super._();
+      : super._();
 
   factory _$DirectoryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DirectoryModelImplFromJson(json);
@@ -174,17 +173,9 @@ class _$DirectoryModelImpl extends _DirectoryModel {
   @override
   @HiveField(2)
   final String? name;
-  final List<PdfModel?>? _pdfList;
   @override
   @HiveField(3)
-  List<PdfModel?>? get pdfList {
-    final value = _pdfList;
-    if (value == null) return null;
-    if (_pdfList is EqualUnmodifiableListView) return _pdfList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final int? pdfListKey;
   @override
   @HiveField(4)
   @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
@@ -192,7 +183,7 @@ class _$DirectoryModelImpl extends _DirectoryModel {
 
   @override
   String toString() {
-    return 'DirectoryModel(id: $id, name: $name, pdfList: $pdfList, tagColor: $tagColor)';
+    return 'DirectoryModel(id: $id, name: $name, pdfListKey: $pdfListKey, tagColor: $tagColor)';
   }
 
   @override
@@ -202,15 +193,15 @@ class _$DirectoryModelImpl extends _DirectoryModel {
             other is _$DirectoryModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._pdfList, _pdfList) &&
+            (identical(other.pdfListKey, pdfListKey) ||
+                other.pdfListKey == pdfListKey) &&
             (identical(other.tagColor, tagColor) ||
                 other.tagColor == tagColor));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name,
-      const DeepCollectionEquality().hash(_pdfList), tagColor);
+  int get hashCode => Object.hash(runtimeType, id, name, pdfListKey, tagColor);
 
   /// Create a copy of DirectoryModel
   /// with the given fields replaced by the non-null parameter values.
@@ -233,7 +224,7 @@ abstract class _DirectoryModel extends DirectoryModel {
   factory _DirectoryModel(
       {@HiveField(1) final int? id,
       @HiveField(2) final String? name,
-      @HiveField(3) final List<PdfModel?>? pdfList,
+      @HiveField(3) final int? pdfListKey,
       @HiveField(4)
       @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
       final Color? tagColor}) = _$DirectoryModelImpl;
@@ -250,7 +241,7 @@ abstract class _DirectoryModel extends DirectoryModel {
   String? get name;
   @override
   @HiveField(3)
-  List<PdfModel?>? get pdfList;
+  int? get pdfListKey;
   @override
   @HiveField(4)
   @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)

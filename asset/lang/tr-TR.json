@@ -19,9 +19,19 @@
     "thereIsAnotherDirectoryWithThisName": "Bu isme sahip başka bir klasör var"
   },
   "home": {
-    "selectDirectory": "Klasör seç"
+    "selectDirectory": "Klasör seç",
+    "directoryDeletedSuccessfully": "Klasör başarıyla silindi"
+  },
+  "directoryAdd": {
+    "directoryAdd": "Klasör ekle"
   },
   "directoryOpen": {
-    "selectPdf": "Pdf seç"
+    "selectPdf": "Pdf seç",
+    "addPdfd": "Pdf ekle"
+  },
+  "pdfAdd": {
+    "pdfAdd": "Pdf ekle",
+    "fileWasNotAddedOrIncorrecty": "Dosya eklenmedi veya yanlış eklenmiş",
+    "thereIsAnotherPdfWithName": "Bu isimde başka bir pdf var"
   }
 }
