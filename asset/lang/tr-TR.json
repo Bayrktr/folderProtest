@@ -33,5 +33,9 @@
     "pdfAdd": "Pdf ekle",
     "fileWasNotAddedOrIncorrecty": "Dosya eklenmedi veya yanlış eklenmiş",
     "thereIsAnotherPdfWithName": "Bu isimde başka bir pdf var"
+  },
+  "editDirectory": {
+    "editDirectory": "Klasörü Düzenle",
+    "pdfDeletedSuccessfully": "Pdf başarıyla silindi"
   }
 }

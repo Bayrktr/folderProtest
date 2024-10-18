@@ -327,6 +327,7 @@ class SettingsHomeRoute extends PageRouteInfo<void> {
   );
 }
 
+
 /// generated route for
 /// [SettingsView]
 class SettingsRoute extends PageRouteInfo<void> {

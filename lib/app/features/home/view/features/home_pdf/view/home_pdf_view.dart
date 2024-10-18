@@ -86,7 +86,13 @@ class HomePdfView extends StatelessWidget {
                                                 item,
                                               );
                                         },
-                                        onEdit: () {},
+                                        onEdit: () {
+                                          context.router.push(
+                                            EditDirectoryRoute(
+                                              directoryModel: item,
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ).showBottomSheet();
                                   },
@@ -121,6 +127,7 @@ class HomePdfView extends StatelessWidget {
                   seconds: 1,
                 ),
               ).show(context);
+
             }
           },
         ),

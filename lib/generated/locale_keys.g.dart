@@ -28,5 +28,8 @@ abstract class  LocaleKeys {
   static const pdfAdd_fileWasNotAddedOrIncorrecty = 'pdfAdd.fileWasNotAddedOrIncorrecty';
   static const pdfAdd_thereIsAnotherPdfWithName = 'pdfAdd.thereIsAnotherPdfWithName';
   static const pdfAdd = 'pdfAdd';
+  static const editDirectory_editDirectory = 'editDirectory.editDirectory';
+  static const editDirectory_pdfDeletedSuccessfully = 'editDirectory.pdfDeletedSuccessfully';
+  static const editDirectory = 'editDirectory';
 
 }

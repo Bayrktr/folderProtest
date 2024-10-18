@@ -106,6 +106,7 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
             case SavePdfStatus.empty:
               return;
             case SavePdfStatus.success:
+              navigatePage(context: context, directoryModel: directoryModel);
               context.router.maybePop();
             case SavePdfStatus.alreadyExist:
               AddPdfSnackBar(

@@ -34,10 +34,13 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
         status: AddPdfStatus.loading,
       ),
     );
-    if(directoryModel?.pdfListKey == null){
-      emit(state.copyWith(status: AddPdfStatus.error,),);
-    }else{
-      print(directoryModel!.pdfListKey);
+    if (directoryModel?.pdfListKey == null) {
+      emit(
+        state.copyWith(
+          status: AddPdfStatus.error,
+        ),
+      );
+    } else {
       await _allPdfOperation.start(directoryModel!.pdfListKey.toString());
       emit(
         state.copyWith(
@@ -74,11 +77,9 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
       emit(
         state.copyWith(
           status: AddPdfStatus.initial,
-          savePdfStatus: SavePdfStatus.fileError,
         ),
       );
     }
-    _resetSavePdfStatus();
   }
 
   void _resetSavePdfStatus() {
@@ -133,6 +134,7 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
         ),
       );
     }
+    _resetSavePdfStatus();
   }
 
   AllPdfModel? _getPdfList() {

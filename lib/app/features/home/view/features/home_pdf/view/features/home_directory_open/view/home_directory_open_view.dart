@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
 import 'package:pdf_app/app/core/extention/string/null_string_extention.dart';
+import 'package:pdf_app/app/core/extention/string/string_extention.dart';
 import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
 import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/cubit/home_directory_open_cubit.dart';
 import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/cubit/home_directory_open_state.dart';
@@ -24,7 +25,15 @@ class HomeDirectoryOpenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(directoryModel == null){
+      return const SizedBox();
+    }
+
     return Scaffold(
+      floatingActionButton: _getFloatingActionButton(
+        context: context,
+        directoryModel: directoryModel!,
+      ),
       appBar: _getAppBar(context: context),
       body: BlocProvider(
         create: (_) => HomeDirectoryOpenCubit(
@@ -96,9 +105,9 @@ class HomeDirectoryOpenView extends StatelessWidget {
             case HomeDirectoryOpenSnackBarStatus.initial:
               return;
             case HomeDirectoryOpenSnackBarStatus.deletedSuccess:
-              // fixme
-              const HomeDirectoryOpenSnackBar(
-                message: 'test',
+              HomeDirectoryOpenSnackBar(
+                message:
+                    LocaleKeys.editDirectory_pdfDeletedSuccessfully.lang.tr,
                 color: Colors.lightGreen,
               ).show(context);
           }
@@ -125,6 +134,23 @@ class HomeDirectoryOpenView extends StatelessWidget {
       title: const LocaleText(
         text: LocaleKeys.directoryOpen_selectPdf,
       ),
+    );
+  }
+
+  FloatingActionButton _getFloatingActionButton({
+    required BuildContext context,
+    required DirectoryModel directoryModel,
+  }) {
+    return FloatingActionButton(
+      onPressed: () {
+        context.router.push(
+          AddPdfRoute(
+            directoryModel: directoryModel,
+          ),
+        );
+      },
+      heroTag: 'addPdf',
+      child: const Icon(Icons.add),
     );
   }
 }

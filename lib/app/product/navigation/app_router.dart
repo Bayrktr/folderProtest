@@ -8,12 +8,12 @@ import 'package:pdf_app/app/features/edit_pdf/view/edit_pdf_view.dart';
 import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
 import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/view/home_directory_open_view.dart';
 import 'package:pdf_app/app/features/home/view/features/home_pdf/view/home_pdf_view.dart';
-import 'package:pdf_app/app/features/home/view/features/settings/view/settings_view.dart';
+import 'package:pdf_app/app/features/home/view/features/settings_home/view/features/language/view/language_view.dart';
+import 'package:pdf_app/app/features/home/view/features/settings_home/view/features/settings/view/settings_view.dart';
+import 'package:pdf_app/app/features/home/view/features/settings_home/view/settings_home_view.dart';
 import 'package:pdf_app/app/features/home/view/home_view.dart';
-import 'package:pdf_app/app/features/language/view/language_view.dart';
 import 'package:pdf_app/app/features/login/view/login_view.dart';
 
-import '../../features/settings_home/settings_home_view.dart';
 
 part 'app_router.gr.dart';
 
@@ -62,13 +62,11 @@ class AppRouter extends RootStackRouter {
                 AdaptiveRoute(
                   page: LanguageRoute.page,
                   path: RoutePath.language.path,
-
                 ),
                 AdaptiveRoute(
                   page: SettingsRoute.page,
                   path: RoutePath.settings.path,
                   initial: true,
-
                 ),
               ],
             ),
@@ -94,6 +92,9 @@ enum RoutePath {
   const RoutePath(this.path);
 
   final String path;
+
+
+  String get getPath => path;
 
   PageRouteInfo<dynamic> get pageRouteInfo => PageRouteInfo(path);
 }

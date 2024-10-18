@@ -5,11 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
 import 'package:pdf_app/app/core/extention/localization/localization_extention.dart';
 import 'package:pdf_app/app/core/extention/string/null_string_extention.dart';
-import 'package:pdf_app/app/features/home/view/features/settings/view/component/settings_list_tile.dart';
-import 'package:pdf_app/app/features/home/view/features/settings/view/settings_view_mixin.dart';
+import 'package:pdf_app/app/features/home/view/features/settings_home/view/features/settings/view/component/settings_list_tile.dart';
+import 'package:pdf_app/app/features/home/view/features/settings_home/view/features/settings/view/settings_view_mixin.dart';
 import 'package:pdf_app/app/product/bloc/theme/theme_cubit.dart';
 import 'package:pdf_app/app/product/bloc/theme/theme_state.dart';
-import 'package:pdf_app/app/product/navigation/app_router.dart';
 
 @RoutePage()
 class SettingsView extends StatelessWidget with SettingsViewMixin {
@@ -30,7 +29,6 @@ class SettingsView extends StatelessWidget with SettingsViewMixin {
           BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, state) {
               return SettingsListTile(
-
                 leading: Icon(
                   isThemeLight(
                     state.theme.themeData ?? ThemeData.dark(),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
+import 'package:pdf_app/app/product/cache/hive/model/hive_model.dart';
 
 part 'directory_model.freezed.dart';
 part 'directory_model.g.dart';
 
 @freezed
 @HiveType(typeId: 1)
-class DirectoryModel with _$DirectoryModel {
+class DirectoryModel with _$DirectoryModel, HiveModelMixin {
   factory DirectoryModel({
     @HiveField(1) int? id,
     @HiveField(2) String? name,
@@ -22,6 +22,9 @@ class DirectoryModel with _$DirectoryModel {
       _$DirectoryModelFromJson(json);
 
   DirectoryModel._();
+
+  @override
+  String get key => id.toString();
 }
 
 Color? _colorFromJson(int? colorValue) {
