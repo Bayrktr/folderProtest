@@ -41,7 +41,8 @@ class LanguageView extends StatelessWidget {
       AppBar(
         leading: IconButton(
           onPressed: () {
-            context.router.maybePop();
+            //context.router.maybePop();
+            context.tabsRouter.setActiveIndex(0);
           },
           icon: Icon(
             Icons.arrow_back,

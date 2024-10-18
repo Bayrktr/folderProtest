@@ -58,6 +58,8 @@ dependencies:
   #State Management
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
+  hydrated_bloc: ^9.1.2
+
 
 
   #Injection

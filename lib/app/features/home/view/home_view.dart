@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter.tabBar(
-      routes: const [HomePdfRoute(), SettingsRoute()],
+      routes: const [HomePdfRoute(), SettingsHomeRoute()],
       builder: (context, child, tabController) {
         return Scaffold(
           body: child,

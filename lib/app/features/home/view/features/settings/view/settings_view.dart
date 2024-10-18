@@ -57,7 +57,8 @@ class SettingsView extends StatelessWidget with SettingsViewMixin {
           ),
           SettingsListTile(
             onTap: () {
-              context.router.push(const LanguageRoute());
+              //context.router.push(const LanguageRoute());
+              context.tabsRouter.setActiveIndex(1);
             },
             leading: Icon(
               Icons.language,

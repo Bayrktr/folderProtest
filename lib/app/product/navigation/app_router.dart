@@ -59,14 +59,16 @@ class AppRouter extends RootStackRouter {
               page: SettingsHomeRoute.page,
               path: RoutePath.settingsHome.path,
               children: [
-
                 AdaptiveRoute(
                   page: LanguageRoute.page,
                   path: RoutePath.language.path,
+
                 ),
                 AdaptiveRoute(
                   page: SettingsRoute.page,
                   path: RoutePath.settings.path,
+                  initial: true,
+
                 ),
               ],
             ),

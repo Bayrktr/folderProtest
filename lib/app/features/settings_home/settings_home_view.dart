@@ -13,8 +13,9 @@ class SettingsHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter.pageView(
       routes: const [
-        LanguageRoute(),
         SettingsRoute(),
+        LanguageRoute(),
+
 
       ],
       builder: (context, widget, controller) {
