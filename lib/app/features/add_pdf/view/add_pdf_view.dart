@@ -75,7 +75,7 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
                       label: Text('sec'),
                       icon: const Icon(Icons.file_upload),
                     ),
-                    Text(state.pickFileResult.toString()),
+                    Text(state.pickFileResult != null ? 'Dosya seçildi':'Dosya seçilmedi'),
                     const SizedBox(
                       height: 10,
                     ),

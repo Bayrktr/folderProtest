@@ -1,0 +1,47 @@
+{
+  "general": {
+    "settings": "Settings",
+    "save": "Save",
+    "cancel": "Cancel",
+    "okey": "Okay",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "settings": {
+    "theme": "Theme"
+  },
+  "errors": {
+    "nullErrorMessage": "",
+    "folderAlreadyExists": "This folder already exists"
+  },
+  "validate": {
+    "directoryNameCannotEmpty": "Directory name cannot be empty or only spaces",
+    "thereIsAnotherDirectoryWithThisName": "There is another directory with this name"
+  },
+  "home": {
+    "selectDirectory": "Select directory",
+    "directoryDeletedSuccessfully": "Directory deleted successfully"
+  },
+  "directoryAdd": {
+    "directoryAdd": "Add directory"
+  },
+  "directoryOpen": {
+    "selectPdf": "Select PDF",
+    "addPdfd": "Add PDF"
+  },
+  "pdfAdd": {
+    "pdfAdd": "Add PDF",
+    "fileWasNotAddedOrIncorrecty": "File was not added or was added incorrectly",
+    "thereIsAnotherPdfWithName": "There is another PDF with this name"
+  },
+  "editDirectory": {
+    "editDirectory": "Edit directory",
+    "pdfDeletedSuccessfully": "PDF deleted successfully"
+  },
+  "customPdfView": {
+    "errorWhileLoadingPdf": "An error occurred while loading the PDF"
+  },
+  "openPdf": {
+    "viewPdf": "View PDF"
+  }
+}

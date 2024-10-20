@@ -37,5 +37,11 @@
   "editDirectory": {
     "editDirectory": "Klasörü Düzenle",
     "pdfDeletedSuccessfully": "Pdf başarıyla silindi"
+  },
+  "customPdfView": {
+    "errorWhileLoadingPdf": "An error occurred while loading the pdf"
+  },
+  "openPdf": {
+    "viewPdf": "Pdf görüntüle"
   }
 }

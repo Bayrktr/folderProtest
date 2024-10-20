@@ -1,38 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pdf_model.dart';
+part of 'custom_pdf_view_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PdfModelAdapter extends TypeAdapter<PdfModel> {
+class CustomPdfViewModelAdapter extends TypeAdapter<CustomPdfViewModel> {
   @override
-  final int typeId = 2;
+  final int typeId = 9;
 
   @override
-  PdfModel read(BinaryReader reader) {
+  CustomPdfViewModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return PdfModel(
-      id: fields[1] as int?,
-      name: fields[2] as String?,
-      byte: fields[3] as Uint8List?,
+    return CustomPdfViewModel(
+      id: fields[0] as int?,
+      pdfModel: fields[1] as PdfModel?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, PdfModel obj) {
+  void write(BinaryWriter writer, CustomPdfViewModel obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(1)
-      ..write(obj.id)
       ..writeByte(2)
-      ..write(obj.name)
-      ..writeByte(3)
-      ..write(obj.byte);
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.pdfModel);
   }
 
   @override
@@ -41,7 +38,7 @@ class PdfModelAdapter extends TypeAdapter<PdfModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PdfModelAdapter &&
+      other is CustomPdfViewModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -50,16 +47,18 @@ class PdfModelAdapter extends TypeAdapter<PdfModel> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PdfModelImpl _$$PdfModelImplFromJson(Map<String, dynamic> json) =>
-    _$PdfModelImpl(
+_$CustomPdfViewModelImpl _$$CustomPdfViewModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CustomPdfViewModelImpl(
       id: (json['id'] as num?)?.toInt(),
-      name: json['name'] as String?,
-      byte: const Uint8ListConverter().fromJson(json['byte'] as String?),
+      pdfModel: json['pdfModel'] == null
+          ? null
+          : PdfModel.fromJson(json['pdfModel'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$PdfModelImplToJson(_$PdfModelImpl instance) =>
+Map<String, dynamic> _$$CustomPdfViewModelImplToJson(
+        _$CustomPdfViewModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
-      'byte': const Uint8ListConverter().toJson(instance.byte),
+      'pdfModel': instance.pdfModel,
     };

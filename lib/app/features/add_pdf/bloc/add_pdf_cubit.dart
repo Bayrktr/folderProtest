@@ -28,20 +28,22 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
   final AllPdfOperation _allPdfOperation =
       GetItManager.getIt<AllPdfOperation>();
 
+  String? get pdfListKey => directoryModel?.pdfListKey.toString();
+
   Future<void> initDatabase() async {
     emit(
       state.copyWith(
         status: AddPdfStatus.loading,
       ),
     );
-    if (directoryModel?.pdfListKey == null) {
+    if (pdfListKey == null) {
       emit(
         state.copyWith(
           status: AddPdfStatus.error,
         ),
       );
     } else {
-      await _allPdfOperation.start(directoryModel!.pdfListKey.toString());
+      await _allPdfOperation.start(pdfListKey!);
       emit(
         state.copyWith(
           status: AddPdfStatus.initial,
@@ -96,20 +98,21 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
         status: AddPdfStatus.loading,
       ),
     );
+    print(state.pickFileResult);
+    print(state.pickFileResult?.files.first.bytes);
+
+    print('byt');
     final newPdfModel = PdfModel(
       id: IdGenerator.randomIntId,
       name: pdfNameController.text,
-      path: state.pickFileResult?.files.first.path,
+      byte: state.pickFileResult?.files.first.bytes,
     );
-    final AllPdfModel? allPdfModel = _getPdfList();
+    AllPdfModel? allPdfModel = _getPdfList();
     if (allPdfModel == null) {
-      emit(
-        state.copyWith(
-          status: AddPdfStatus.error,
-        ),
-      );
-      return;
+      _createFirstModel();
     }
+
+    allPdfModel = _getPdfList()!;
 
     final mutableAllPdf = List<PdfModel>.from(allPdfModel.allPdf ?? []);
 
@@ -141,5 +144,14 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
     final AllPdfModel? allPdfModel =
         _allPdfOperation.getItem(directoryModel!.pdfListKey.toString());
     return allPdfModel;
+  }
+
+  Future<void> _createFirstModel() async {
+    await _allPdfOperation.addOrUpdateItem(
+      AllPdfModel(
+        id: int.parse(pdfListKey!),
+        allPdf: [],
+      ),
+    );
   }
 }

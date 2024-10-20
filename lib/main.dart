@@ -9,26 +9,30 @@ import 'package:pdf_app/app/product/init/app_init.dart';
 import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
 import 'package:pdf_app/app/product/model/theme/theme_model.dart';
 import 'package:pdf_app/app/product/navigation/app_router.dart';
-import 'package:pdf_app/app/product/navigation/custom_navigator_observer.dart';
 
 Future<void> main() async {
   await AppInit.mainInit();
+
 
   runApp(
     EasyLocalization(
       startLocale: Settings.startLocale,
       supportedLocales: Settings.supportedLocale,
       path: Settings.langPath,
+      //child: MyApp(),
       child: MyApp(),
     ),
   );
+
+
+  //  runApp(TestApp());
 }
+
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _appRouter = AppRouter();
-
 
   final ThemeModel themeModel =
       GetItManager.getIt<ThemeOperation>().getItem(ThemeModel.themeModelKey) ??
@@ -55,7 +59,6 @@ class MyApp extends StatelessWidget {
             routerConfig: _appRouter.config(),
             title: Settings.appName,
             theme: state.theme.themeData,
-
           );
         },
       ),

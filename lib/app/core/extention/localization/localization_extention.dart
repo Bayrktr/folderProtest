@@ -7,6 +7,8 @@ extension LocalizationExtention on Locale {
     switch (this) {
       case Settings.trLocale:
         return 'Türkiye';
+      case Settings.enLocale:
+        return 'United States';
     }
     return null;
   }
@@ -19,6 +21,8 @@ extension LocalizationExtention on Locale {
     switch (this) {
       case Settings.trLocale:
         return 'tr';
+      case Settings.enLocale:
+        return 'en';
     }
     return null;
   }

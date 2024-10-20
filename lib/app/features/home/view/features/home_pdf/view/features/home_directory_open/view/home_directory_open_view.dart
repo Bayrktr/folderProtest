@@ -25,7 +25,7 @@ class HomeDirectoryOpenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(directoryModel == null){
+    if (directoryModel == null) {
       return const SizedBox();
     }
 
@@ -59,6 +59,13 @@ class HomeDirectoryOpenView extends StatelessWidget {
                     if (item == null) return const SizedBox();
 
                     return ListTile(
+                      onTap: () {
+                        context.router.push(
+                          OpenPdfRoute(
+                            pdfModel: item,
+                          ),
+                        );
+                      },
                       leading: Text(
                         item.name.forNull.getGeneralNullMessage,
                         style: context.theme.getTextStyle.bodyText1,

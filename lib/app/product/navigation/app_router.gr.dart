@@ -309,6 +309,52 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [OpenPdfView]
+class OpenPdfRoute extends PageRouteInfo<OpenPdfRouteArgs> {
+  OpenPdfRoute({
+    Key? key,
+    required PdfModel pdfModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          OpenPdfRoute.name,
+          args: OpenPdfRouteArgs(
+            key: key,
+            pdfModel: pdfModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'OpenPdfRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<OpenPdfRouteArgs>();
+      return OpenPdfView(
+        key: args.key,
+        pdfModel: args.pdfModel,
+      );
+    },
+  );
+}
+
+class OpenPdfRouteArgs {
+  const OpenPdfRouteArgs({
+    this.key,
+    required this.pdfModel,
+  });
+
+  final Key? key;
+
+  final PdfModel pdfModel;
+
+  @override
+  String toString() {
+    return 'OpenPdfRouteArgs{key: $key, pdfModel: $pdfModel}';
+  }
+}
+
+/// generated route for
 /// [SettingsHomeView]
 class SettingsHomeRoute extends PageRouteInfo<void> {
   const SettingsHomeRoute({List<PageRouteInfo>? children})
@@ -326,7 +372,6 @@ class SettingsHomeRoute extends PageRouteInfo<void> {
     },
   );
 }
-
 
 /// generated route for
 /// [SettingsView]

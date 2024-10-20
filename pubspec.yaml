@@ -74,8 +74,13 @@ dependencies:
   permission_handler: ^10.0.0
 
 
+  #UI
+  syncfusion_flutter_pdfviewer: ^27.1.53
+
+
+
   #Other
-  uuid: ^3.0.6  
+  uuid: ^4.1.0
 
 
 
@@ -121,3 +126,4 @@ flutter:
     - asset/lang/
     - asset/image/error/
     - asset/image/flag/
+    - asset/testPdf/

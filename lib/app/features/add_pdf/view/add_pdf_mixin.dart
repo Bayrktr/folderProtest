@@ -19,7 +19,7 @@ mixin AddPdfMixin on StatelessWidget {
       case AddPdfStatus.loading:
         return const CircularProgressIndicator();
       case AddPdfStatus.error:
-        return const LocaleText(text: LocaleKeys.errors_nullErrorMessage);
+        return const Icon(Icons.error);
       case AddPdfStatus.finish:
         return const CircularProgressIndicator();
     }
@@ -47,7 +47,14 @@ mixin AddPdfMixin on StatelessWidget {
             directoryModel: directoryModel,
           ),
         );
-
+      case 'HomeDirectoryOpenRoute':
+        print('HomeDirectoryOpenRoute');
+        context.router.popUntil((route) => route.settings.name == 'HomeRoute');
+        context.router.push(
+          HomeDirectoryOpenRoute(
+            directoryModel: directoryModel,
+          ),
+        );
       default:
         context.router.maybePop();
     }

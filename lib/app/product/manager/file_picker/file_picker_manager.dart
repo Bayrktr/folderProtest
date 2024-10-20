@@ -22,6 +22,7 @@ class FilePickerManager {
         allowedExtensions: [
           AllowedExtention.pdf,
         ],
+        withData: true,
       );
 
       return result;

@@ -7,7 +7,9 @@ import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model
 import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
 import 'package:pdf_app/app/product/cache/hive/adapter/material_color_adapter.dart';
 import 'package:pdf_app/app/product/cache/hive/adapter/theme_data_adapter.dart';
+import 'package:pdf_app/app/product/component/custom_pdf_view/model/custom_pdf_view_model.dart';
 import 'package:pdf_app/app/product/manager/directory/directory_manager.dart';
+import 'package:pdf_app/app/product/model/pdf_settings/pdf_settings_model.dart';
 import 'package:pdf_app/app/product/model/theme/theme_model.dart';
 
 abstract class IDatabaseManager {
@@ -33,7 +35,6 @@ final class HiveCacheManager implements IDatabaseManager {
   Future<void> clear() async {
     await Hive.close();
 
-
     await Hive.deleteFromDisk();
     await DirectoryManager.instance.removeSubDirectory(_subDirectory);
   }
@@ -44,8 +45,6 @@ final class HiveCacheManager implements IDatabaseManager {
     final subPath =
         await DirectoryManager.instance.createSubDirectory(_subDirectory);
     await Hive.initFlutter(subPath);
-
-
   }
 
   /// Register your generic model or make your operation before start
@@ -58,7 +57,7 @@ final class HiveCacheManager implements IDatabaseManager {
     Hive.registerAdapter(MaterialColorAdapter());
     Hive.registerAdapter(ThemeModelAdapter());
     Hive.registerAdapter(ThemeDataAdapter());
-
-
+    Hive.registerAdapter(PdfSettingsModelAdapter());
+    Hive.registerAdapter(CustomPdfViewModelAdapter());
   }
 }

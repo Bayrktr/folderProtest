@@ -10,13 +10,21 @@ final class Settings {
 
   static const List<Locale> supportedLocale = [
     Settings.trLocale,
+    Settings.enLocale,
   ];
+
+  /// TR Language
 
   static const String tr = 'tr';
 
   static const Locale trLocale = Locale('tr', 'TR');
 
-  static const Locale startLocale = Settings.trLocale;
+  /// EN Language
+  static const String en = 'en';
+
+  static const Locale enLocale = Locale('en', 'US');
+
+  static const Locale startLocale = Settings.enLocale;
 
   static const String assetPath = 'asset/';
 

@@ -13,7 +13,7 @@ import 'package:pdf_app/app/features/home/view/features/settings_home/view/featu
 import 'package:pdf_app/app/features/home/view/features/settings_home/view/settings_home_view.dart';
 import 'package:pdf_app/app/features/home/view/home_view.dart';
 import 'package:pdf_app/app/features/login/view/login_view.dart';
-
+import 'package:pdf_app/app/features/open_pdf/view/open_pdf_view.dart';
 
 part 'app_router.gr.dart';
 
@@ -45,6 +45,10 @@ class AppRouter extends RootStackRouter {
         AdaptiveRoute(
           page: EditPdfRoute.page,
           path: RoutePath.pdfEdit.path,
+        ),
+        AdaptiveRoute(
+          page: OpenPdfRoute.page,
+          path: RoutePath.openPdf.path,
         ),
         AdaptiveRoute(
           page: HomeRoute.page,
@@ -87,12 +91,12 @@ enum RoutePath {
   pdfEdit('/pdfEdit'),
   pdfAdd('/pdfAdd'),
   settingsHome('settingsHome'),
+  openPdf('/openPdf'),
   homeDirectoryOpen('/homeDirectoryOpen');
 
   const RoutePath(this.path);
 
   final String path;
-
 
   String get getPath => path;
 
