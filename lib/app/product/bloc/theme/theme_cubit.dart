@@ -1,18 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/product/bloc/theme/theme_state.dart';
-import 'package:pdf_app/app/product/cache/hive/operation/theme_operation.dart';
-import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
-import 'package:pdf_app/app/product/model/theme/theme_model.dart';
+import 'package:DocuSort/app/product/bloc/theme/theme_state.dart';
+import 'package:DocuSort/app/product/cache/hive/operation/theme_operation.dart';
+import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/theme/theme_model.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit(this.themeModel) : super(ThemeState(theme: themeModel));
+  ThemeCubit(this.theme) : super(ThemeState(themeModel: theme));
 
-  final ThemeModel themeModel;
+  final ThemeModel theme;
 
   final ThemeData _themeDark = ThemeData.dark();
   final ThemeData _themeLight = ThemeData.light();
   final ThemeOperation _themeOperation = GetItManager.getIt<ThemeOperation>();
+
+  bool get isLight =>
+      state.themeModel.isLight;
 
   void resetStatus() {
     emit(
@@ -23,16 +26,13 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   void setTheme() {
-    final isLightMode = state.theme.themeData == _themeLight;
-    final newTheme = isLightMode ? _themeDark : _themeLight;
-
-    final newThemeModel = state.theme.copyWith(
-      themeData: newTheme,
+    final newThemeModel = state.themeModel.copyWith(
+      isLight: !isLight,
     );
-    print(newTheme);
+
     emit(
       state.copyWith(
-        theme: newThemeModel,
+        themeModel: newThemeModel,
       ),
     );
 

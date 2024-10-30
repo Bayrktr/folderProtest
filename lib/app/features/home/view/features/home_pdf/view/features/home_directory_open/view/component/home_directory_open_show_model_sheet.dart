@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
-import 'package:pdf_app/app/product/component/text/locale_text.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
+import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/generated/locale_keys.g.dart';
 
 class HomeDirectoryOpenShowModelSheet extends StatelessWidget {
   final PdfModel pdfModel;

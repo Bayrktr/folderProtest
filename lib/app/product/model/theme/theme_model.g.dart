@@ -18,7 +18,7 @@ class ThemeModelAdapter extends TypeAdapter<ThemeModel> {
     };
     return ThemeModel(
       id: fields[0] as int?,
-      themeData: fields[1] as ThemeData?,
+      isLight: fields[1] as bool,
     );
   }
 
@@ -29,7 +29,7 @@ class ThemeModelAdapter extends TypeAdapter<ThemeModel> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.themeData);
+      ..write(obj.isLight);
   }
 
   @override
@@ -50,25 +50,11 @@ class ThemeModelAdapter extends TypeAdapter<ThemeModel> {
 _$ThemeModelImpl _$$ThemeModelImplFromJson(Map<String, dynamic> json) =>
     _$ThemeModelImpl(
       id: (json['id'] as num?)?.toInt(),
-      themeData: _$JsonConverterFromJson<Map<String, dynamic>, ThemeData>(
-          json['themeData'], const _ThemeDataConverter().fromJson),
+      isLight: json['isLight'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$ThemeModelImplToJson(_$ThemeModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'themeData': _$JsonConverterToJson<Map<String, dynamic>, ThemeData>(
-          instance.themeData, const _ThemeDataConverter().toJson),
+      'isLight': instance.isLight,
     };
-
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) =>
-    json == null ? null : fromJson(json as Json);
-
-Json? _$JsonConverterToJson<Json, Value>(
-  Value? value,
-  Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/product/cache/hive/operation/theme_operation.dart';
-import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
-import 'package:pdf_app/app/product/model/theme/theme_model.dart';
-import 'package:pdf_app/app/product/package/uuid/id_generator.dart';
+import 'package:DocuSort/app/product/cache/hive/operation/theme_operation.dart';
+import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/theme/theme_model.dart';
+import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
 
 class ThemeManager {
   // Private constructor to prevent external instantiation.
@@ -20,7 +20,7 @@ class ThemeManager {
 
   ThemeModel _themeModel = ThemeModel(
     id: null,
-    themeData: ThemeData.dark(),
+    isLight: true,
   );
 
   ThemeModel get themeModel => _themeModel;
@@ -31,7 +31,7 @@ class ThemeManager {
 
     final themeData = _themeOperation.getItem(ThemeModel.themeModelKey);
 
-    print('theme data ${themeData?.themeData.toString()}');
+    print('theme data ${themeData?.isLight.toString()}');
 
     if (themeData == null) {
       await _createFirstThemeData();
@@ -47,7 +47,7 @@ class ThemeManager {
     await _themeOperation.addOrUpdateItem(
       ThemeModel(
         id: IdGenerator.randomIntId,
-        themeData: ThemeData.dark(),
+        isLight: true,
       ),
     );
   }

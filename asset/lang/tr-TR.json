@@ -5,7 +5,10 @@
     "cancel": "Cancel",
     "okey": "Tamam",
     "edit": "Düzenle",
-    "delete": "Sil"
+    "delete": "Sil",
+    "next": "Sıradaki",
+    "previous": "Önceki",
+    "search": "Ara"
   },
   "settings": {
     "theme": "Tema"
@@ -42,6 +45,8 @@
     "errorWhileLoadingPdf": "An error occurred while loading the pdf"
   },
   "openPdf": {
-    "viewPdf": "Pdf görüntüle"
+    "viewPdf": "Pdf görüntüle",
+    "enterTextToSearch": "Aranacak metni girin\n"
+
   }
 }

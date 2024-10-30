@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
-import 'package:pdf_app/app/core/extention/localization/localization_extention.dart';
-import 'package:pdf_app/app/core/extention/string/null_string_extention.dart';
-import 'package:pdf_app/app/features/home/view/features/settings_home/view/features/language/view/component/country_selection_list_tile.dart';
+import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
+import 'package:DocuSort/app/core/extention/localization/localization_extention.dart';
+import 'package:DocuSort/app/core/extention/string/null_string_extention.dart';
+import 'package:DocuSort/app/features/home/view/features/settings_home/view/features/language/view/component/country_selection_list_tile.dart';
 
 @RoutePage()
 class LanguageView extends StatelessWidget {

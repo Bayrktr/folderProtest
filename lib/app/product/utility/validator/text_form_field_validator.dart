@@ -1,5 +1,5 @@
-import 'package:pdf_app/app/core/extention/string/string_extention.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
+import 'package:DocuSort/app/core/extention/string/string_extention.dart';
+import 'package:DocuSort/generated/locale_keys.g.dart';
 
 class TextFormFieldValidator {
   TextFormFieldValidator({this.value});

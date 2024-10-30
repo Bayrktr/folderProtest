@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
-import 'package:pdf_app/app/product/cache/hive/model/hive_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
+import 'package:DocuSort/app/product/cache/hive/model/hive_model.dart';
 
 part 'custom_pdf_view_model.freezed.dart';
 part 'custom_pdf_view_model.g.dart';

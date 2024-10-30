@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pdf_app/app/core/model/base_model.dart';
+import 'package:DocuSort/app/core/model/base_model.dart';
 
 part 'file_picker_response_model.freezed.dart';
 part 'file_picker_response_model.g.dart';

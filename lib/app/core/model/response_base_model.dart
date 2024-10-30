@@ -1,5 +1,5 @@
-import 'package:pdf_app/app/core/model/base_model.dart';
-import 'package:pdf_app/app/product/model/error/response_error_model.dart';
+import 'package:DocuSort/app/core/model/base_model.dart';
+import 'package:DocuSort/app/product/model/error/response_error_model.dart';
 
 class ResponseBaseModel<T extends BaseModel> {
   final T? data;

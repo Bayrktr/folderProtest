@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/features/edit_directory/bloc/edit_directory_state.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
-import 'package:pdf_app/app/product/cache/hive/operation/all_directory_operation.dart';
-import 'package:pdf_app/app/product/cache/hive/operation/all_pdf_operation.dart';
-import 'package:pdf_app/app/product/cache/hive/operation/directory_operation.dart';
-import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_state.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
+import 'package:DocuSort/app/product/cache/hive/operation/all_directory_operation.dart';
+import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
+import 'package:DocuSort/app/product/cache/hive/operation/directory_operation.dart';
+import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 
 part 'edit_directory_cubit_mixin.dart';
 

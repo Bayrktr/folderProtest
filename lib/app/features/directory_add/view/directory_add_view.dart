@@ -1,19 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
-import 'package:pdf_app/app/core/extention/string/null_string_extention.dart';
-import 'package:pdf_app/app/features/directory_add/bloc/directory_add_cubit.dart';
-import 'package:pdf_app/app/features/directory_add/bloc/directory_add_state.dart';
-import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/features/directory_add/view/directory_add_view_mixin.dart';
-import 'package:pdf_app/app/product/component/alert_dialog/custom_pop_up.dart';
-import 'package:pdf_app/app/product/component/alert_dialog/show_dialog.dart';
-import 'package:pdf_app/app/product/component/text/locale_text.dart';
-import 'package:pdf_app/app/product/navigation/app_router.dart';
-import 'package:pdf_app/app/product/package/uuid/id_generator.dart';
-import 'package:pdf_app/app/product/utility/validator/text_form_field_validator.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
+import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
+import 'package:DocuSort/app/core/extention/string/null_string_extention.dart';
+import 'package:DocuSort/app/features/directory_add/bloc/directory_add_cubit.dart';
+import 'package:DocuSort/app/features/directory_add/bloc/directory_add_state.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/features/directory_add/view/directory_add_view_mixin.dart';
+import 'package:DocuSort/app/product/component/alert_dialog/custom_pop_up.dart';
+import 'package:DocuSort/app/product/component/alert_dialog/show_dialog.dart';
+import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/app/product/navigation/app_router.dart';
+import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
+import 'package:DocuSort/app/product/utility/validator/text_form_field_validator.dart';
+import 'package:DocuSort/generated/locale_keys.g.dart';
 
 @RoutePage()
 class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
@@ -131,6 +131,8 @@ class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
     required BuildContext context,
   }) {
     return AppBar(
+      centerTitle: true,
+      automaticallyImplyLeading: false,
       title: const LocaleText(text: LocaleKeys.directoryAdd_directoryAdd),
       leading: IconButton(
         onPressed: () {

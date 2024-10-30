@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:pdf_app/app/product/cache/hive/model/hive_model.dart';
-import 'package:pdf_app/app/product/cache/hive/model/hive_model_mixin.dart';
+import 'package:DocuSort/app/product/cache/hive/model/hive_model.dart';
+import 'package:DocuSort/app/product/cache/hive/model/hive_model_mixin.dart';
 
 
 

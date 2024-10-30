@@ -4,7 +4,8 @@
 
 
     <application
-        android:label="pdf_app"
+        android:requestLegacyExternalStorage="true"
+        android:label="DocuSort"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

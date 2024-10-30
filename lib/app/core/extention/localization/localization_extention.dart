@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:pdf_app/app/core/constant/settings.dart';
+import 'package:DocuSort/app/core/constant/settings.dart';
 
 extension LocalizationExtention on Locale {
   String? get getCountryName {

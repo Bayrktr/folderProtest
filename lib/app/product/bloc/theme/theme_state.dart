@@ -1,28 +1,28 @@
 import 'package:equatable/equatable.dart';
-import 'package:pdf_app/app/product/model/theme/theme_model.dart';
+import 'package:DocuSort/app/product/model/theme/theme_model.dart';
 
 class ThemeState with EquatableMixin {
   ThemeState({
     this.status = ThemeStatus.start,
-    required this.theme,
+    required this.themeModel,
   });
 
-  final ThemeModel theme;
+  final ThemeModel themeModel;
 
   final ThemeStatus status;
 
   @override
   List<Object?> get props => [
-        theme,
+    themeModel,
         status,
       ];
 
   ThemeState copyWith({
-    ThemeModel? theme,
+    ThemeModel? themeModel,
     ThemeStatus? status,
   }) =>
       ThemeState(
-        theme: theme ?? this.theme,
+        themeModel: themeModel ?? this.themeModel,
         status: status ?? this.status,
       );
 }

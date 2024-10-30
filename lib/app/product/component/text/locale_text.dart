@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/core/extention/string/string_extention.dart';
+import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 
 class LocaleText extends StatelessWidget {
   const LocaleText({

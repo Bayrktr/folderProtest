@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/cubit/home_directory_open_state.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
-import 'package:pdf_app/app/product/cache/hive/operation/all_pdf_operation.dart';
-import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/view/features/home_directory_open/cubit/home_directory_open_state.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
+import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
+import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 
 class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
   HomeDirectoryOpenCubit(this.pdfListKey) : super(HomeDirectoryOpenState());
@@ -27,7 +27,7 @@ class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
       );
     } else {
       await _allPdfOperation.start(pdfListKey.toString());
-      _getPdfList();
+      await _getPdfList();
     }
   }
 

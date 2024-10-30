@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:pdf_app/app/product/cache/hive/model/hive_model.dart';
-import 'package:pdf_app/app/product/converter/uint8List_converter.dart';
+import 'package:DocuSort/app/product/cache/hive/model/hive_model.dart';
+import 'package:DocuSort/app/product/converter/uint8List_converter.dart';
 
 part 'pdf_model.freezed.dart';
 part 'pdf_model.g.dart';

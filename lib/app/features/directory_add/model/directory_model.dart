@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:pdf_app/app/product/cache/hive/model/hive_model.dart';
+import 'package:DocuSort/app/product/cache/hive/model/hive_model.dart';
 
 part 'directory_model.freezed.dart';
 part 'directory_model.g.dart';

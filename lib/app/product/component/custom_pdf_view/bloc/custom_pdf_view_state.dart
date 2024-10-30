@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:pdf_app/app/product/component/custom_pdf_view/model/custom_pdf_view_model.dart';
-import 'package:pdf_app/app/product/model/pdf_settings/pdf_settings_model.dart';
+import 'package:DocuSort/app/product/component/custom_pdf_view/model/custom_pdf_view_model.dart';
+import 'package:DocuSort/app/product/model/pdf_settings/pdf_settings_model.dart';
 
 class CustomPdfViewState with EquatableMixin {
   CustomPdfViewState({

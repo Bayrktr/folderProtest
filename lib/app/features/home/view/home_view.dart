@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
-import 'package:pdf_app/app/product/navigation/app_router.dart';
+import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
+import 'package:DocuSort/app/product/navigation/app_router.dart';
 
 @RoutePage()
 class HomeView extends StatelessWidget {
@@ -14,25 +14,68 @@ class HomeView extends StatelessWidget {
       builder: (context, child, tabController) {
         return Scaffold(
           body: child,
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: context.tabsRouter.activeIndex,
-            onTap: context.tabsRouter.setActiveIndex,
-            unselectedItemColor: context.theme.getColor.focusColor,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.note_add_rounded,
-                ),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: '',
-              )
-            ],
+          bottomNavigationBar: _getBottomBar(
+            context: context,
           ),
         );
       },
+    );
+  }
+
+  Widget _getBottomBar({
+    required BuildContext context,
+  }) {
+    final int selectedIndex = context.tabsRouter.activeIndex;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: context.theme.getColor.focusColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+      width: context.sized.width,
+      height: context.sized.dynamicHeight(0.1),
+      child: Row(
+        children: [
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                context.tabsRouter.setActiveIndex(0);
+              },
+              child: Container(
+                height: double.infinity,
+                color: Colors.transparent,
+                child: Icon(
+                  Icons.note_add,
+                  color: selectedIndex == 0
+                      ? null
+                      : context.theme.getColor.focusColor,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                context.tabsRouter.setActiveIndex(1);
+              },
+              child: Container(
+                height: double.infinity,
+
+                color: Colors.transparent,
+                child: Icon(
+                  Icons.settings,
+                  color: selectedIndex == 1
+                      ? null
+                      : context.theme.getColor.focusColor,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

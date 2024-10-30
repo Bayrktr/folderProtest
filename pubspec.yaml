@@ -1,4 +1,4 @@
-name: pdf_app
+name: DocuSort
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -71,7 +71,7 @@ dependencies:
 
 
   #Permission
-  permission_handler: ^10.0.0
+  permission_handler: ^10.2.0
 
 
   #UI
@@ -127,3 +127,4 @@ flutter:
     - asset/image/error/
     - asset/image/flag/
     - asset/testPdf/
+    - asset/image/logo/

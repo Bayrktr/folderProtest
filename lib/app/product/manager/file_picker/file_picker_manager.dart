@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf_app/app/core/model/response_base_model.dart';
-import 'package:pdf_app/app/product/manager/file_picker/allowed_extentions.dart';
-import 'package:pdf_app/app/product/manager/file_picker/model/file_picker_response_model.dart';
-import 'package:pdf_app/app/product/manager/permission_handler/permission_handler_manager.dart';
-import 'package:pdf_app/app/product/model/error/response_error_model.dart';
-import 'package:pdf_app/app/product/package/uuid/id_generator.dart';
+import 'package:DocuSort/app/core/model/response_base_model.dart';
+import 'package:DocuSort/app/product/manager/device_info/device_info_manager.dart';
+import 'package:DocuSort/app/product/manager/device_info/platform_enum.dart';
+import 'package:DocuSort/app/product/manager/file_picker/allowed_extentions.dart';
+import 'package:DocuSort/app/product/manager/file_picker/model/file_picker_response_model.dart';
+import 'package:DocuSort/app/product/manager/permission_handler/permission_handler_manager.dart';
+import 'package:DocuSort/app/product/model/error/response_error_model.dart';
+import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class FilePickerManager {
@@ -16,7 +18,16 @@ class FilePickerManager {
   static final FilePicker _filePicker = FilePicker.platform;
 
   static Future<FilePickerResult?>? pickFile() async {
-    if (await PermissionHandlerManager.isGranted(Permission.storage)) {
+    final permissionStorage = await PermissionHandlerManager.isGranted(
+      DeviceInfoManager.devicePlatform == PlatformEnum.IOS
+          ? Permission.storage
+          : Permission.mediaLibrary,
+    );
+
+    print('first storege');
+    print(permissionStorage);
+
+    if (permissionStorage) {
       Future<FilePickerResult?>? result = _filePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: [
@@ -25,8 +36,11 @@ class FilePickerManager {
         withData: true,
       );
 
+      print(result);
       return result;
     } else {
+      await Permission.storage.request();
+      print('burası tetıklendi');
       return null;
     }
   }

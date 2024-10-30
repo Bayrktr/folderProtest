@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 
 class AddPdfState with EquatableMixin {
   AddPdfState({

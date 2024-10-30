@@ -1,19 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
-import 'package:pdf_app/app/core/extention/string/null_string_extention.dart';
-import 'package:pdf_app/app/core/extention/string/string_extention.dart';
-import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/features/edit_directory/bloc/edit_directory_cubit.dart';
-import 'package:pdf_app/app/features/edit_directory/bloc/edit_directory_state.dart';
-import 'package:pdf_app/app/features/edit_directory/view/component/edit_directory_show_model_sheet.dart';
-import 'package:pdf_app/app/features/edit_directory/view/component/edit_directory_snack_bar.dart';
-import 'package:pdf_app/app/product/component/alert_dialog/show_dialog.dart';
-import 'package:pdf_app/app/product/component/text/locale_text.dart';
-import 'package:pdf_app/app/product/navigation/app_router.dart';
-import 'package:pdf_app/app/product/utility/validator/text_form_field_validator.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
+import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
+import 'package:DocuSort/app/core/extention/string/null_string_extention.dart';
+import 'package:DocuSort/app/core/extention/string/string_extention.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_cubit.dart';
+import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_state.dart';
+import 'package:DocuSort/app/features/edit_directory/view/component/edit_directory_show_model_sheet.dart';
+import 'package:DocuSort/app/features/edit_directory/view/component/edit_directory_snack_bar.dart';
+import 'package:DocuSort/app/product/component/alert_dialog/show_dialog.dart';
+import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/app/product/navigation/app_router.dart';
+import 'package:DocuSort/app/product/utility/validator/text_form_field_validator.dart';
+import 'package:DocuSort/generated/locale_keys.g.dart';
 
 part 'edit_directory_mixin.dart';
 
@@ -118,6 +118,8 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
 
   AppBar _getAppbar({required BuildContext context}) {
     return AppBar(
+      centerTitle: true,
+
       automaticallyImplyLeading: false,
       title: const LocaleText(text: LocaleKeys.editDirectory_editDirectory),
       leading: IconButton(

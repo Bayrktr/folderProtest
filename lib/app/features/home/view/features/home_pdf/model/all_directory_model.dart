@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/product/cache/hive/model/hive_model.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/product/cache/hive/model/hive_model.dart';
 
 part 'all_directory_model.freezed.dart';
 part 'all_directory_model.g.dart';

@@ -7,6 +7,9 @@ abstract class  LocaleKeys {
   static const general_okey = 'general.okey';
   static const general_edit = 'general.edit';
   static const general_delete = 'general.delete';
+  static const general_next = 'general.next';
+  static const general_previous = 'general.previous';
+  static const general_search = 'general.search';
   static const general = 'general';
   static const settings_theme = 'settings.theme';
   static const settings = 'settings';
@@ -34,6 +37,7 @@ abstract class  LocaleKeys {
   static const customPdfView_errorWhileLoadingPdf = 'customPdfView.errorWhileLoadingPdf';
   static const customPdfView = 'customPdfView';
   static const openPdf_viewPdf = 'openPdf.viewPdf';
+  static const openPdf_enterTextToSearch = 'openPdf.enterTextToSearch';
   static const openPdf = 'openPdf';
 
 }

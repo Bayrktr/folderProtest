@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:pdf_app/app/product/cache/hive/model/hive_model.dart';
+import 'package:DocuSort/app/product/cache/hive/model/hive_model.dart';
 
 part 'theme_model.freezed.dart';
 part 'theme_model.g.dart';
@@ -11,7 +11,7 @@ part 'theme_model.g.dart';
 class ThemeModel with _$ThemeModel, HiveModelMixin {
   factory ThemeModel({
     @HiveField(0) int? id,
-    @HiveField(1) @_ThemeDataConverter() ThemeData? themeData,
+    @HiveField(1) @Default(true) bool isLight,
   }) = _ThemeModel;
 
   factory ThemeModel.fromJson(Map<String, dynamic> json) =>
@@ -27,6 +27,8 @@ class ThemeModel with _$ThemeModel, HiveModelMixin {
   String get key => themeModelKey;
 }
 
+
+/*
 class _ThemeDataConverter
     implements JsonConverter<ThemeData, Map<String, dynamic>> {
   const _ThemeDataConverter();
@@ -45,3 +47,5 @@ class _ThemeDataConverter
     };
   }
 }
+
+ */

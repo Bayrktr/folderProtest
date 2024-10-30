@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
-import 'package:pdf_app/app/product/component/text/locale_text.dart';
-import 'package:pdf_app/app/product/navigation/app_router.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
+import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
+import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/app/product/navigation/app_router.dart';
+import 'package:DocuSort/generated/locale_keys.g.dart';
 
 @RoutePage()
 class SettingsHomeView extends StatelessWidget {
@@ -31,6 +31,8 @@ class SettingsHomeView extends StatelessWidget {
     required BuildContext context,
   }) =>
       AppBar(
+        centerTitle: true,
+
         automaticallyImplyLeading: false,
         title: LocaleText(
           text: LocaleKeys.general_settings,

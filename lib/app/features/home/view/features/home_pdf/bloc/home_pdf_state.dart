@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
 
 class HomePdfState with EquatableMixin {
   HomePdfState({

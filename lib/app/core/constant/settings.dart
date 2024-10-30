@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 final class Settings {
   const Settings._();
 
-  static String appName = 'Pdf App';
+  static String appName = 'DocuSort';
+
+  static String appIconPath = '${Settings.appIconPath}image/logo/app_icon.png';
 
   static bool isDebugBannerOpen = false;
 

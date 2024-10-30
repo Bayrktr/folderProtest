@@ -23,8 +23,7 @@ mixin _$ThemeModel {
   @HiveField(0)
   int? get id => throw _privateConstructorUsedError;
   @HiveField(1)
-  @_ThemeDataConverter()
-  ThemeData? get themeData => throw _privateConstructorUsedError;
+  bool get isLight => throw _privateConstructorUsedError;
 
   /// Serializes this ThemeModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,9 +41,7 @@ abstract class $ThemeModelCopyWith<$Res> {
           ThemeModel value, $Res Function(ThemeModel) then) =
       _$ThemeModelCopyWithImpl<$Res, ThemeModel>;
   @useResult
-  $Res call(
-      {@HiveField(0) int? id,
-      @HiveField(1) @_ThemeDataConverter() ThemeData? themeData});
+  $Res call({@HiveField(0) int? id, @HiveField(1) bool isLight});
 }
 
 /// @nodoc
@@ -63,17 +60,17 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
   @override
   $Res call({
     Object? id = freezed,
-    Object? themeData = freezed,
+    Object? isLight = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      themeData: freezed == themeData
-          ? _value.themeData
-          : themeData // ignore: cast_nullable_to_non_nullable
-              as ThemeData?,
+      isLight: null == isLight
+          ? _value.isLight
+          : isLight // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -86,9 +83,7 @@ abstract class _$$ThemeModelImplCopyWith<$Res>
       __$$ThemeModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) int? id,
-      @HiveField(1) @_ThemeDataConverter() ThemeData? themeData});
+  $Res call({@HiveField(0) int? id, @HiveField(1) bool isLight});
 }
 
 /// @nodoc
@@ -105,17 +100,17 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? themeData = freezed,
+    Object? isLight = null,
   }) {
     return _then(_$ThemeModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      themeData: freezed == themeData
-          ? _value.themeData
-          : themeData // ignore: cast_nullable_to_non_nullable
-              as ThemeData?,
+      isLight: null == isLight
+          ? _value.isLight
+          : isLight // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -123,9 +118,7 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ThemeModelImpl extends _ThemeModel {
-  _$ThemeModelImpl(
-      {@HiveField(0) this.id,
-      @HiveField(1) @_ThemeDataConverter() this.themeData})
+  _$ThemeModelImpl({@HiveField(0) this.id, @HiveField(1) this.isLight = true})
       : super._();
 
   factory _$ThemeModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -135,13 +128,13 @@ class _$ThemeModelImpl extends _ThemeModel {
   @HiveField(0)
   final int? id;
   @override
+  @JsonKey()
   @HiveField(1)
-  @_ThemeDataConverter()
-  final ThemeData? themeData;
+  final bool isLight;
 
   @override
   String toString() {
-    return 'ThemeModel(id: $id, themeData: $themeData)';
+    return 'ThemeModel(id: $id, isLight: $isLight)';
   }
 
   @override
@@ -150,13 +143,12 @@ class _$ThemeModelImpl extends _ThemeModel {
         (other.runtimeType == runtimeType &&
             other is _$ThemeModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.themeData, themeData) ||
-                other.themeData == themeData));
+            (identical(other.isLight, isLight) || other.isLight == isLight));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, themeData);
+  int get hashCode => Object.hash(runtimeType, id, isLight);
 
   /// Create a copy of ThemeModel
   /// with the given fields replaced by the non-null parameter values.
@@ -176,9 +168,8 @@ class _$ThemeModelImpl extends _ThemeModel {
 
 abstract class _ThemeModel extends ThemeModel {
   factory _ThemeModel(
-          {@HiveField(0) final int? id,
-          @HiveField(1) @_ThemeDataConverter() final ThemeData? themeData}) =
-      _$ThemeModelImpl;
+      {@HiveField(0) final int? id,
+      @HiveField(1) final bool isLight}) = _$ThemeModelImpl;
   _ThemeModel._() : super._();
 
   factory _ThemeModel.fromJson(Map<String, dynamic> json) =
@@ -189,8 +180,7 @@ abstract class _ThemeModel extends ThemeModel {
   int? get id;
   @override
   @HiveField(1)
-  @_ThemeDataConverter()
-  ThemeData? get themeData;
+  bool get isLight;
 
   /// Create a copy of ThemeModel
   /// with the given fields replaced by the non-null parameter values.

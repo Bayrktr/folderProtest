@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/core/theme/color_theme.dart';
-import 'package:pdf_app/app/core/theme/text_theme.dart';
+import 'package:DocuSort/app/core/theme/color_theme.dart';
+import 'package:DocuSort/app/core/theme/text_theme.dart';
 
 final class CustomThemeExtention {
   CustomThemeExtention(BuildContext context) : _context = context;

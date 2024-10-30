@@ -5,7 +5,10 @@
     "cancel": "Cancel",
     "okey": "Okay",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search"
   },
   "settings": {
     "theme": "Theme"
@@ -42,6 +45,9 @@
     "errorWhileLoadingPdf": "An error occurred while loading the PDF"
   },
   "openPdf": {
-    "viewPdf": "View PDF"
+    "viewPdf": "View PDF",
+    "enterTextToSearch": "Enter text to search"
   }
 }
+
+

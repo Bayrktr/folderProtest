@@ -1,15 +1,15 @@
+import 'package:DocuSort/app/core/extention/string/string_extention.dart';
+import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_cubit_mixin.dart';
+import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_state.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
+import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
+import 'package:DocuSort/app/product/manager/file_picker/file_picker_manager.dart';
+import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pdf_app/app/core/extention/string/string_extention.dart';
-import 'package:pdf_app/app/features/add_pdf/bloc/add_pdf_cubit_mixin.dart';
-import 'package:pdf_app/app/features/add_pdf/bloc/add_pdf_state.dart';
-import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/model/pdf_model.dart';
-import 'package:pdf_app/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
-import 'package:pdf_app/app/product/cache/hive/operation/all_pdf_operation.dart';
-import 'package:pdf_app/app/product/manager/file_picker/file_picker_manager.dart';
-import 'package:pdf_app/app/product/manager/getIt/getIt_manager.dart';
-import 'package:pdf_app/app/product/package/uuid/id_generator.dart';
 
 class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
   AddPdfCubit({this.directoryModel})
@@ -93,57 +93,72 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
   }
 
   Future<void> savePdfToDirectory() async {
-    emit(
-      state.copyWith(
-        status: AddPdfStatus.loading,
-      ),
-    );
-    print(state.pickFileResult);
-    print(state.pickFileResult?.files.first.bytes);
-
-    print('byt');
-    final newPdfModel = PdfModel(
-      id: IdGenerator.randomIntId,
-      name: pdfNameController.text,
-      byte: state.pickFileResult?.files.first.bytes,
-    );
-    AllPdfModel? allPdfModel = _getPdfList();
-    if (allPdfModel == null) {
-      _createFirstModel();
-    }
-
-    allPdfModel = _getPdfList()!;
-
-    final mutableAllPdf = List<PdfModel>.from(allPdfModel.allPdf ?? []);
-
-    if (!isAlreadyExist(mutableAllPdf, newPdfModel)) {
-      mutableAllPdf.insert(0, newPdfModel);
-      await _allPdfOperation.addOrUpdateItem(
-        allPdfModel.copyWith(
-          allPdf: mutableAllPdf,
-        ),
-      );
+    if (state.pickFileResult == null) {
       emit(
         state.copyWith(
-          status: AddPdfStatus.initial,
-          savePdfStatus: SavePdfStatus.success,
+          savePdfStatus: SavePdfStatus.fileError,
         ),
       );
-    } else {
+      return;
+    }
+
+    try {
       emit(
         state.copyWith(
-          status: AddPdfStatus.initial,
-          savePdfStatus: SavePdfStatus.alreadyExist,
+          status: AddPdfStatus.loading,
         ),
       );
+
+      final newPdfModel = PdfModel(
+        id: IdGenerator.randomIntId,
+        name: pdfNameController.text,
+        byte: state.pickFileResult?.files.first.bytes,
+      );
+
+      AllPdfModel? allPdfModel = await Future.microtask(() => _getPdfList());
+
+      if (allPdfModel == null) {
+        await _createFirstModel();
+        allPdfModel = await Future.microtask(() => _getPdfList());
+      }
+
+      final mutableAllPdf = List<PdfModel>.from(allPdfModel?.allPdf ?? []);
+
+      if (!isAlreadyExist(mutableAllPdf, newPdfModel)) {
+        mutableAllPdf.insert(0, newPdfModel);
+
+        await Future.microtask(() => _allPdfOperation.addOrUpdateItem(
+              allPdfModel!.copyWith(
+                allPdf: mutableAllPdf,
+              ),
+            ));
+
+        emit(
+          state.copyWith(
+            status: AddPdfStatus.initial,
+            savePdfStatus: SavePdfStatus.success,
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            status: AddPdfStatus.initial,
+            savePdfStatus: SavePdfStatus.alreadyExist,
+          ),
+        );
+      }
+
+    } catch (e) {
+      print("Error saving PDF: $e");
+      emit(state.copyWith(status: AddPdfStatus.error));
     }
+
     _resetSavePdfStatus();
+
   }
 
   AllPdfModel? _getPdfList() {
-    final AllPdfModel? allPdfModel =
-        _allPdfOperation.getItem(directoryModel!.pdfListKey.toString());
-    return allPdfModel;
+    return _allPdfOperation.getItem(directoryModel!.pdfListKey.toString());
   }
 
   Future<void> _createFirstModel() async {

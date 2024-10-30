@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
-import 'package:pdf_app/app/core/extention/string/string_extention.dart';
-import 'package:pdf_app/app/features/add_pdf/bloc/add_pdf_cubit.dart';
-import 'package:pdf_app/app/features/add_pdf/bloc/add_pdf_state.dart';
-import 'package:pdf_app/app/features/add_pdf/view/add_pdf_mixin.dart';
-import 'package:pdf_app/app/features/add_pdf/view/component/add_pdf_snack_bar.dart';
-import 'package:pdf_app/app/features/directory_add/model/directory_model.dart';
-import 'package:pdf_app/app/product/component/text/locale_text.dart';
-import 'package:pdf_app/app/product/utility/validator/text_form_field_validator.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
+import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
+import 'package:DocuSort/app/core/extention/string/string_extention.dart';
+import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_cubit.dart';
+import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_state.dart';
+import 'package:DocuSort/app/features/add_pdf/view/add_pdf_mixin.dart';
+import 'package:DocuSort/app/features/add_pdf/view/component/add_pdf_snack_bar.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/app/product/utility/validator/text_form_field_validator.dart';
+import 'package:DocuSort/generated/locale_keys.g.dart';
 
 @RoutePage()
 class AddPdfView extends StatelessWidget with AddPdfMixin {
@@ -72,7 +72,7 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
                       onPressed: () {
                         context.read<AddPdfCubit>().pickPdf();
                       },
-                      label: Text('sec'),
+                      label: const Text('sec'),
                       icon: const Icon(Icons.file_upload),
                     ),
                     Text(state.pickFileResult != null ? 'Dosya seçildi':'Dosya seçilmedi'),
@@ -123,6 +123,8 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
     required BuildContext context,
   }) {
     return AppBar(
+      centerTitle: true,
+
       automaticallyImplyLeading: false,
       leading: IconButton(
         onPressed: () {

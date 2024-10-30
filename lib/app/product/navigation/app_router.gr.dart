@@ -355,6 +355,25 @@ class OpenPdfRouteArgs {
 }
 
 /// generated route for
+/// [PdfSettingsView]
+class PdfSettingsRoute extends PageRouteInfo<void> {
+  const PdfSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          PdfSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PdfSettingsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PdfSettingsView();
+    },
+  );
+}
+
+/// generated route for
 /// [SettingsHomeView]
 class SettingsHomeRoute extends PageRouteInfo<void> {
   const SettingsHomeRoute({List<PageRouteInfo>? children})
@@ -388,6 +407,25 @@ class SettingsRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SettingsView();
+    },
+  );
+}
+
+/// generated route for
+/// [SplashView]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SplashView();
     },
   );
 }

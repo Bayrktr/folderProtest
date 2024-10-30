@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pdf_app/app/core/extention/build_context/build_context_extension.dart';
-import 'package:pdf_app/app/features/directory_add/bloc/directory_add_state.dart';
-import 'package:pdf_app/app/product/component/text/locale_text.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
+import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
+import 'package:DocuSort/app/features/directory_add/bloc/directory_add_state.dart';
+import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/generated/locale_keys.g.dart';
 
 mixin DirectoryAddViewMixin on StatelessWidget {
   Widget getButtonWidget(
