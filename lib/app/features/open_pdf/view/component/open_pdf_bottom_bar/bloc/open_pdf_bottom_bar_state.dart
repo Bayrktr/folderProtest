@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class OpenPdfBottomBarState with EquatableMixin {
   OpenPdfBottomBarState({
-    this.isShow = true,
+    this.isShow = false,
   });
 
   final bool isShow;

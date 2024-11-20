@@ -1,3 +1,4 @@
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:equatable/equatable.dart';
 
 class DirectoryAddState with EquatableMixin {
@@ -6,12 +7,14 @@ class DirectoryAddState with EquatableMixin {
     this.statusMessage,
     this.popUpStatus = DirectoryAddPopUpStatus.initial,
     this.popUpStatusMessage,
+    this.selectedFileTypeEnum,
   });
 
   final DirectoryAddStatus status;
   final String? statusMessage;
   final DirectoryAddPopUpStatus popUpStatus;
   final String? popUpStatusMessage;
+  final FileTypeEnum? selectedFileTypeEnum;
 
   @override
   List<Object?> get props => [
@@ -19,6 +22,7 @@ class DirectoryAddState with EquatableMixin {
         statusMessage,
         popUpStatus,
         popUpStatusMessage,
+        selectedFileTypeEnum,
       ];
 
   DirectoryAddState copyWith({
@@ -26,12 +30,14 @@ class DirectoryAddState with EquatableMixin {
     String? statusMessage,
     DirectoryAddPopUpStatus? popUpStatus,
     String? popUpStatusMessage,
+    FileTypeEnum? selectedFileTypeEnum,
   }) =>
       DirectoryAddState(
         status: status ?? this.status,
         statusMessage: statusMessage ?? this.statusMessage,
         popUpStatus: popUpStatus ?? this.popUpStatus,
         popUpStatusMessage: popUpStatusMessage ?? this.popUpStatusMessage,
+        selectedFileTypeEnum: selectedFileTypeEnum ?? this.selectedFileTypeEnum,
       );
 }
 

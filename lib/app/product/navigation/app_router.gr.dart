@@ -186,6 +186,25 @@ class EditPdfRouteArgs {
 }
 
 /// generated route for
+/// [GeneralErrorView]
+class GeneralErrorRoute extends PageRouteInfo<void> {
+  const GeneralErrorRoute({List<PageRouteInfo>? children})
+      : super(
+          GeneralErrorRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'GeneralErrorRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const GeneralErrorView();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeDirectoryOpenView]
 class HomeDirectoryOpenRoute extends PageRouteInfo<HomeDirectoryOpenRouteArgs> {
   HomeDirectoryOpenRoute({
@@ -233,20 +252,20 @@ class HomeDirectoryOpenRouteArgs {
 }
 
 /// generated route for
-/// [HomePdfView]
-class HomePdfRoute extends PageRouteInfo<void> {
-  const HomePdfRoute({List<PageRouteInfo>? children})
+/// [HomeDirectoryView]
+class HomeDirectoryRoute extends PageRouteInfo<void> {
+  const HomeDirectoryRoute({List<PageRouteInfo>? children})
       : super(
-          HomePdfRoute.name,
+          HomeDirectoryRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomePdfRoute';
+  static const String name = 'HomeDirectoryRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const HomePdfView();
+      return const HomeDirectoryView();
     },
   );
 }
@@ -313,7 +332,7 @@ class LoginRoute extends PageRouteInfo<void> {
 class OpenPdfRoute extends PageRouteInfo<OpenPdfRouteArgs> {
   OpenPdfRoute({
     Key? key,
-    required PdfModel pdfModel,
+    required PdfModel? pdfModel,
     List<PageRouteInfo>? children,
   }) : super(
           OpenPdfRoute.name,
@@ -346,7 +365,7 @@ class OpenPdfRouteArgs {
 
   final Key? key;
 
-  final PdfModel pdfModel;
+  final PdfModel? pdfModel;
 
   @override
   String toString() {

@@ -19,4 +19,5 @@ final class ColorTheme {
   Color get iconColor => _theme.iconTheme.color ?? Colors.grey;
 
   Color get borderColor => _theme.shadowColor;
+
 }

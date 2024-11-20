@@ -14,7 +14,7 @@ mixin _EditDirectoryMixin on StatelessWidget {
           height: context.sized.dynamicHeight(0.2),
           child: ListView.builder(
             itemBuilder: (context, index) {
-              final item = state.allPdfModel?.allPdf?[index];
+              final item = state.allPdfModel?.allFiles?[index];
               if (item == null) {
                 return const SizedBox();
               }
@@ -40,7 +40,7 @@ mixin _EditDirectoryMixin on StatelessWidget {
                     )),
               );
             },
-            itemCount: state.allPdfModel?.allPdf?.length ?? 0,
+            itemCount: state.allPdfModel?.allFiles?.length ?? 0,
           ),
         ),
       EditDirectoryAllPdfStatus.loading => const CircularProgressIndicator(),
@@ -70,8 +70,8 @@ mixin _EditDirectoryMixin on StatelessWidget {
           ),
         );
       },
-      label: const LocaleText(
-        text: LocaleKeys.directoryOpen_addPdfd,
+      label: Text(
+        directoryModel.fileTypeEnum?.name ?? '',
       ),
     );
   }

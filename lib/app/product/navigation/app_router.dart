@@ -3,9 +3,10 @@ import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/directory_add/view/directory_add_view.dart';
 import 'package:DocuSort/app/features/edit_directory/view/edit_directory_view.dart';
 import 'package:DocuSort/app/features/edit_pdf/view/edit_pdf_view.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/view/features/home_directory_open/view/home_directory_open_view.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/view/home_pdf_view.dart';
+import 'package:DocuSort/app/features/error/features/general_error/view/general_error_view.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/home_directory_open_view.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/home_directory_view.dart';
 import 'package:DocuSort/app/features/home/view/features/settings_home/view/features/language/view/language_view.dart';
 import 'package:DocuSort/app/features/home/view/features/settings_home/view/features/settings/view/settings_view.dart';
 import 'package:DocuSort/app/features/home/view/features/settings_home/view/settings_home_view.dart';
@@ -62,12 +63,16 @@ class AppRouter extends RootStackRouter {
           path: RoutePath.pdfSettings.path,
         ),
         AdaptiveRoute(
+          page: GeneralErrorRoute.page,
+          path: RoutePath.generalError.path,
+        ),
+        AdaptiveRoute(
           page: HomeRoute.page,
           path: RoutePath.home.path,
           // initial: true,
           children: [
             AdaptiveRoute(
-              page: HomePdfRoute.page,
+              page: HomeDirectoryRoute.page,
               path: RoutePath.homePdf.path,
             ),
             AdaptiveRoute(
@@ -97,13 +102,14 @@ enum RoutePath {
   language('language'),
   directoryAdd('/directoryAdd'),
   settings('settings'),
-  homePdf('homePdf'),
+  homePdf('homeDirectory'),
   directoryEdit('/directoryEdit'),
   pdfEdit('/pdfEdit'),
   pdfAdd('/pdfAdd'),
   settingsHome('settingsHome'),
   openPdf('/openPdf'),
   pdfSettings('/pdfSettings'),
+  generalError('/generalError'),
   homeDirectoryOpen('/homeDirectoryOpen');
 
   const RoutePath(this.path);

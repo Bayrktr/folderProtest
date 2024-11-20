@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 class ThemeDataAdapter extends TypeAdapter<ThemeData> {
   @override
-  final typeId = 6; // Unique ID for this adapter
+  final typeId = 6;
 
   @override
   ThemeData read(BinaryReader reader) {

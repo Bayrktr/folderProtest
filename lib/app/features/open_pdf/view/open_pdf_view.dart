@@ -1,10 +1,8 @@
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
 import 'package:DocuSort/app/features/open_pdf/bloc/open_pdf_cubit.dart';
 import 'package:DocuSort/app/features/open_pdf/bloc/open_pdf_state.dart';
 import 'package:DocuSort/app/features/open_pdf/view/component/open_pdf_bottom_bar/bloc/open_pdf_buttom_bar_cubit.dart';
 import 'package:DocuSort/app/features/open_pdf/view/component/open_pdf_bottom_bar/view/open_pdf_bottom_bar_view.dart';
-import 'package:DocuSort/app/features/open_pdf/view/component/search_pdf_pop_up/view/search_pdf_pop_up_view.dart';
-import 'package:DocuSort/app/product/component/alert_dialog/show_dialog.dart';
 import 'package:DocuSort/app/product/component/custom_pdf_view/model/custom_pdf_view_model.dart';
 import 'package:DocuSort/app/product/component/custom_pdf_view/view/custom_pdf_view.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
@@ -22,7 +20,7 @@ class OpenPdfView extends StatefulWidget {
     required this.pdfModel,
   });
 
-  final PdfModel pdfModel;
+  final PdfModel? pdfModel;
 
   @override
   State<OpenPdfView> createState() => _OpenPdfViewState();
@@ -38,16 +36,21 @@ class _OpenPdfViewState extends State<OpenPdfView> {
 
   @override
   void dispose() {
+    _pdfViewerController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.pdfModel == null) return const SizedBox(
+      child: Text('selam'),
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (_) => OpenPdfCubit(
-            widget.pdfModel,
+            widget.pdfModel!,
           )..initDatabase(),
         ),
         BlocProvider(
@@ -72,11 +75,13 @@ class _OpenPdfViewState extends State<OpenPdfView> {
                       ),
                       pdfViewerController: _pdfViewerController,
                     ),
-                    const Positioned(
+                    Positioned(
                       bottom: 0,
                       left: 0,
                       right: 0,
-                      child: OpenPdfBottomBarView(),
+                      child: OpenPdfBottomBarView(
+                        pdfViewerController: _pdfViewerController,
+                      ),
                     ),
                   ],
                 );
@@ -106,41 +111,12 @@ class _OpenPdfViewState extends State<OpenPdfView> {
         ),
       ),
       title: const LocaleText(text: LocaleKeys.openPdf_viewPdf),
-      actions: [
-        _getSearchButton(),
-      ],
     );
   }
 
   Widget _getCircularProgressIndicator() {
     return const Center(
       child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget _getSearchButton() {
-    return BlocBuilder<OpenPdfCubit, OpenPdfState>(
-      builder: (context, state) {
-        switch (state.status) {
-          case OpenPdfStatus.start:
-            return const SizedBox();
-          case OpenPdfStatus.initial:
-            return IconButton(
-              onPressed: () {
-                IShowDialog(
-                  context: context,
-                  widget: SearchPdfPopUpView(
-                    pdfViewerController: _pdfViewerController,
-                  ),
-                ).getDialog();
-              },
-              icon: const Icon(Icons.search),
-            );
-          case OpenPdfStatus.loading:
-          case OpenPdfStatus.error:
-            return const SizedBox();
-        }
-      },
     );
   }
 }

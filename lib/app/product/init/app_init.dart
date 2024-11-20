@@ -4,7 +4,9 @@ import 'package:DocuSort/app/product/manager/device_info/device_info_manager.dar
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 import 'package:DocuSort/app/product/model/theme/theme_model.dart';
 import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
+import 'package:DocuSort/firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +15,10 @@ final class AppInit {
 
   static Future<void> mainInit() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 

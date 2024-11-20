@@ -1,5 +1,5 @@
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
 import 'package:equatable/equatable.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
 import 'package:DocuSort/app/product/model/pdf_settings/pdf_settings_model.dart';
 
 class OpenPdfState with EquatableMixin {

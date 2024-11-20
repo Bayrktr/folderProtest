@@ -25,10 +25,12 @@ mixin _$DirectoryModel {
   @HiveField(2)
   String? get name => throw _privateConstructorUsedError;
   @HiveField(3)
-  int? get pdfListKey => throw _privateConstructorUsedError;
+  int? get fileListKey => throw _privateConstructorUsedError;
   @HiveField(4)
   @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
   Color? get tagColor => throw _privateConstructorUsedError;
+  @HiveField(5)
+  FileTypeEnum? get fileTypeEnum => throw _privateConstructorUsedError;
 
   /// Serializes this DirectoryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,10 +51,11 @@ abstract class $DirectoryModelCopyWith<$Res> {
   $Res call(
       {@HiveField(1) int? id,
       @HiveField(2) String? name,
-      @HiveField(3) int? pdfListKey,
+      @HiveField(3) int? fileListKey,
       @HiveField(4)
       @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
-      Color? tagColor});
+      Color? tagColor,
+      @HiveField(5) FileTypeEnum? fileTypeEnum});
 }
 
 /// @nodoc
@@ -72,8 +75,9 @@ class _$DirectoryModelCopyWithImpl<$Res, $Val extends DirectoryModel>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? pdfListKey = freezed,
+    Object? fileListKey = freezed,
     Object? tagColor = freezed,
+    Object? fileTypeEnum = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -84,14 +88,18 @@ class _$DirectoryModelCopyWithImpl<$Res, $Val extends DirectoryModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      pdfListKey: freezed == pdfListKey
-          ? _value.pdfListKey
-          : pdfListKey // ignore: cast_nullable_to_non_nullable
+      fileListKey: freezed == fileListKey
+          ? _value.fileListKey
+          : fileListKey // ignore: cast_nullable_to_non_nullable
               as int?,
       tagColor: freezed == tagColor
           ? _value.tagColor
           : tagColor // ignore: cast_nullable_to_non_nullable
               as Color?,
+      fileTypeEnum: freezed == fileTypeEnum
+          ? _value.fileTypeEnum
+          : fileTypeEnum // ignore: cast_nullable_to_non_nullable
+              as FileTypeEnum?,
     ) as $Val);
   }
 }
@@ -107,10 +115,11 @@ abstract class _$$DirectoryModelImplCopyWith<$Res>
   $Res call(
       {@HiveField(1) int? id,
       @HiveField(2) String? name,
-      @HiveField(3) int? pdfListKey,
+      @HiveField(3) int? fileListKey,
       @HiveField(4)
       @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
-      Color? tagColor});
+      Color? tagColor,
+      @HiveField(5) FileTypeEnum? fileTypeEnum});
 }
 
 /// @nodoc
@@ -128,8 +137,9 @@ class __$$DirectoryModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? pdfListKey = freezed,
+    Object? fileListKey = freezed,
     Object? tagColor = freezed,
+    Object? fileTypeEnum = freezed,
   }) {
     return _then(_$DirectoryModelImpl(
       id: freezed == id
@@ -140,14 +150,18 @@ class __$$DirectoryModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      pdfListKey: freezed == pdfListKey
-          ? _value.pdfListKey
-          : pdfListKey // ignore: cast_nullable_to_non_nullable
+      fileListKey: freezed == fileListKey
+          ? _value.fileListKey
+          : fileListKey // ignore: cast_nullable_to_non_nullable
               as int?,
       tagColor: freezed == tagColor
           ? _value.tagColor
           : tagColor // ignore: cast_nullable_to_non_nullable
               as Color?,
+      fileTypeEnum: freezed == fileTypeEnum
+          ? _value.fileTypeEnum
+          : fileTypeEnum // ignore: cast_nullable_to_non_nullable
+              as FileTypeEnum?,
     ));
   }
 }
@@ -158,10 +172,11 @@ class _$DirectoryModelImpl extends _DirectoryModel {
   _$DirectoryModelImpl(
       {@HiveField(1) this.id,
       @HiveField(2) this.name,
-      @HiveField(3) this.pdfListKey,
+      @HiveField(3) this.fileListKey,
       @HiveField(4)
       @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
-      this.tagColor})
+      this.tagColor = Colors.black,
+      @HiveField(5) this.fileTypeEnum})
       : super._();
 
   factory _$DirectoryModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -175,15 +190,18 @@ class _$DirectoryModelImpl extends _DirectoryModel {
   final String? name;
   @override
   @HiveField(3)
-  final int? pdfListKey;
+  final int? fileListKey;
   @override
   @HiveField(4)
   @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
   final Color? tagColor;
+  @override
+  @HiveField(5)
+  final FileTypeEnum? fileTypeEnum;
 
   @override
   String toString() {
-    return 'DirectoryModel(id: $id, name: $name, pdfListKey: $pdfListKey, tagColor: $tagColor)';
+    return 'DirectoryModel(id: $id, name: $name, fileListKey: $fileListKey, tagColor: $tagColor, fileTypeEnum: $fileTypeEnum)';
   }
 
   @override
@@ -193,15 +211,18 @@ class _$DirectoryModelImpl extends _DirectoryModel {
             other is _$DirectoryModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.pdfListKey, pdfListKey) ||
-                other.pdfListKey == pdfListKey) &&
+            (identical(other.fileListKey, fileListKey) ||
+                other.fileListKey == fileListKey) &&
             (identical(other.tagColor, tagColor) ||
-                other.tagColor == tagColor));
+                other.tagColor == tagColor) &&
+            (identical(other.fileTypeEnum, fileTypeEnum) ||
+                other.fileTypeEnum == fileTypeEnum));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, pdfListKey, tagColor);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, fileListKey, tagColor, fileTypeEnum);
 
   /// Create a copy of DirectoryModel
   /// with the given fields replaced by the non-null parameter values.
@@ -224,10 +245,11 @@ abstract class _DirectoryModel extends DirectoryModel {
   factory _DirectoryModel(
       {@HiveField(1) final int? id,
       @HiveField(2) final String? name,
-      @HiveField(3) final int? pdfListKey,
+      @HiveField(3) final int? fileListKey,
       @HiveField(4)
       @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
-      final Color? tagColor}) = _$DirectoryModelImpl;
+      final Color? tagColor,
+      @HiveField(5) final FileTypeEnum? fileTypeEnum}) = _$DirectoryModelImpl;
   _DirectoryModel._() : super._();
 
   factory _DirectoryModel.fromJson(Map<String, dynamic> json) =
@@ -241,11 +263,14 @@ abstract class _DirectoryModel extends DirectoryModel {
   String? get name;
   @override
   @HiveField(3)
-  int? get pdfListKey;
+  int? get fileListKey;
   @override
   @HiveField(4)
   @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson)
   Color? get tagColor;
+  @override
+  @HiveField(5)
+  FileTypeEnum? get fileTypeEnum;
 
   /// Create a copy of DirectoryModel
   /// with the given fields replaced by the non-null parameter values.

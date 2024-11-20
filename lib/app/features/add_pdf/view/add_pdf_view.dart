@@ -1,6 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_cubit.dart';
@@ -11,6 +8,9 @@ import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/app/product/utility/validator/text_form_field_validator.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class AddPdfView extends StatelessWidget with AddPdfMixin {
@@ -72,10 +72,18 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
                       onPressed: () {
                         context.read<AddPdfCubit>().pickPdf();
                       },
-                      label: const Text('sec'),
-                      icon: const Icon(Icons.file_upload),
+                      label: const LocaleText(
+                        text: LocaleKeys.pdfAdd_select,
+                      ),
+                      icon: const Icon(
+                        Icons.file_upload,
+                      ),
                     ),
-                    Text(state.pickFileResult != null ? 'Dosya seçildi':'Dosya seçilmedi'),
+                    LocaleText(
+                      text: state.pickFileResult != null
+                          ? LocaleKeys.pdfAdd_fileSelected
+                          : LocaleKeys.pdfAdd_fileNotSelected,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -100,7 +108,7 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
               return;
             case SavePdfStatus.fileError:
               AddPdfSnackBar(
-                message: LocaleKeys.pdfAdd_fileWasNotAddedOrIncorrecty.lang.tr,
+                message: LocaleKeys.pdfAdd_fileWasNotAddedOrIncorrectly.lang.tr,
                 color: Colors.redAccent,
               ).show(context);
             case SavePdfStatus.empty:
@@ -124,7 +132,6 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
   }) {
     return AppBar(
       centerTitle: true,
-
       automaticallyImplyLeading: false,
       leading: IconButton(
         onPressed: () {

@@ -2,14 +2,15 @@ import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_cubit_mixin.dart';
 import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_state.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
 import 'package:DocuSort/app/product/manager/file_picker/file_picker_manager.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
 
 class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
   AddPdfCubit({this.directoryModel})
@@ -28,7 +29,8 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
   final AllPdfOperation _allPdfOperation =
       GetItManager.getIt<AllPdfOperation>();
 
-  String? get pdfListKey => directoryModel?.pdfListKey.toString();
+  String? get fileListKey => directoryModel?.fileListKey.toString();
+
 
   Future<void> initDatabase() async {
     emit(
@@ -36,14 +38,14 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
         status: AddPdfStatus.loading,
       ),
     );
-    if (pdfListKey == null) {
+    if (fileListKey == null) {
       emit(
         state.copyWith(
           status: AddPdfStatus.error,
         ),
       );
     } else {
-      await _allPdfOperation.start(pdfListKey!);
+      await _allPdfOperation.start(fileListKey!);
       emit(
         state.copyWith(
           status: AddPdfStatus.initial,
@@ -122,14 +124,14 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
         allPdfModel = await Future.microtask(() => _getPdfList());
       }
 
-      final mutableAllPdf = List<PdfModel>.from(allPdfModel?.allPdf ?? []);
+      final mutableAllPdf = List<PdfModel>.from(allPdfModel?.allFiles ?? []);
 
       if (!isAlreadyExist(mutableAllPdf, newPdfModel)) {
         mutableAllPdf.insert(0, newPdfModel);
 
         await Future.microtask(() => _allPdfOperation.addOrUpdateItem(
               allPdfModel!.copyWith(
-                allPdf: mutableAllPdf,
+                allFiles: mutableAllPdf,
               ),
             ));
 
@@ -158,14 +160,14 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
   }
 
   AllPdfModel? _getPdfList() {
-    return _allPdfOperation.getItem(directoryModel!.pdfListKey.toString());
+    return _allPdfOperation.getItem(directoryModel!.fileListKey.toString());
   }
 
   Future<void> _createFirstModel() async {
     await _allPdfOperation.addOrUpdateItem(
       AllPdfModel(
-        id: int.parse(pdfListKey!),
-        allPdf: [],
+        id: int.parse(fileListKey!),
+        allFiles: [],
       ),
     );
   }

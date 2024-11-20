@@ -12,4 +12,9 @@ final class GeneralStringExtention {
 
     return _string;
   }
+
+  String get capitalize {
+    if (_string.isEmpty) return _string;
+    return _string[0].toUpperCase() + _string.substring(1);
+  }
 }

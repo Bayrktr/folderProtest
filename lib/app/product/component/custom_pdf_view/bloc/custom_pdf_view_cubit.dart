@@ -1,5 +1,5 @@
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
 import 'package:DocuSort/app/product/component/custom_pdf_view/bloc/custom_pdf_view_state.dart';
 import 'package:DocuSort/app/product/component/custom_pdf_view/model/custom_pdf_view_model.dart';
 import 'package:DocuSort/app/product/model/pdf_settings/pdf_settings_model.dart';

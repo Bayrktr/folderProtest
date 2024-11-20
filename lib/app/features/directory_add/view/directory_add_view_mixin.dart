@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/features/directory_add/bloc/directory_add_state.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
+import 'package:flutter/material.dart';
 
 mixin DirectoryAddViewMixin on StatelessWidget {
   Widget getButtonWidget(
@@ -25,4 +26,8 @@ mixin DirectoryAddViewMixin on StatelessWidget {
         return const CircularProgressIndicator();
     }
   }
+
+  final List<FileTypeEnum> fileTypeEnumList = [
+    FileTypeEnum.pdf,
+  ];
 }

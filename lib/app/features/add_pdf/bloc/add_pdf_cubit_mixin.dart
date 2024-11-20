@@ -1,6 +1,6 @@
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_state.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
 
 mixin AddPdfCubitMixin on Cubit<AddPdfState> {
   bool isAlreadyExist(

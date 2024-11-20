@@ -8,34 +8,39 @@
     "delete": "Delete",
     "next": "Next",
     "previous": "Previous",
-    "search": "Search"
+    "search": "Search",
+    "add": "Add"
   },
   "settings": {
     "theme": "Theme"
   },
   "errors": {
     "nullErrorMessage": "",
-    "folderAlreadyExists": "This folder already exists"
+    "folderAlreadyExists": "This folder already exists",
+    "anUnexpectedProblem": "An unexpected problem occurred"
   },
   "validate": {
     "directoryNameCannotEmpty": "Directory name cannot be empty or only spaces",
     "thereIsAnotherDirectoryWithThisName": "There is another directory with this name"
   },
   "home": {
-    "selectDirectory": "Select directory",
-    "directoryDeletedSuccessfully": "Directory deleted successfully"
+    "directorys": "Directorys",
+    "directoryDeletedSuccessfully": "Directory deleted successfully",
+    "layout": "Layout",
+    "asSymbol": "As symbol",
+    "asList": "As list"
   },
   "directoryAdd": {
-    "directoryAdd": "Add directory"
-  },
-  "directoryOpen": {
-    "selectPdf": "Select PDF",
-    "addPdfd": "Add PDF"
+    "directoryAdd": "Add directory",
+    "fileTypeNotSelected": "File type not selected"
   },
   "pdfAdd": {
     "pdfAdd": "Add PDF",
-    "fileWasNotAddedOrIncorrecty": "File was not added or was added incorrectly",
-    "thereIsAnotherPdfWithName": "There is another PDF with this name"
+    "fileWasNotAddedOrIncorrectly": "File was not added or was added incorrectly",
+    "thereIsAnotherPdfWithName": "There is another PDF with this name",
+    "select": "Select",
+    "fileNotSelected": "File not selected",
+    "fileSelected": "File selected"
   },
   "editDirectory": {
     "editDirectory": "Edit directory",

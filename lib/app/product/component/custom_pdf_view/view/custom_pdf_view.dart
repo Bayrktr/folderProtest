@@ -1,3 +1,5 @@
+
+import 'package:DocuSort/app/features/open_pdf/view/component/open_pdf_bottom_bar/bloc/open_pdf_buttom_bar_cubit.dart';
 import 'package:DocuSort/app/product/component/custom_pdf_view/bloc/custom_pdf_view_cubit.dart';
 import 'package:DocuSort/app/product/component/custom_pdf_view/bloc/custom_pdf_view_state.dart';
 import 'package:DocuSort/app/product/component/custom_pdf_view/model/custom_pdf_view_model.dart';
@@ -27,16 +29,8 @@ class CustomPdfView extends StatefulWidget {
 }
 
 class _CustomPdfViewState extends State<CustomPdfView> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    widget.pdfViewerController.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +48,10 @@ class _CustomPdfViewState extends State<CustomPdfView> {
             case CustomPdfViewStatus.initial:
               final PdfSettingsModel pdfSettingsModel = state.pdfSettingsModel;
               return SfPdfViewer.memory(
+                onPageChanged: (detail) {
+                  print('aaa');
+                  context.read<OpenPdfBottomBarCubit>().toggleBottomBarStatus();
+                },
                 canShowScrollHead: true,
                 scrollDirection: pdfSettingsModel.swipeHorizontal
                     ? PdfScrollDirection.horizontal

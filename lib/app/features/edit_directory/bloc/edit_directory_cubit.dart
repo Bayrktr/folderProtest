@@ -1,10 +1,10 @@
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/all_directory_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_state.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/pdf_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/view/features/home_directory_open/model/all_pdf_model.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_directory_operation.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/directory_operation.dart';
@@ -39,27 +39,27 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
   final DirectoryOperation _directoryOperation =
       GetItManager.getIt<DirectoryOperation>();
 
-  int? get pdfListKey => selectedDirectory?.pdfListKey;
+  int? get fileListKey => selectedDirectory?.fileListKey;
 
   String? get selectedDirectoryKey => selectedDirectory?.key;
 
 
   Future<void> initDatabase() async {
-    final int? pdfListKey = selectedDirectory?.pdfListKey;
+    final int? fileListKey = selectedDirectory?.fileListKey;
 
     emit(
       state.copyWith(
         allPdfStatus: EditDirectoryAllPdfStatus.loading,
       ),
     );
-    if (pdfListKey == null || selectedDirectory == null) {
+    if (fileListKey == null || selectedDirectory == null) {
       emit(
         state.copyWith(
           allPdfStatus: EditDirectoryAllPdfStatus.error,
         ),
       );
     } else {
-      await _allPdfOperation.start(pdfListKey.toString());
+      await _allPdfOperation.start(fileListKey.toString());
       await _directoryOperation.start(selectedDirectoryKey!);
       await _allDirectoryOperation.start(AllDirectoryModel.allDirectoryKey);
       _getPdfList();
@@ -67,12 +67,12 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
   }
 
   AllPdfModel? _getAllPdfModel() {
-    return _allPdfOperation.getItem(pdfListKey!.toString());
+    return _allPdfOperation.getItem(fileListKey!.toString());
   }
 
   Future<void> _getPdfList() async {
     final AllPdfModel? allPdfModel = _getAllPdfModel();
-    if (allPdfModel?.allPdf == null) {
+    if (allPdfModel?.allFiles == null) {
       await _createFirstModel();
       _getPdfList();
     } else {
@@ -91,8 +91,8 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
   Future<void> _createFirstModel() async {
     await _allPdfOperation.addOrUpdateItem(
       AllPdfModel(
-        id: pdfListKey,
-        allPdf: [],
+        id: fileListKey,
+        allFiles: [],
       ),
     );
   }
@@ -106,13 +106,13 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
     final AllPdfModel allPdfModel = state.allPdfModel!;
 
     final List<PdfModel?> mutableList = List<PdfModel>.from(
-      allPdfModel.allPdf!,
+      allPdfModel.allFiles!,
     );
 
     mutableList.remove(pdfModel);
 
     final newAllPdfModel = allPdfModel.copyWith(
-      allPdf: mutableList,
+      allFiles: mutableList,
     );
 
     await _allPdfOperation.addOrUpdateItem(newAllPdfModel);
@@ -160,14 +160,12 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
     print(updatedDirectoryModel);
 
     if (isDuplicate(directoryList, updatedDirectoryModel)) {
-      print('bu zaten var');
       emit(
         state.copyWith(
           allDirectoryStatus: EditDirectoryAllDirectoryStatus.alreadyExist,
         ),
       );
     } else {
-      print('değişti');
       await _directoryOperation.addOrUpdateItem(
         updatedDirectoryModel,
       );

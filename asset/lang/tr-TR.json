@@ -8,34 +8,39 @@
     "delete": "Sil",
     "next": "Sıradaki",
     "previous": "Önceki",
-    "search": "Ara"
+    "search": "Ara",
+    "add": "Ekle"
   },
   "settings": {
     "theme": "Tema"
   },
   "errors": {
     "nullErrorMessage": "",
-    "folderAlreadyExists": "Bu klasör zaten mevcut"
+    "folderAlreadyExists": "Bu klasör zaten mevcut",
+    "anUnexpectedProblem": "Beklenmeyen bir sorun oluştu"
   },
   "validate": {
     "directoryNameCannotEmpty": "Klasör adı boş veya yalnızca boşluk olamaz",
     "thereIsAnotherDirectoryWithThisName": "Bu isme sahip başka bir klasör var"
   },
   "home": {
-    "selectDirectory": "Klasör seç",
-    "directoryDeletedSuccessfully": "Klasör başarıyla silindi"
+    "directorys": "Klasörler",
+    "directoryDeletedSuccessfully": "Klasör başarıyla silindi",
+    "layout": "Düzen",
+    "asSymbol": "Simge olarak",
+    "asList": "Liste olarak"
   },
   "directoryAdd": {
-    "directoryAdd": "Klasör ekle"
-  },
-  "directoryOpen": {
-    "selectPdf": "Pdf seç",
-    "addPdfd": "Pdf ekle"
+    "directoryAdd": "Klasör ekle",
+    "fileTypeNotSelected": "Dosya tipi seçilmedi"
   },
   "pdfAdd": {
     "pdfAdd": "Pdf ekle",
-    "fileWasNotAddedOrIncorrecty": "Dosya eklenmedi veya yanlış eklenmiş",
-    "thereIsAnotherPdfWithName": "Bu isimde başka bir pdf var"
+    "fileWasNotAddedOrIncorrectly": "Dosya eklenmedi veya yanlış eklenmiş",
+    "thereIsAnotherPdfWithName": "Bu isimde başka bir pdf var",
+    "select": "Seç",
+    "fileNotSelected": "Dosya seçilmedi",
+    "fileSelected": "Dosya seçildi"
   },
   "editDirectory": {
     "editDirectory": "Klasörü Düzenle",
@@ -47,6 +52,5 @@
   "openPdf": {
     "viewPdf": "Pdf görüntüle",
     "enterTextToSearch": "Aranacak metni girin\n"
-
   }
 }

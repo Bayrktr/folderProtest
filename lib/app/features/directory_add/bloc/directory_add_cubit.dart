@@ -1,13 +1,15 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:DocuSort/app/features/directory_add/bloc/directory_add_cubit_mixin.dart';
 import 'package:DocuSort/app/features/directory_add/bloc/directory_add_state.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_pdf/model/all_directory_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/all_directory_model.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_directory_operation.dart';
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DirectoryAddCubit extends Cubit<DirectoryAddState>
     with DirectoryAddCubitMixin {
@@ -39,6 +41,15 @@ class DirectoryAddCubit extends Cubit<DirectoryAddState>
   void updateDirectoryName(String? value) {
     if (value == null) return;
     directoryNameController.text = value;
+  }
+
+  void updateSelectedFileTypeEnum(FileTypeEnum? fileTypeEnum) {
+    if (fileTypeEnum == null) return;
+    emit(
+      state.copyWith(
+        selectedFileTypeEnum: fileTypeEnum,
+      ),
+    );
   }
 
   void allReset() {
@@ -79,9 +90,18 @@ class DirectoryAddCubit extends Cubit<DirectoryAddState>
           statusMessage: LocaleKeys.errors_folderAlreadyExists.lang.tr,
         ),
       );
+    } else if (state.selectedFileTypeEnum == null) {
+      emit(
+        state.copyWith(
+          popUpStatus: DirectoryAddPopUpStatus.show,
+          popUpStatusMessage: LocaleKeys.directoryAdd_fileTypeNotSelected.tr(),
+          status: DirectoryAddStatus.initial,
+        ),
+      );
+      resetPopUpStatus();
     } else {
       final mutableAllDirectory =
-          List<DirectoryModel>.from(response!.allDirectory!);
+          List<DirectoryModel>.from(response!.allDirectory);
 
       if (!isDuplicate(
         mutableAllDirectory,
@@ -103,7 +123,8 @@ class DirectoryAddCubit extends Cubit<DirectoryAddState>
         emit(
           state.copyWith(
             popUpStatus: DirectoryAddPopUpStatus.show,
-            popUpStatusMessage: LocaleKeys.validate_thereIsAnotherDirectoryWithThisName.lang.tr,
+            popUpStatusMessage:
+                LocaleKeys.validate_thereIsAnotherDirectoryWithThisName.lang.tr,
             status: DirectoryAddStatus.initial,
           ),
         );

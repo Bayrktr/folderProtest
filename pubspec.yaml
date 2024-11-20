@@ -76,6 +76,13 @@ dependencies:
 
   #UI
   syncfusion_flutter_pdfviewer: ^27.1.53
+  dropdown_button2: ^2.3.9
+
+
+
+  #Firebase
+  firebase_core: ^3.6.0
+
 
 
 

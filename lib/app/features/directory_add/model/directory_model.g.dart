@@ -19,23 +19,26 @@ class DirectoryModelAdapter extends TypeAdapter<DirectoryModel> {
     return DirectoryModel(
       id: fields[1] as int?,
       name: fields[2] as String?,
-      pdfListKey: fields[3] as int?,
+      fileListKey: fields[3] as int?,
       tagColor: fields[4] as Color?,
+      fileTypeEnum: fields[5] as FileTypeEnum?,
     );
   }
 
   @override
   void write(BinaryWriter writer, DirectoryModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
       ..write(obj.name)
       ..writeByte(3)
-      ..write(obj.pdfListKey)
+      ..write(obj.fileListKey)
       ..writeByte(4)
-      ..write(obj.tagColor);
+      ..write(obj.tagColor)
+      ..writeByte(5)
+      ..write(obj.fileTypeEnum);
   }
 
   @override
@@ -57,8 +60,12 @@ _$DirectoryModelImpl _$$DirectoryModelImplFromJson(Map<String, dynamic> json) =>
     _$DirectoryModelImpl(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      pdfListKey: (json['pdfListKey'] as num?)?.toInt(),
-      tagColor: _colorFromJson((json['tagColor'] as num?)?.toInt()),
+      fileListKey: (json['fileListKey'] as num?)?.toInt(),
+      tagColor: json['tagColor'] == null
+          ? Colors.black
+          : _colorFromJson((json['tagColor'] as num?)?.toInt()),
+      fileTypeEnum:
+          $enumDecodeNullable(_$FileTypeEnumEnumMap, json['fileTypeEnum']),
     );
 
 Map<String, dynamic> _$$DirectoryModelImplToJson(
@@ -66,6 +73,11 @@ Map<String, dynamic> _$$DirectoryModelImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'pdfListKey': instance.pdfListKey,
+      'fileListKey': instance.fileListKey,
       'tagColor': _colorToJson(instance.tagColor),
+      'fileTypeEnum': _$FileTypeEnumEnumMap[instance.fileTypeEnum],
     };
+
+const _$FileTypeEnumEnumMap = {
+  FileTypeEnum.pdf: 'pdf',
+};
