@@ -17,4 +17,9 @@ final class GeneralStringExtention {
     if (_string.isEmpty) return _string;
     return _string[0].toUpperCase() + _string.substring(1);
   }
+
+  String get toLower {
+    if(_string.isEmpty) return _string;
+    return _string.toLowerCase();
+  }
 }

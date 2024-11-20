@@ -14,6 +14,7 @@ import 'package:DocuSort/app/features/home/view/home_view.dart';
 import 'package:DocuSort/app/features/login/view/login_view.dart';
 import 'package:DocuSort/app/features/open_pdf/view/open_pdf_view.dart';
 import 'package:DocuSort/app/features/pdf_view_settings/view/pdf_settings_view.dart';
+import 'package:DocuSort/app/features/search_directory/view/search_directory_view.dart';
 import 'package:DocuSort/app/features/splash/view/splash_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class AppRouter extends RootStackRouter {
         ),
         AdaptiveRoute(
           page: AddPdfRoute.page,
-          path: RoutePath.pdfAdd.path,
+          path: RoutePath.fileAdd.path,
         ),
         AdaptiveRoute(
           page: EditDirectoryRoute.page,
@@ -52,11 +53,15 @@ class AppRouter extends RootStackRouter {
         ),
         AdaptiveRoute(
           page: EditPdfRoute.page,
-          path: RoutePath.pdfEdit.path,
+          path: RoutePath.fileEdit.path,
         ),
         AdaptiveRoute(
           page: OpenPdfRoute.page,
-          path: RoutePath.openPdf.path,
+          path: RoutePath.openFile.path,
+        ),
+        AdaptiveRoute(
+          page: SearchDirectoryRoute.page,
+          path: RoutePath.searchDirectory.path,
         ),
         AdaptiveRoute(
           page: PdfSettingsRoute.page,
@@ -104,10 +109,11 @@ enum RoutePath {
   settings('settings'),
   homePdf('homeDirectory'),
   directoryEdit('/directoryEdit'),
-  pdfEdit('/pdfEdit'),
-  pdfAdd('/pdfAdd'),
+  fileEdit('/fileEdit'),
+  fileAdd('/fileAdd'),
   settingsHome('settingsHome'),
-  openPdf('/openPdf'),
+  openFile('/openFile'),
+  searchDirectory('/searchDirectory'),
   pdfSettings('/pdfSettings'),
   generalError('/generalError'),
   homeDirectoryOpen('/homeDirectoryOpen');

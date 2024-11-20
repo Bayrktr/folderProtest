@@ -47,19 +47,33 @@ class HomeDirectoryView extends StatelessWidget {
             switch (state.status) {
               case HomeDirectoryStatus.initial:
                 return Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.sized.widthNormalValue,
-                  ),
-                  child: switch (state.pageLayoutModel?.pageLayoutEnum) {
-                    PageLayoutEnum.list => HomeDirectoryListLayout(
-                        allDirectoryModel: state.allDirectory,
-                      ),
-                    PageLayoutEnum.symbol => HomeDirectorySymbolLayout(
-                        allDirectoryModel: state.allDirectory,
-                      ),
-                    null => const SizedBox(),
-                  },
-                );
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.sized.widthNormalValue,
+                    ),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            context.router.push(const SearchDirectoryRoute());
+                          },
+                          child: const Icon(
+                            Icons.search,
+                          ),
+                        ),
+                        Expanded(
+                          child: switch (
+                              state.pageLayoutModel?.pageLayoutEnum) {
+                            PageLayoutEnum.list => HomeDirectoryListLayout(
+                                allDirectoryModel: state.allDirectory,
+                              ),
+                            PageLayoutEnum.symbol => HomeDirectorySymbolLayout(
+                                allDirectoryModel: state.allDirectory,
+                              ),
+                            null => const SizedBox(),
+                          },
+                        ),
+                      ],
+                    ));
 
               case HomeDirectoryStatus.error:
                 return const Center(
@@ -69,8 +83,9 @@ class HomeDirectoryView extends StatelessWidget {
                 );
 
               case HomeDirectoryStatus.loading:
+                return _getCircularProgressIndicator(context: context);
               case HomeDirectoryStatus.start:
-                return const Center(child: CircularProgressIndicator());
+                return _getCircularProgressIndicator(context: context);
             }
           },
         ),
@@ -106,6 +121,12 @@ class HomeDirectoryView extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+
+  Widget _getCircularProgressIndicator({required BuildContext context}) {
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

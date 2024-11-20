@@ -393,6 +393,25 @@ class PdfSettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SearchDirectoryView]
+class SearchDirectoryRoute extends PageRouteInfo<void> {
+  const SearchDirectoryRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchDirectoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchDirectoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchDirectoryView();
+    },
+  );
+}
+
+/// generated route for
 /// [SettingsHomeView]
 class SettingsHomeRoute extends PageRouteInfo<void> {
   const SettingsHomeRoute({List<PageRouteInfo>? children})

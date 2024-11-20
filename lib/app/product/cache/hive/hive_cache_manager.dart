@@ -43,15 +43,13 @@ final class HiveCacheManager implements IDatabaseManager {
     await DirectoryManager.instance.removeSubDirectory(_subDirectory);
   }
 
-  /// Open your database connection
-  /// Now using [Hive]
+
   Future<void> _open() async {
     final subPath =
         await DirectoryManager.instance.createSubDirectory(_subDirectory);
     await Hive.initFlutter(subPath);
   }
 
-  /// Register your generic model or make your operation before start
   void initialOperation() {
     //Hive.registerAdapter(UserAdapter());
     Hive.registerAdapter(AllDirectoryModelAdapter());
@@ -67,5 +65,6 @@ final class HiveCacheManager implements IDatabaseManager {
     Hive.registerAdapter(HomeDirectoryPageLayoutModelAdapter());
     Hive.registerAdapter(PageLayoutEnumAdapter());
     Hive.registerAdapter(HomeDirectoryOpenPageLayoutModelAdapter());
+    Hive.registerAdapter(ColorAdapter());
   }
 }
