@@ -102,7 +102,7 @@ class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
   }
 
   Future<void> _initPdfFile() async {
-    await _allPdfOperation.start(fileListKey.toString());
+    await _pdfRepository.start();
     await _getPdfList();
   }
 

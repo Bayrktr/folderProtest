@@ -412,6 +412,53 @@ class SearchDirectoryRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SearchFileView]
+class SearchFileRoute extends PageRouteInfo<SearchFileRouteArgs> {
+  SearchFileRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SearchFileRoute.name,
+          args: SearchFileRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchFileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SearchFileRouteArgs>(
+          orElse: () => const SearchFileRouteArgs());
+      return SearchFileView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+      );
+    },
+  );
+}
+
+class SearchFileRouteArgs {
+  const SearchFileRouteArgs({
+    this.key,
+    this.directoryModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  @override
+  String toString() {
+    return 'SearchFileRouteArgs{key: $key, directoryModel: $directoryModel}';
+  }
+}
+
+/// generated route for
 /// [SettingsHomeView]
 class SettingsHomeRoute extends PageRouteInfo<void> {
   const SettingsHomeRoute({List<PageRouteInfo>? children})

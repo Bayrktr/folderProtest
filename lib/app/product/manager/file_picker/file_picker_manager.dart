@@ -1,8 +1,7 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:DocuSort/app/core/model/response_base_model.dart';
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/manager/device_info/device_info_manager.dart';
 import 'package:DocuSort/app/product/manager/device_info/platform_enum.dart';
 import 'package:DocuSort/app/product/manager/file_picker/allowed_extentions.dart';
@@ -10,6 +9,8 @@ import 'package:DocuSort/app/product/manager/file_picker/model/file_picker_respo
 import 'package:DocuSort/app/product/manager/permission_handler/permission_handler_manager.dart';
 import 'package:DocuSort/app/product/model/error/response_error_model.dart';
 import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class FilePickerManager {
@@ -17,21 +18,20 @@ class FilePickerManager {
 
   static final FilePicker _filePicker = FilePicker.platform;
 
-  static Future<FilePickerResult?>? pickFile() async {
+  static Future<FilePickerResult?>? pickFile(
+    FileTypeEnum? fileTypeEnum,
+  ) async {
     final permissionStorage = await PermissionHandlerManager.isGranted(
       DeviceInfoManager.devicePlatform == PlatformEnum.IOS
           ? Permission.storage
           : Permission.mediaLibrary,
     );
 
-    print('first storege');
-    print(permissionStorage);
-
     if (permissionStorage) {
       Future<FilePickerResult?>? result = _filePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: [
-          AllowedExtention.pdf,
+          _getCorrectExtention(fileTypeEnum),
         ],
         withData: true,
       );
@@ -80,6 +80,15 @@ class FilePickerManager {
         ),
         error: null,
       );
+    }
+  }
+
+  static String _getCorrectExtention(FileTypeEnum? fileTypeEnum) {
+    switch (fileTypeEnum) {
+      case null:
+        return '';
+      case FileTypeEnum.pdf:
+        return AllowedExtention.pdf;
     }
   }
 }

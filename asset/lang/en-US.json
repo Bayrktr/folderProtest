@@ -40,7 +40,8 @@
     "thereIsAnotherPdfWithName": "There is another PDF with this name",
     "select": "Select",
     "fileNotSelected": "File not selected",
-    "fileSelected": "File selected"
+    "fileSelected": "File selected",
+    "folderIsNotCompatible": "Folder is not compatible with this file type"
   },
   "editDirectory": {
     "editDirectory": "Edit directory",

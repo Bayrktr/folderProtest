@@ -40,7 +40,9 @@
     "thereIsAnotherPdfWithName": "Bu isimde başka bir pdf var",
     "select": "Seç",
     "fileNotSelected": "Dosya seçilmedi",
-    "fileSelected": "Dosya seçildi"
+    "fileSelected": "Dosya seçildi",
+    "folderIsNotCompatible": "Klasor bu dosya tipi ile uyumlu değil"
+
   },
   "editDirectory": {
     "editDirectory": "Klasörü Düzenle",

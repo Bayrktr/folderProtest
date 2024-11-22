@@ -5,6 +5,8 @@ import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 abstract class IPdfRepository {
   int? get fileListKey;
 
+  Future<void> start();
+
   Future<void> createFirstModel();
 
   Future<void> deletePdfFromDirectory(AllPdfModel newPdfModel);
@@ -43,5 +45,10 @@ class PdfRepository extends IPdfRepository {
   @override
   AllPdfModel? getAllPdfModel() {
     return _allPdfOperation.getItem(fileListKey.toString());
+  }
+
+  @override
+  Future<void> start() async {
+    await _allPdfOperation.start(fileListKey.toString());
   }
 }

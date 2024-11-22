@@ -62,21 +62,41 @@ class HomeDirectoryOpenView extends StatelessWidget
                     return _getCircularProgress(context: context);
                   case HomeDirectoryOpenStatus.initial:
                     return Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: context.sized.widthNormalValue,
-                      ),
-                      child: switch (state.pageLayoutModel?.pageLayoutEnum) {
-                        null => const SizedBox(),
-                        PageLayoutEnum.list => HomeDirectoryOpenListLayout(
-                            directoryModel: directoryModel,
-                            allFileExtendBaseModel: state.allFileModel,
-                          ),
-                        PageLayoutEnum.symbol => HomeDirectoryOpenSymbolLayout(
-                            allFileExtendBaseModel: state.allFileModel,
-                            directoryModel: directoryModel,
-                          ),
-                      },
-                    );
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.sized.widthNormalValue,
+                        ),
+                        child: Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                context.router.push(
+                                  SearchFileRoute(
+                                    directoryModel: directoryModel,
+                                  ),
+                                );
+                              },
+                              child: const Icon(
+                                Icons.search,
+                              ),
+                            ),
+                            Expanded(
+                              child: switch (
+                                  state.pageLayoutModel?.pageLayoutEnum) {
+                                null => const SizedBox(),
+                                PageLayoutEnum.list =>
+                                  HomeDirectoryOpenListLayout(
+                                    directoryModel: directoryModel,
+                                    allFileExtendBaseModel: state.allFileModel,
+                                  ),
+                                PageLayoutEnum.symbol =>
+                                  HomeDirectoryOpenSymbolLayout(
+                                    allFileExtendBaseModel: state.allFileModel,
+                                    directoryModel: directoryModel,
+                                  ),
+                              },
+                            ),
+                          ],
+                        ));
                   case HomeDirectoryOpenStatus.loading:
                     return _getCircularProgress(context: context);
                   case HomeDirectoryOpenStatus.error:
@@ -137,7 +157,8 @@ class HomeDirectoryOpenView extends StatelessWidget
                     return BlocProvider.value(
                       value: BlocProvider.of<HomeDirectoryOpenCubit>(context),
                       child: HomeDirectoryOpenAppBarShowModalSheet(
-                          directoryModel: directoryModel),
+                        directoryModel: directoryModel,
+                      ),
                     );
                   },
                 );

@@ -15,6 +15,7 @@ import 'package:DocuSort/app/features/login/view/login_view.dart';
 import 'package:DocuSort/app/features/open_pdf/view/open_pdf_view.dart';
 import 'package:DocuSort/app/features/pdf_view_settings/view/pdf_settings_view.dart';
 import 'package:DocuSort/app/features/search_directory/view/search_directory_view.dart';
+import 'package:DocuSort/app/features/search_file/view/search_file_view.dart';
 import 'package:DocuSort/app/features/splash/view/splash_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,10 @@ class AppRouter extends RootStackRouter {
         AdaptiveRoute(
           page: SearchDirectoryRoute.page,
           path: RoutePath.searchDirectory.path,
+        ),
+        AdaptiveRoute(
+          page: SearchFileRoute.page,
+          path: RoutePath.searchFile.path,
         ),
         AdaptiveRoute(
           page: PdfSettingsRoute.page,
@@ -114,6 +119,7 @@ enum RoutePath {
   settingsHome('settingsHome'),
   openFile('/openFile'),
   searchDirectory('/searchDirectory'),
+  searchFile('/searchFile'),
   pdfSettings('/pdfSettings'),
   generalError('/generalError'),
   homeDirectoryOpen('/homeDirectoryOpen');

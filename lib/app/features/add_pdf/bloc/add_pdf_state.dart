@@ -49,6 +49,7 @@ enum SavePdfStatus {
   initial,
   fileError,
   alreadyExist,
+  wrongFileType,
   empty,
   success,
 }

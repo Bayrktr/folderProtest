@@ -1,20 +1,32 @@
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
-import 'package:DocuSort/app/features/search_directory/bloc/search_directory_cubit.dart';
-import 'package:DocuSort/app/features/search_directory/bloc/search_directory_state.dart';
+import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/repository/pdf_repository.dart';
+import 'package:DocuSort/app/features/search_file/bloc/search_file_cubit.dart';
+import 'package:DocuSort/app/features/search_file/bloc/search_file_state.dart';
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
+import 'package:DocuSort/app/product/model/file/file/file_base_model.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+part 'search_file_mixin.dart';
+
 @RoutePage()
-class SearchDirectoryView extends StatelessWidget {
-  const SearchDirectoryView({super.key});
+class SearchFileView extends StatelessWidget with _SearchFileMixin {
+  const SearchFileView({super.key, this.directoryModel});
+
+  final DirectoryModel? directoryModel;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SearchDirectoryCubit()..initDatabase(),
-      child: BlocConsumer<SearchDirectoryCubit, SearchDirectoryState>(
+      create: (_) => SearchFileCubit(
+        PdfRepository(directoryModel?.fileListKey),
+        directoryModel,
+      )..initDatabase(),
+      child: BlocConsumer<SearchFileCubit, SearchFileState>(
         builder: (context, state) {
           return Scaffold(
               appBar: AppBar(
@@ -28,9 +40,9 @@ class SearchDirectoryView extends StatelessWidget {
                 ),
               ),
               body: switch (state.status) {
-                SearchDirectoryStatus.start =>
+                SearchFileStatus.start =>
                   _getCircularProgressIndicator(context: context),
-                SearchDirectoryStatus.initial => Padding(
+                SearchFileStatus.initial => Padding(
                     padding: context.padding.normal,
                     child: Column(
                       children: [
@@ -38,27 +50,27 @@ class SearchDirectoryView extends StatelessWidget {
                           decoration:
                               const InputDecoration(icon: Icon(Icons.search)),
                           controller: context
-                              .read<SearchDirectoryCubit>()
-                              .searchDirectoryController,
+                              .read<SearchFileCubit>()
+                              .searchFileController,
                           onChanged: (value) {
                             context
-                                .read<SearchDirectoryCubit>()
-                                .updateSearchDirectoryController(value);
+                                .read<SearchFileCubit>()
+                                .updateSearchFileController(value);
                           },
                         ),
                         Expanded(
                           child: ListView.builder(
                             itemCount: state.searchResultList?.length ?? 0,
                             itemBuilder: (BuildContext context, int index) {
-                              final item = state.searchResultList![index];
-                              print(item);
+                              final item = state.searchResultList?[index];
                               return item == null
                                   ? const SizedBox()
                                   : ListTile(
                                       onTap: () {
                                         context.router.push(
-                                          HomeDirectoryOpenRoute(
-                                            directoryModel: item,
+                                          getNavigatePageRoute(
+                                            directoryModel?.fileTypeEnum,
+                                            fileBaseModel: item,
                                           ),
                                         );
                                       },
@@ -72,11 +84,11 @@ class SearchDirectoryView extends StatelessWidget {
                       ],
                     ),
                   ),
-                SearchDirectoryStatus.loading =>
+                SearchFileStatus.loading =>
                   _getCircularProgressIndicator(context: context),
-                SearchDirectoryStatus.error =>
+                SearchFileStatus.error =>
                   _getCircularProgressIndicator(context: context),
-                SearchDirectoryStatus.finish =>
+                SearchFileStatus.finish =>
                   _getCircularProgressIndicator(context: context),
               });
         },

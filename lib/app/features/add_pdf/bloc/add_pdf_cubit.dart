@@ -4,6 +4,8 @@ import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_state.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
+import 'package:DocuSort/app/product/manager/detect_file_type/detect_file_type_manager.dart';
 import 'package:DocuSort/app/product/manager/file_picker/file_picker_manager.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
@@ -30,7 +32,6 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
       GetItManager.getIt<AllPdfOperation>();
 
   String? get fileListKey => directoryModel?.fileListKey.toString();
-
 
   Future<void> initDatabase() async {
     emit(
@@ -65,18 +66,31 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
         status: AddPdfStatus.loading,
       ),
     );
-    final result = await FilePickerManager.pickFile();
+    final result = await FilePickerManager.pickFile(FileTypeEnum.pdf);
     if (result != null) {
-      if (pdfNameController.text == '') {
-        pdfNameController.text = result.files.first.name.general.removeAfterDot;
-      }
+      if (DetectFileTypeManager(filePath: result.files.first.name)
+              .getFileTypeEnum !=
+          FileTypeEnum.pdf) {
+        emit(
+          state.copyWith(
+            savePdfStatus: SavePdfStatus.wrongFileType,
+            status: AddPdfStatus.initial,
+          ),
+        );
+        _resetSavePdfStatus();
+      } else {
+        if (pdfNameController.text == '') {
+          pdfNameController.text =
+              result.files.first.name.general.removeAfterDot;
+        }
 
-      emit(
-        state.copyWith(
-          pickFileResult: result,
-          status: AddPdfStatus.initial,
-        ),
-      );
+        emit(
+          state.copyWith(
+            pickFileResult: result,
+            status: AddPdfStatus.initial,
+          ),
+        );
+      }
     } else {
       emit(
         state.copyWith(
@@ -149,14 +163,12 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
           ),
         );
       }
-
     } catch (e) {
       print("Error saving PDF: $e");
       emit(state.copyWith(status: AddPdfStatus.error));
     }
 
     _resetSavePdfStatus();
-
   }
 
   AllPdfModel? _getPdfList() {

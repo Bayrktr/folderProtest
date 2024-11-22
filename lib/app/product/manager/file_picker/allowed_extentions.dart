@@ -4,6 +4,6 @@ import 'package:flutter/cupertino.dart';
 final class AllowedExtention {
   const AllowedExtention._();
 
-  static String pdf = 'pdf';
+  static const String pdf = 'pdf';
 
 }

@@ -121,6 +121,11 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
                 message: LocaleKeys.pdfAdd_thereIsAnotherPdfWithName.lang.tr,
                 color: Colors.redAccent,
               ).show(context);
+            case SavePdfStatus.wrongFileType:
+              AddPdfSnackBar(
+                message: LocaleKeys.pdfAdd_folderIsNotCompatible.lang.tr,
+                color: Colors.redAccent,
+              ).show(context);
           }
         },
       ),

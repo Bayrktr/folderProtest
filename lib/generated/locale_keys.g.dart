@@ -36,6 +36,7 @@ abstract class  LocaleKeys {
   static const pdfAdd_select = 'pdfAdd.select';
   static const pdfAdd_fileNotSelected = 'pdfAdd.fileNotSelected';
   static const pdfAdd_fileSelected = 'pdfAdd.fileSelected';
+  static const pdfAdd_folderIsNotCompatible = 'pdfAdd.folderIsNotCompatible';
   static const pdfAdd = 'pdfAdd';
   static const editDirectory_editDirectory = 'editDirectory.editDirectory';
   static const editDirectory_pdfDeletedSuccessfully = 'editDirectory.pdfDeletedSuccessfully';
