@@ -1,7 +1,6 @@
 import 'package:DocuSort/app/product/model/file/all_file/all_file_base_model.dart';
 import 'package:DocuSort/app/product/model/page_layout/home_directory_open_layout_model/home_directory_open_page_layout_model.dart';
-import 'package:DocuSort/app/product/model/page_layout/home_directory_page_layout/home_directory_page_layout_model.dart';
-import 'package:equatable/equatable.dart';
+ import 'package:equatable/equatable.dart';
 
 class HomeDirectoryOpenState with EquatableMixin {
   HomeDirectoryOpenState({

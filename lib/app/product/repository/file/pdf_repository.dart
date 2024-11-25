@@ -11,6 +11,8 @@ abstract class IPdfRepository {
 
   Future<void> deletePdfFromDirectory(AllPdfModel newPdfModel);
 
+  Future<void> updateAllPdfModel(AllPdfModel newPdfModel);
+
   AllPdfModel? getAllPdfModel();
 }
 
@@ -47,8 +49,15 @@ class PdfRepository extends IPdfRepository {
     return _allPdfOperation.getItem(fileListKey.toString());
   }
 
+
+
   @override
   Future<void> start() async {
     await _allPdfOperation.start(fileListKey.toString());
+  }
+
+  @override
+  Future<void> updateAllPdfModel(AllPdfModel newPdfModel) async{
+    await _allPdfOperation.addOrUpdateItem(newPdfModel);
   }
 }

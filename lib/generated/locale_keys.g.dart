@@ -41,6 +41,10 @@ abstract class  LocaleKeys {
   static const editDirectory_editDirectory = 'editDirectory.editDirectory';
   static const editDirectory_pdfDeletedSuccessfully = 'editDirectory.pdfDeletedSuccessfully';
   static const editDirectory = 'editDirectory';
+  static const editFile_editFile = 'editFile.editFile';
+  static const editFile = 'editFile';
+  static const editPdf_thereIsAnotherPdfWithThisName = 'editPdf.thereIsAnotherPdfWithThisName';
+  static const editPdf = 'editPdf';
   static const customPdfView_errorWhileLoadingPdf = 'customPdfView.errorWhileLoadingPdf';
   static const customPdfView = 'customPdfView';
   static const openPdf_viewPdf = 'openPdf.viewPdf';

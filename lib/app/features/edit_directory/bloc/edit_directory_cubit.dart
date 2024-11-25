@@ -135,17 +135,14 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
       ),
     );
 
-    print('new name');
-    print(_directoryNameController.text);
 
     final DirectoryModel updatedDirectoryModel = selectedDirectory!.copyWith(
       name: _directoryNameController.text,
     );
 
-    final AllDirectoryModel? allDirectoryModel = _getAllDirectoryModel();
+    AllDirectoryModel? allDirectoryModel = _getAllDirectoryModel();
 
-    final List<DirectoryModel?>? directoryList =
-        allDirectoryModel?.allDirectory;
+    List<DirectoryModel?>? directoryList = allDirectoryModel?.allDirectory;
 
     if (directoryList == null) {
       emit(
@@ -166,8 +163,18 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
         ),
       );
     } else {
-      await _directoryOperation.addOrUpdateItem(
+
+      final List<DirectoryModel?> updatedList = [
         updatedDirectoryModel,
+        ...directoryList.where((model) => model?.id != updatedDirectoryModel.id),
+      ];
+
+      final AllDirectoryModel newDirectoryModel = allDirectoryModel!.copyWith(
+        allDirectory: updatedList,
+      );
+
+      await _allDirectoryOperation.addOrUpdateItem(
+        newDirectoryModel,
       );
       emit(
         state.copyWith(
@@ -175,6 +182,7 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
         ),
       );
     }
+
     emit(
       state.copyWith(
         status: EditDirectoryStatus.initial,
@@ -182,6 +190,7 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
     );
     resetAllDirectoryStatus();
   }
+
 
   AllDirectoryModel? _getAllDirectoryModel() {
     return _allDirectoryOperation.getItem(AllDirectoryModel.allDirectoryKey);

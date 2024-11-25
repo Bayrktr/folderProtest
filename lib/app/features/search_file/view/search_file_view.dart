@@ -1,7 +1,7 @@
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/repository/pdf_repository.dart';
+import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/app/features/search_file/bloc/search_file_cubit.dart';
 import 'package:DocuSort/app/features/search_file/bloc/search_file_state.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';

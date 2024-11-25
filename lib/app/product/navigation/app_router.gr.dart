@@ -143,12 +143,14 @@ class EditDirectoryRouteArgs {
 class EditPdfRoute extends PageRouteInfo<EditPdfRouteArgs> {
   EditPdfRoute({
     Key? key,
+    DirectoryModel? directoryModel,
     PdfModel? pdfModel,
     List<PageRouteInfo>? children,
   }) : super(
           EditPdfRoute.name,
           args: EditPdfRouteArgs(
             key: key,
+            directoryModel: directoryModel,
             pdfModel: pdfModel,
           ),
           initialChildren: children,
@@ -163,6 +165,7 @@ class EditPdfRoute extends PageRouteInfo<EditPdfRouteArgs> {
           data.argsAs<EditPdfRouteArgs>(orElse: () => const EditPdfRouteArgs());
       return EditPdfView(
         key: args.key,
+        directoryModel: args.directoryModel,
         pdfModel: args.pdfModel,
       );
     },
@@ -172,16 +175,19 @@ class EditPdfRoute extends PageRouteInfo<EditPdfRouteArgs> {
 class EditPdfRouteArgs {
   const EditPdfRouteArgs({
     this.key,
+    this.directoryModel,
     this.pdfModel,
   });
 
   final Key? key;
 
+  final DirectoryModel? directoryModel;
+
   final PdfModel? pdfModel;
 
   @override
   String toString() {
-    return 'EditPdfRouteArgs{key: $key, pdfModel: $pdfModel}';
+    return 'EditPdfRouteArgs{key: $key, directoryModel: $directoryModel, pdfModel: $pdfModel}';
   }
 }
 

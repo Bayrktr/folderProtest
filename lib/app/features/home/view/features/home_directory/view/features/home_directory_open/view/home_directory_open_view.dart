@@ -3,7 +3,6 @@ import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_cubit.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_state.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/repository/pdf_repository.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/layouts/home_directory_open_list_layout.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/layouts/home_directory_open_symbol_layout.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/show_modal/home_directory_open_app_bar_show_modal_sheet.dart';
@@ -11,6 +10,7 @@ import 'package:DocuSort/app/features/home/view/features/home_directory/view/fea
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/app/product/enum/page_layout_enum.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
+import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -62,41 +62,42 @@ class HomeDirectoryOpenView extends StatelessWidget
                     return _getCircularProgress(context: context);
                   case HomeDirectoryOpenStatus.initial:
                     return Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: context.sized.widthNormalValue,
-                        ),
-                        child: Column(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                context.router.push(
-                                  SearchFileRoute(
-                                    directoryModel: directoryModel,
-                                  ),
-                                );
-                              },
-                              child: const Icon(
-                                Icons.search,
-                              ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: context.sized.widthNormalValue,
+                      ),
+                      child: Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              context.router.push(
+                                SearchFileRoute(
+                                  directoryModel: directoryModel,
+                                ),
+                              );
+                            },
+                            child: const Icon(
+                              Icons.search,
                             ),
-                            Expanded(
-                              child: switch (
-                                  state.pageLayoutModel?.pageLayoutEnum) {
-                                null => const SizedBox(),
-                                PageLayoutEnum.list =>
-                                  HomeDirectoryOpenListLayout(
-                                    directoryModel: directoryModel,
-                                    allFileExtendBaseModel: state.allFileModel,
-                                  ),
-                                PageLayoutEnum.symbol =>
-                                  HomeDirectoryOpenSymbolLayout(
-                                    allFileExtendBaseModel: state.allFileModel,
-                                    directoryModel: directoryModel,
-                                  ),
-                              },
-                            ),
-                          ],
-                        ));
+                          ),
+                          Expanded(
+                            child: switch (
+                                state.pageLayoutModel?.pageLayoutEnum) {
+                              null => const SizedBox(),
+                              PageLayoutEnum.list =>
+                                HomeDirectoryOpenListLayout(
+                                  directoryModel: directoryModel,
+                                  allFileExtendBaseModel: state.allFileModel,
+                                ),
+                              PageLayoutEnum.symbol =>
+                                HomeDirectoryOpenSymbolLayout(
+                                  allFileExtendBaseModel: state.allFileModel,
+                                  directoryModel: directoryModel,
+                                ),
+                            },
+                          ),
+                        ],
+                      ),
+                    );
                   case HomeDirectoryOpenStatus.loading:
                     return _getCircularProgress(context: context);
                   case HomeDirectoryOpenStatus.error:

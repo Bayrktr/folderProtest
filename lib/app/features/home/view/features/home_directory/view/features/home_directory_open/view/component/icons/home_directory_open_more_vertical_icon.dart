@@ -1,5 +1,3 @@
-
-
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_cubit.dart';
@@ -13,7 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeDirectoryOpenMoreVerticalIcon extends StatelessWidget {
-  const HomeDirectoryOpenMoreVerticalIcon({super.key, required this.directoryModel, required  this.item,});
+  const HomeDirectoryOpenMoreVerticalIcon({
+    super.key,
+    required this.directoryModel,
+    required this.item,
+  });
 
   final DirectoryModel? directoryModel;
   final FileExtendBaseModel item;
@@ -29,15 +31,14 @@ class HomeDirectoryOpenMoreVerticalIcon extends StatelessWidget {
               context.router.push(
                 getNavigateEditPageRoute(
                   directoryModel!.fileTypeEnum,
+                  fileModel: item,
                 ),
               );
             },
             onDelete: () {
-              context
-                  .read<HomeDirectoryOpenCubit>()
-                  .deleteFileList(
-                item,
-              );
+              context.read<HomeDirectoryOpenCubit>().deleteFileList(
+                    item,
+                  );
             },
           ),
         ).showBottomSheet();
@@ -49,15 +50,16 @@ class HomeDirectoryOpenMoreVerticalIcon extends StatelessWidget {
   }
 
   PageRouteInfo<dynamic> getNavigateEditPageRoute(
-      FileTypeEnum? fileTypeEnum, {
-        PdfModel? pdfModel,
-      }) {
+    FileTypeEnum? fileTypeEnum, {
+    FileExtendBaseModel? fileModel,
+  }) {
     switch (fileTypeEnum) {
       case null:
         return const GeneralErrorRoute();
       case FileTypeEnum.pdf:
         return EditPdfRoute(
-          pdfModel: pdfModel,
+          directoryModel: directoryModel,
+          pdfModel: fileModel as PdfModel,
         );
     }
   }

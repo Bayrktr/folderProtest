@@ -47,6 +47,12 @@
     "editDirectory": "Edit directory",
     "pdfDeletedSuccessfully": "PDF deleted successfully"
   },
+  "editFile": {
+    "editFile": "Edit {}"
+  },
+  "editPdf": {
+    "thereIsAnotherPdfWithThisName": "There is another pdf with this name"
+  },
   "customPdfView": {
     "errorWhileLoadingPdf": "An error occurred while loading the PDF"
   },

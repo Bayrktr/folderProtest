@@ -1,6 +1,6 @@
 import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_state.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/repository/pdf_repository.dart';
+import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/home_directory_open_page_layout_operation.dart';
@@ -24,8 +24,6 @@ class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
 
   final PdfRepository _pdfRepository;
 
-  final AllPdfOperation _allPdfOperation =
-      GetItManager.getIt<AllPdfOperation>();
 
   final HomeDirectoryOpenPageLayoutOperation _homeDirectoryPageLayoutOperation =
       GetItManager.getIt<HomeDirectoryOpenPageLayoutOperation>();

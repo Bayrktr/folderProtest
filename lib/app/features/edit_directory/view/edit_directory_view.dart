@@ -1,6 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/core/extention/string/null_string_extention.dart';
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
@@ -14,6 +11,9 @@ import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:DocuSort/app/product/utility/validator/text_form_field_validator.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'edit_directory_mixin.dart';
 
@@ -32,7 +32,10 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
     }
 
     return Scaffold(
-      appBar: _getAppbar(context: context),
+      appBar: _getAppbar(
+        context: context,
+        directoryModel: directoryModel,
+      ),
       body: BlocProvider(
         create: (_) => EditDirectoryCubit(directoryModel),
         child: BlocConsumer<EditDirectoryCubit, EditDirectoryState>(
@@ -81,16 +84,15 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
                       height: 20,
                     ),
                     getSaveButton(
-                        status: state.status,
-                        context: context,
-                        onPressed: () {
-                          if ((_formKey.currentState?.validate() ?? false) &&
-                              state.status == EditDirectoryStatus.initial) {
-                            context
-                                .read<EditDirectoryCubit>()
-                                .updateDirectory();
-                          }
-                        }),
+                      status: state.status,
+                      context: context,
+                      onPressed: () {
+                        if ((_formKey.currentState?.validate() ?? false) &&
+                            state.status == EditDirectoryStatus.initial) {
+                          context.read<EditDirectoryCubit>().updateDirectory();
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -99,7 +101,7 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
           listener: (context, state) {
             switch (state.allPdfSnackBarStatus) {
               case EditDirectoryAllPdfSnackBarStatus.initial:
-                return;
+                break;
               case EditDirectoryAllPdfSnackBarStatus.success:
                 EditDirectorySnackBar(
                   message:
@@ -107,8 +109,29 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
                 ).show(
                   context,
                 );
+
               case EditDirectoryAllPdfSnackBarStatus.error:
-                return;
+                break;
+            }
+            switch (state.allDirectoryStatus) {
+              case EditDirectoryAllDirectoryStatus.initial:
+                break;
+
+              case EditDirectoryAllDirectoryStatus.success:
+                context.router.pushAndPopUntil(
+                  const HomeDirectoryRoute(),
+                  predicate: (_) => false,
+                );
+              case EditDirectoryAllDirectoryStatus.alreadyExist:
+                EditDirectorySnackBar(
+                  message:
+                      LocaleKeys.editDirectory_pdfDeletedSuccessfully.lang.tr,
+                ).show(
+                  context,
+                );
+
+              case EditDirectoryAllDirectoryStatus.error:
+                break;
             }
           },
         ),
@@ -116,15 +139,19 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
     );
   }
 
-  AppBar _getAppbar({required BuildContext context}) {
+  AppBar _getAppbar({
+    required BuildContext context,
+    DirectoryModel? directoryModel,
+  }) {
     return AppBar(
       centerTitle: true,
-
       automaticallyImplyLeading: false,
       title: const LocaleText(text: LocaleKeys.editDirectory_editDirectory),
       leading: IconButton(
         onPressed: () {
-          context.router.maybePop();
+          context.router.popAndPush(
+            const HomeDirectoryRoute(),
+          );
         },
         icon: const Icon(
           Icons.arrow_back,

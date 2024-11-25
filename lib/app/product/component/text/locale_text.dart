@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
+import 'package:flutter/material.dart';
 
 class LocaleText extends StatelessWidget {
   const LocaleText({
     super.key,
     required this.text,
+    this.args,
     this.textStyle,
     this.fontFamily,
     this.textAlign,
@@ -16,6 +17,7 @@ class LocaleText extends StatelessWidget {
   });
 
   final String text;
+  final List<String>? args;
   final String? fontFamily;
   final double? fontSize;
   final Color? color;
@@ -28,15 +30,23 @@ class LocaleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String translatedText = text.lang.tr;
+    if (args != null && args!.isNotEmpty) {
+      for (var i = 0; i < args!.length; i++) {
+        translatedText = translatedText.replaceFirst('{}', args![i]);
+      }
+    }
+
     return Text(
-      text.lang.tr,
-      style: textStyle ?? TextStyle(
-        fontSize: fontSize,
-        color: color,
-        decorationColor: decorationColor ?? Colors.white,
-        decoration: decoration ?? TextDecoration.none,
-        fontWeight: fontWeight ?? FontWeight.normal,
-      ),
+      translatedText,
+      style: textStyle ??
+          TextStyle(
+            fontSize: fontSize,
+            color: color,
+            decorationColor: decorationColor ?? Colors.white,
+            decoration: decoration ?? TextDecoration.none,
+            fontWeight: fontWeight ?? FontWeight.normal,
+          ),
       textAlign: textAlign,
     );
   }

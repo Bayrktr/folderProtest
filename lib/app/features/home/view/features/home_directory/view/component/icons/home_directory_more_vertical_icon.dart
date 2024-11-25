@@ -30,7 +30,7 @@ class HomeDirectoryMoreVerticalIcon extends StatelessWidget {
                   );
             },
             onEdit: () {
-              context.router.push(
+              context.router.popAndPush(
                 EditDirectoryRoute(
                   directoryModel: directoryModel,
                 ),

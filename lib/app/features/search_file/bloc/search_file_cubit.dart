@@ -1,5 +1,5 @@
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/repository/pdf_repository.dart';
+import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
 import 'package:DocuSort/app/features/search_file/bloc/search_file_state.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';

@@ -42,11 +42,16 @@
     "fileNotSelected": "Dosya seçilmedi",
     "fileSelected": "Dosya seçildi",
     "folderIsNotCompatible": "Klasor bu dosya tipi ile uyumlu değil"
-
   },
   "editDirectory": {
     "editDirectory": "Klasörü Düzenle",
     "pdfDeletedSuccessfully": "Pdf başarıyla silindi"
+  },
+  "editFile": {
+    "editFile": "{} Düzenle"
+  },
+  "editPdf": {
+    "thereIsAnotherPdfWithThisName": "Bu isme sahip başka bir pdf var"
   },
   "customPdfView": {
     "errorWhileLoadingPdf": "An error occurred while loading the pdf"
