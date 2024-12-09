@@ -1,5 +1,5 @@
-final class GeneralStringExtention {
-  GeneralStringExtention(String value) : _string = value;
+final class GeneralStringExtension {
+  GeneralStringExtension(String value) : _string = value;
 
   final String _string;
 

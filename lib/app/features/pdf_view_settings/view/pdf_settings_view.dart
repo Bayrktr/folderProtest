@@ -38,7 +38,6 @@ class PdfSettingsView extends StatelessWidget {
                     horizontal: context.sized.widthNormalValue,
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SettingsListTile(
                         leading: const Icon(

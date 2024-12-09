@@ -1,3 +1,4 @@
+import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:flutter/material.dart';
 
@@ -42,10 +43,10 @@ class LocaleText extends StatelessWidget {
       style: textStyle ??
           TextStyle(
             fontSize: fontSize,
-            color: color,
             decorationColor: decorationColor ?? Colors.white,
             decoration: decoration ?? TextDecoration.none,
             fontWeight: fontWeight ?? FontWeight.normal,
+            color: color,
           ),
       textAlign: textAlign,
     );

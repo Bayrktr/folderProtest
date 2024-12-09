@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 final class Settings {
   const Settings._();
 
-  static String appName = 'DocuSort';
+  static String appName = 'FolderPro';
 
-  static String appIconPath = '${Settings.appIconPath}image/logo/app_icon.png';
+  static String appIconPath = '${Settings.assetPath}image/logo/app_icon.png';
 
   static bool isDebugBannerOpen = false;
 
@@ -31,4 +31,5 @@ final class Settings {
   static const String assetPath = 'asset/';
 
   static const String langPath = '${Settings.assetPath}lang';
+
 }

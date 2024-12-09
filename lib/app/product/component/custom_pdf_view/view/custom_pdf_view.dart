@@ -49,7 +49,6 @@ class _CustomPdfViewState extends State<CustomPdfView> {
               final PdfSettingsModel pdfSettingsModel = state.pdfSettingsModel;
               return SfPdfViewer.memory(
                 onPageChanged: (detail) {
-                  print('aaa');
                   context.read<OpenPdfBottomBarCubit>().toggleBottomBarStatus();
                 },
                 canShowScrollHead: true,

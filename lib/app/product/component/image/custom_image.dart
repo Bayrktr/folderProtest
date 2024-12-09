@@ -2,9 +2,11 @@ import 'dart:io'; // For file images
 import 'dart:typed_data'; // For memory images
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomImage extends StatelessWidget {
   final ImageFrom imageFrom;
+  final ImageType imageType;
   final String? assetPath;
   final String? networkUrl;
   final File? file;
@@ -13,14 +15,13 @@ class CustomImage extends StatelessWidget {
   final double height;
 
   const CustomImage({
-    super.key,
-    required this.imageFrom,
+    required this.imageFrom, required this.imageType, super.key,
     this.assetPath,
     this.networkUrl,
     this.file,
     this.memoryImage,
-    this.width = 50,
-    this.height = 50,
+    this.width = 50.0,
+    this.height = 50.0,
   }) : assert(
           (imageFrom == ImageFrom.ASSET && assetPath != null) ||
               (imageFrom == ImageFrom.NETWORK && networkUrl != null) ||
@@ -31,36 +32,70 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (imageFrom) {
-      case ImageFrom.ASSET:
-        return Image.asset(
-          assetPath!,
-          height: height,
-          width: width,
-        ); // assetPath is required if ASSET
-      case ImageFrom.NETWORK:
-        return Image.network(
-          networkUrl!,
-          height: height,
-          width: width,
-        ); // networkUrl is required if NETWORK
-      case ImageFrom.FILE:
-        return Image.file(
-          file!,
-          height: height,
-          width: width,
-        ); // file is required if FILE
-      case ImageFrom.MEMORY:
-        return Image.memory(
-          memoryImage!,
-          height: height,
-          width: width,
-        ); // memoryImage is required if MEMORY
-      default:
-        return const SizedBox
-            .shrink(); // Fallback to an empty widget if nothing is provided
+    switch (imageType) {
+      case ImageType.PNG:
+        switch (imageFrom) {
+          case ImageFrom.ASSET:
+            return Image.asset(
+              assetPath!,
+              height: height,
+              width: width,
+            ); // assetPath is required if ASSET
+          case ImageFrom.NETWORK:
+            return Image.network(
+              networkUrl!,
+              height: height,
+              width: width,
+            ); // networkUrl is required if NETWORK
+          case ImageFrom.FILE:
+            return Image.file(
+              file!,
+              height: height,
+              width: width,
+            ); // file is required if FILE
+          case ImageFrom.MEMORY:
+            return Image.memory(
+              memoryImage!,
+              height: height,
+              width: width,
+            ); // memoryImage is required if MEMORY
+          default:
+            return const SizedBox
+                .shrink(); // Fallback to an empty widget if nothing is provided
+        }
+      case ImageType.SVG:
+        switch (imageFrom) {
+          case ImageFrom.ASSET:
+            return SvgPicture.asset(
+              assetPath!,
+              height: height,
+              width: width,
+            );
+          case ImageFrom.NETWORK:
+            return SvgPicture.network(
+              networkUrl!,
+              height: height,
+              width: width,
+            );
+          case ImageFrom.FILE:
+            return SvgPicture.file(
+              file!,
+              height: height,
+              width: width,
+            );
+          case ImageFrom.MEMORY:
+            return SvgPicture.memory(
+              memoryImage!,
+              height: height,
+              width: width,
+            );
+        }
     }
   }
+
+
 }
 
 enum ImageFrom { ASSET, NETWORK, FILE, MEMORY }
+
+enum ImageType { PNG, SVG }

@@ -1,6 +1,7 @@
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_cubit.dart';
+import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_repository.dart';
 import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_state.dart';
 import 'package:DocuSort/app/features/add_pdf/view/add_pdf_mixin.dart';
 import 'package:DocuSort/app/features/add_pdf/view/component/add_pdf_snack_bar.dart';
@@ -28,6 +29,9 @@ class AddPdfView extends StatelessWidget with AddPdfMixin {
     return BlocProvider(
       create: (_) => AddPdfCubit(
         directoryModel: directoryModel,
+        addPdfRepository: AddPdfRepository(
+          directoryModel?.fileListKey,
+        ),
       ),
       child: BlocConsumer<AddPdfCubit, AddPdfState>(
         builder: (context, state) {

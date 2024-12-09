@@ -1,4 +1,4 @@
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:DocuSort/app/product/cache/hive/model/hive_model.dart';

@@ -1,4 +1,4 @@
-import 'package:DocuSort/app/product/model/file/file/file_base_model.dart';
+import 'package:DocuSort/app/product/model/file/file/base/file_base_model.dart';
 
 abstract class AllFileImplementBaseModel<T> {
   /// Creates an instance of the model from a JSON map.
@@ -10,5 +10,5 @@ abstract class AllFileImplementBaseModel<T> {
 
 abstract class AllFileExtendBaseModel {
   int? id;
-  List<FileExtendBaseModel?>? allFiles;
+  List<FileExtendBaseModel<dynamic>?>? allFiles;
 }

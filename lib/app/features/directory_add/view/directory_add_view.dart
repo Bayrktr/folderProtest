@@ -29,13 +29,9 @@ class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
         context: context,
       ),
       body: BlocProvider(
-        create: (_) => DirectoryAddCubit(),
+        create: (_) => DirectoryAddCubit()..initDatabase(),
         child: BlocConsumer<DirectoryAddCubit, DirectoryAddState>(
           builder: (context, state) {
-            if (state.status == DirectoryAddStatus.start) {
-              context.read<DirectoryAddCubit>().initDatabase();
-            }
-
             return Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: context.sized.widthHighValue,
@@ -43,7 +39,6 @@ class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
               child: Form(
                 key: _formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextFormField(
                       controller: context

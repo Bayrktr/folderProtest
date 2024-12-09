@@ -192,6 +192,25 @@ class EditPdfRouteArgs {
 }
 
 /// generated route for
+/// [FavoritesView]
+class FavoritesRoute extends PageRouteInfo<void> {
+  const FavoritesRoute({List<PageRouteInfo>? children})
+      : super(
+          FavoritesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FavoritesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const FavoritesView();
+    },
+  );
+}
+
+/// generated route for
 /// [GeneralErrorView]
 class GeneralErrorRoute extends PageRouteInfo<void> {
   const GeneralErrorRoute({List<PageRouteInfo>? children})
@@ -399,6 +418,25 @@ class PdfSettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ProfileView]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ProfileView();
+    },
+  );
+}
+
+/// generated route for
 /// [SearchDirectoryView]
 class SearchDirectoryRoute extends PageRouteInfo<void> {
   const SearchDirectoryRoute({List<PageRouteInfo>? children})
@@ -413,6 +451,25 @@ class SearchDirectoryRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SearchDirectoryView();
+    },
+  );
+}
+
+/// generated route for
+/// [SearchFavoriteDirectoryView]
+class SearchFavoriteDirectoryRoute extends PageRouteInfo<void> {
+  const SearchFavoriteDirectoryRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchFavoriteDirectoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchFavoriteDirectoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchFavoriteDirectoryView();
     },
   );
 }
@@ -498,6 +555,44 @@ class SettingsRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SettingsView();
+    },
+  );
+}
+
+/// generated route for
+/// [SignInView]
+class SignInRoute extends PageRouteInfo<void> {
+  const SignInRoute({List<PageRouteInfo>? children})
+      : super(
+          SignInRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SignInRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return  SignInView();
+    },
+  );
+}
+
+/// generated route for
+/// [SignUpView]
+class SignUpRoute extends PageRouteInfo<void> {
+  const SignUpRoute({List<PageRouteInfo>? children})
+      : super(
+          SignUpRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SignUpRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SignUpView();
     },
   );
 }

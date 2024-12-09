@@ -1,4 +1,4 @@
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/features/open_pdf/bloc/open_pdf_cubit.dart';
 import 'package:DocuSort/app/features/open_pdf/bloc/open_pdf_state.dart';
 import 'package:DocuSort/app/features/open_pdf/view/component/open_pdf_bottom_bar/bloc/open_pdf_buttom_bar_cubit.dart';

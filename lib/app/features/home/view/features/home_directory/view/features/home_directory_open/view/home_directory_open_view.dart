@@ -2,12 +2,15 @@ import 'package:DocuSort/app/core/extention/build_context/build_context_extensio
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_cubit.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_repository.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_state.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/layouts/home_directory_open_list_layout.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/layouts/home_directory_open_symbol_layout.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/show_modal/home_directory_open_app_bar_show_modal_sheet.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/snack_bar/home_directory_open_snack_bar.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/app/product/constant/hero_tags.dart';
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/enum/page_layout_enum.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
@@ -39,7 +42,10 @@ class HomeDirectoryOpenView extends StatelessWidget
         PdfRepository(
           directoryModel!.fileListKey,
         ),
-      ),
+        HomeDirectoryOpenRepository(
+          directoryModel?.fileListKey,
+        ),
+      )..initDatabase(),
       child: Builder(
         builder: (context) {
           return Scaffold(
@@ -53,9 +59,6 @@ class HomeDirectoryOpenView extends StatelessWidget
             ),
             body: BlocConsumer<HomeDirectoryOpenCubit, HomeDirectoryOpenState>(
               builder: (context, state) {
-                if (state.status == HomeDirectoryOpenStatus.start) {
-                  context.read<HomeDirectoryOpenCubit>().initDatabase();
-                }
 
                 switch (state.status) {
                   case HomeDirectoryOpenStatus.start:
@@ -179,13 +182,24 @@ class HomeDirectoryOpenView extends StatelessWidget
     return FloatingActionButton(
       onPressed: () {
         context.router.push(
-          AddPdfRoute(
-            directoryModel: directoryModel,
+          _getNavigatePageRoute(
+            directoryModel,
           ),
         );
       },
-      heroTag: 'addFile',
+      heroTag: HeroTags.addFile,
       child: const Icon(Icons.add),
     );
+  }
+
+  PageRouteInfo<dynamic> _getNavigatePageRoute(DirectoryModel? directoryModel) {
+    switch (directoryModel?.fileTypeEnum) {
+      case null:
+        return const GeneralErrorRoute();
+      case FileTypeEnum.pdf:
+        return AddPdfRoute(
+          directoryModel: directoryModel,
+        );
+    }
   }
 }

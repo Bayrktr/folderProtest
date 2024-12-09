@@ -25,6 +25,8 @@ mixin _$PdfModel {
   @HiveField(2)
   String? get name => throw _privateConstructorUsedError;
   @HiveField(3)
+  FileTypeEnum? get fileTypeEnum => throw _privateConstructorUsedError;
+  @HiveField(4)
   @Uint8ListConverter()
   Uint8List? get byte => throw _privateConstructorUsedError;
 
@@ -46,7 +48,8 @@ abstract class $PdfModelCopyWith<$Res> {
   $Res call(
       {@HiveField(1) int? id,
       @HiveField(2) String? name,
-      @HiveField(3) @Uint8ListConverter() Uint8List? byte});
+      @HiveField(3) FileTypeEnum? fileTypeEnum,
+      @HiveField(4) @Uint8ListConverter() Uint8List? byte});
 }
 
 /// @nodoc
@@ -66,6 +69,7 @@ class _$PdfModelCopyWithImpl<$Res, $Val extends PdfModel>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? fileTypeEnum = freezed,
     Object? byte = freezed,
   }) {
     return _then(_value.copyWith(
@@ -77,6 +81,10 @@ class _$PdfModelCopyWithImpl<$Res, $Val extends PdfModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      fileTypeEnum: freezed == fileTypeEnum
+          ? _value.fileTypeEnum
+          : fileTypeEnum // ignore: cast_nullable_to_non_nullable
+              as FileTypeEnum?,
       byte: freezed == byte
           ? _value.byte
           : byte // ignore: cast_nullable_to_non_nullable
@@ -96,7 +104,8 @@ abstract class _$$PdfModelImplCopyWith<$Res>
   $Res call(
       {@HiveField(1) int? id,
       @HiveField(2) String? name,
-      @HiveField(3) @Uint8ListConverter() Uint8List? byte});
+      @HiveField(3) FileTypeEnum? fileTypeEnum,
+      @HiveField(4) @Uint8ListConverter() Uint8List? byte});
 }
 
 /// @nodoc
@@ -114,6 +123,7 @@ class __$$PdfModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? fileTypeEnum = freezed,
     Object? byte = freezed,
   }) {
     return _then(_$PdfModelImpl(
@@ -125,6 +135,10 @@ class __$$PdfModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      fileTypeEnum: freezed == fileTypeEnum
+          ? _value.fileTypeEnum
+          : fileTypeEnum // ignore: cast_nullable_to_non_nullable
+              as FileTypeEnum?,
       byte: freezed == byte
           ? _value.byte
           : byte // ignore: cast_nullable_to_non_nullable
@@ -139,7 +153,8 @@ class _$PdfModelImpl extends _PdfModel {
   _$PdfModelImpl(
       {@HiveField(1) this.id,
       @HiveField(2) this.name,
-      @HiveField(3) @Uint8ListConverter() this.byte})
+      @HiveField(3) this.fileTypeEnum,
+      @HiveField(4) @Uint8ListConverter() this.byte})
       : super._();
 
   factory _$PdfModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -153,12 +168,15 @@ class _$PdfModelImpl extends _PdfModel {
   final String? name;
   @override
   @HiveField(3)
+  final FileTypeEnum? fileTypeEnum;
+  @override
+  @HiveField(4)
   @Uint8ListConverter()
   final Uint8List? byte;
 
   @override
   String toString() {
-    return 'PdfModel(id: $id, name: $name, byte: $byte)';
+    return 'PdfModel(id: $id, name: $name, fileTypeEnum: $fileTypeEnum, byte: $byte)';
   }
 
   @override
@@ -168,13 +186,15 @@ class _$PdfModelImpl extends _PdfModel {
             other is _$PdfModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.fileTypeEnum, fileTypeEnum) ||
+                other.fileTypeEnum == fileTypeEnum) &&
             const DeepCollectionEquality().equals(other.byte, byte));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(byte));
+  int get hashCode => Object.hash(runtimeType, id, name, fileTypeEnum,
+      const DeepCollectionEquality().hash(byte));
 
   /// Create a copy of PdfModel
   /// with the given fields replaced by the non-null parameter values.
@@ -196,7 +216,8 @@ abstract class _PdfModel extends PdfModel {
   factory _PdfModel(
           {@HiveField(1) final int? id,
           @HiveField(2) final String? name,
-          @HiveField(3) @Uint8ListConverter() final Uint8List? byte}) =
+          @HiveField(3) final FileTypeEnum? fileTypeEnum,
+          @HiveField(4) @Uint8ListConverter() final Uint8List? byte}) =
       _$PdfModelImpl;
   _PdfModel._() : super._();
 
@@ -211,6 +232,9 @@ abstract class _PdfModel extends PdfModel {
   String? get name;
   @override
   @HiveField(3)
+  FileTypeEnum? get fileTypeEnum;
+  @override
+  @HiveField(4)
   @Uint8ListConverter()
   Uint8List? get byte;
 

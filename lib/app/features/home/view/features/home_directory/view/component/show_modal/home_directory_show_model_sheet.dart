@@ -8,27 +8,53 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class HomeDirectoryShowModelSheet extends StatelessWidget {
-  final DirectoryModel directoryModel;
-  final VoidCallback onDelete;
-  final VoidCallback onEdit;
-  final VoidCallback onAdd;
-
   const HomeDirectoryShowModelSheet({
     super.key,
     required this.directoryModel,
     required this.onDelete,
     required this.onEdit,
     required this.onAdd,
+    required this.addFavorite,
+    this.alreadyFavorite = false,
   });
+
+  final DirectoryModel directoryModel;
+  final VoidCallback onDelete;
+  final VoidCallback onEdit;
+  final VoidCallback onAdd;
+  final VoidCallback addFavorite;
+  final bool alreadyFavorite;
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       children: <Widget>[
         ListTile(
+          leading: Icon(
+            alreadyFavorite ? Icons.favorite : Icons.favorite_border,
+          ),
+          title: const LocaleText(
+            text: LocaleKeys.general_addFavorite,
+          ),
+          onTap: () {
+            Navigator.of(context).pop();
+            addFavorite();
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.share),
+          title: const LocaleText(
+            text: LocaleKeys.general_share,
+          ),
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        ListTile(
           leading: const Icon(Icons.file_upload),
           title: Text(
-              '${directoryModel.fileTypeEnum?.name.general.capitalize ?? ''} ${LocaleKeys.general_add.lang.tr}'),
+            _getDirectoryAddTitle,
+          ),
           onTap: () {
             Navigator.of(context).pop();
             context.router.push(
@@ -70,4 +96,7 @@ class HomeDirectoryShowModelSheet extends StatelessWidget {
         );
     }
   }
+
+  String get _getDirectoryAddTitle =>
+      '${directoryModel.fileTypeEnum?.name.general.capitalize ?? ''} ${LocaleKeys.general_add.lang.tr}';
 }

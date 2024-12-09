@@ -30,9 +30,10 @@ class SplashView extends StatelessWidget {
                   children: [
                     CustomImage(
                       imageFrom: ImageFrom.ASSET,
-                      assetPath: 'asset/image/logo/app_icon.png',
+                      assetPath: Settings.appIconPath,
                       height: context.sized.dynamicWidth(0.50),
                       width: context.sized.dynamicWidth(0.50),
+                      imageType: ImageType.PNG,
                     ),
                     Text(
                       Settings.appName,

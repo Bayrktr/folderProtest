@@ -82,12 +82,15 @@ dependencies:
 
   #Firebase
   firebase_core: ^3.6.0
+  firebase_auth: ^5.3.4
 
 
 
 
   #Other
   uuid: ^4.1.0
+  flutter_svg: ^2.0.15
+
 
 
 
@@ -97,6 +100,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  very_good_analysis: ^6.0.0
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -110,7 +116,6 @@ dev_dependencies:
   auto_route_generator: ^9.0.0
 
 
-  very_good_analysis: ^6.0.0
 
 
 # For information on the generic Dart part of this file, see the
@@ -135,3 +140,10 @@ flutter:
     - asset/image/flag/
     - asset/testPdf/
     - asset/image/logo/
+    - asset/image/icons/
+
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: asset/font/roboto/Roboto-Regular.ttf

@@ -1,20 +1,24 @@
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/all_directory_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_repository.dart';
 import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_state.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/model/all_directory_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/pdf/all_pdf_model.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_directory_operation.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/directory_operation.dart';
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/file/all_file/all_file_base_model.dart';
+import 'package:DocuSort/app/product/model/file/file/base/file_base_model.dart';
+import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'edit_directory_cubit_mixin.dart';
 
 class EditDirectoryCubit extends Cubit<EditDirectoryState>
     with _EditDirectoryCubitMixin {
-  EditDirectoryCubit(this.selectedDirectory)
+  EditDirectoryCubit(this.selectedDirectory, this._editDirectoryRepository)
       : _directoryNameController = TextEditingController(
           text: selectedDirectory?.name ?? '',
         ),
@@ -24,14 +28,13 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
           ),
         );
 
+  final EditDirectoryRepository _editDirectoryRepository;
+
   final DirectoryModel? selectedDirectory;
 
   final TextEditingController _directoryNameController;
 
   TextEditingController get directoryNameController => _directoryNameController;
-
-  final AllPdfOperation _allPdfOperation =
-      GetItManager.getIt<AllPdfOperation>();
 
   final AllDirectoryOperation _allDirectoryOperation =
       GetItManager.getIt<AllDirectoryOperation>();
@@ -39,93 +42,82 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
   final DirectoryOperation _directoryOperation =
       GetItManager.getIt<DirectoryOperation>();
 
-  int? get fileListKey => selectedDirectory?.fileListKey;
-
-  String? get selectedDirectoryKey => selectedDirectory?.key;
-
+  FileTypeEnum? get _fileTypeEnum => selectedDirectory?.fileTypeEnum;
 
   Future<void> initDatabase() async {
-    final int? fileListKey = selectedDirectory?.fileListKey;
-
     emit(
       state.copyWith(
-        allPdfStatus: EditDirectoryAllPdfStatus.loading,
+        allFileStatus: EditDirectoryAllFileStatus.loading,
       ),
     );
-    if (fileListKey == null || selectedDirectory == null) {
+    if (_editDirectoryRepository.selectedDirectoryModel == null ||
+        _editDirectoryRepository.fileListKey == null) {
       emit(
         state.copyWith(
-          allPdfStatus: EditDirectoryAllPdfStatus.error,
+          allFileStatus: EditDirectoryAllFileStatus.error,
         ),
       );
     } else {
-      await _allPdfOperation.start(fileListKey.toString());
-      await _directoryOperation.start(selectedDirectoryKey!);
-      await _allDirectoryOperation.start(AllDirectoryModel.allDirectoryKey);
-      _getPdfList();
+      await _editDirectoryRepository.initDatabase();
+      _getFileList();
     }
   }
 
-  AllPdfModel? _getAllPdfModel() {
-    return _allPdfOperation.getItem(fileListKey!.toString());
-  }
+  void _getFileList() async {
+    AllFileExtendBaseModel? allFileExtendBaseModel;
 
-  Future<void> _getPdfList() async {
-    final AllPdfModel? allPdfModel = _getAllPdfModel();
-    if (allPdfModel?.allFiles == null) {
-      await _createFirstModel();
-      _getPdfList();
-    } else {
-      emit(
-        state.copyWith(
-          allPdfModel: allPdfModel,
-          allPdfStatus: EditDirectoryAllPdfStatus.initial,
-          status: EditDirectoryStatus.initial,
-        ),
-      );
-
-      print('data: ${state.allPdfModel}');
+    switch (_fileTypeEnum!) {
+      case FileTypeEnum.pdf:
+        allFileExtendBaseModel =
+            _editDirectoryRepository.pdfRepository.getAllPdfModel();
     }
-  }
-
-  Future<void> _createFirstModel() async {
-    await _allPdfOperation.addOrUpdateItem(
-      AllPdfModel(
-        id: fileListKey,
-        allFiles: [],
-      ),
-    );
-  }
-
-  Future<void> deletePdfFromHive(PdfModel? pdfModel) async {
-    emit(
-      state.copyWith(
-        allPdfStatus: EditDirectoryAllPdfStatus.loading,
-      ),
-    );
-    final AllPdfModel allPdfModel = state.allPdfModel!;
-
-    final List<PdfModel?> mutableList = List<PdfModel>.from(
-      allPdfModel.allFiles!,
-    );
-
-    mutableList.remove(pdfModel);
-
-    final newAllPdfModel = allPdfModel.copyWith(
-      allFiles: mutableList,
-    );
-
-    await _allPdfOperation.addOrUpdateItem(newAllPdfModel);
 
     emit(
       state.copyWith(
-        allPdfStatus: EditDirectoryAllPdfStatus.initial,
-        allPdfSnackBarStatus: EditDirectoryAllPdfSnackBarStatus.success,
-        allPdfModel: newAllPdfModel,
+        status: EditDirectoryStatus.initial,
+        allFileStatus: EditDirectoryAllFileStatus.initial,
+        allFileExtendBaseModel: allFileExtendBaseModel,
+      ),
+    );
+  }
+
+  Future<void> deleteFileFromDirectory(FileExtendBaseModel? fileModel) async {
+    if (fileModel == null) return;
+    emit(
+      state.copyWith(
+        allFileStatus: EditDirectoryAllFileStatus.loading,
       ),
     );
 
-    resetAllPdfSnackBarStatus();
+    AllFileExtendBaseModel allFileModel = state.allFileExtendBaseModel!;
+
+    switch (_fileTypeEnum!) {
+      case FileTypeEnum.pdf:
+        allFileModel = allFileModel as AllPdfModel;
+
+        final List<PdfModel?> mutableList = List<PdfModel>.from(
+          allFileModel.allFiles!,
+        );
+
+        mutableList.remove(fileModel as PdfModel);
+
+        allFileModel = allFileModel.copyWith(
+          allFiles: mutableList,
+        );
+        await _editDirectoryRepository.pdfRepository.deletePdfFromDirectory(
+          allFileModel,
+        );
+    }
+
+    emit(
+      state.copyWith(
+        allFileStatus: EditDirectoryAllFileStatus.initial,
+        allFileSnackBarStatus: EditDirectoryAllFileSnackBarStatus.success,
+        allFileExtendBaseModel: allFileModel,
+      ),
+    );
+
+    resetAllFileSnackBarStatus();
   }
 
   Future<void> updateDirectory() async {
@@ -135,14 +127,13 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
       ),
     );
 
-
-    final DirectoryModel updatedDirectoryModel = selectedDirectory!.copyWith(
+    final updatedDirectoryModel = selectedDirectory!.copyWith(
       name: _directoryNameController.text,
     );
 
-    AllDirectoryModel? allDirectoryModel = _getAllDirectoryModel();
+    final allDirectoryModel = _getAllDirectoryModel();
 
-    List<DirectoryModel?>? directoryList = allDirectoryModel?.allDirectory;
+    final directoryList = allDirectoryModel?.allDirectory;
 
     if (directoryList == null) {
       emit(
@@ -153,9 +144,6 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
       return;
     }
 
-    print(directoryList);
-    print(updatedDirectoryModel);
-
     if (isDuplicate(directoryList, updatedDirectoryModel)) {
       emit(
         state.copyWith(
@@ -163,13 +151,13 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
         ),
       );
     } else {
-
-      final List<DirectoryModel?> updatedList = [
+      final updatedList = <DirectoryModel?>[
         updatedDirectoryModel,
-        ...directoryList.where((model) => model?.id != updatedDirectoryModel.id),
+        ...directoryList
+            .where((model) => model?.id != updatedDirectoryModel.id),
       ];
 
-      final AllDirectoryModel newDirectoryModel = allDirectoryModel!.copyWith(
+      final newDirectoryModel = allDirectoryModel!.copyWith(
         allDirectory: updatedList,
       );
 
@@ -191,7 +179,6 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
     resetAllDirectoryStatus();
   }
 
-
   AllDirectoryModel? _getAllDirectoryModel() {
     return _allDirectoryOperation.getItem(AllDirectoryModel.allDirectoryKey);
   }
@@ -201,10 +188,10 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
     _directoryNameController.text = value;
   }
 
-  void resetAllPdfSnackBarStatus() {
+  void resetAllFileSnackBarStatus() {
     emit(
       state.copyWith(
-        allPdfSnackBarStatus: EditDirectoryAllPdfSnackBarStatus.initial,
+        allFileSnackBarStatus: EditDirectoryAllFileSnackBarStatus.initial,
       ),
     );
   }

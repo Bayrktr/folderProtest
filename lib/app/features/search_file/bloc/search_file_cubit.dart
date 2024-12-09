@@ -1,9 +1,9 @@
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/pdf/all_pdf_model.dart';
 import 'package:DocuSort/app/features/search_file/bloc/search_file_state.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
-import 'package:DocuSort/app/product/model/file/file/file_base_model.dart';
+import 'package:DocuSort/app/product/model/file/file/base/file_base_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

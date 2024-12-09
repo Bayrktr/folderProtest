@@ -1,4 +1,4 @@
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/pdf/all_pdf_model.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 
@@ -49,15 +49,13 @@ class PdfRepository extends IPdfRepository {
     return _allPdfOperation.getItem(fileListKey.toString());
   }
 
-
-
   @override
   Future<void> start() async {
     await _allPdfOperation.start(fileListKey.toString());
   }
 
   @override
-  Future<void> updateAllPdfModel(AllPdfModel newPdfModel) async{
+  Future<void> updateAllPdfModel(AllPdfModel newPdfModel) async {
     await _allPdfOperation.addOrUpdateItem(newPdfModel);
   }
 }

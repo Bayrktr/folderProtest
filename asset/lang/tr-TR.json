@@ -9,7 +9,9 @@
     "next": "Sıradaki",
     "previous": "Önceki",
     "search": "Ara",
-    "add": "Ekle"
+    "add": "Ekle",
+    "share": "Paylaş",
+    "addFavorite": "Favorilere Ekle"
   },
   "settings": {
     "theme": "Tema"
@@ -29,6 +31,13 @@
     "layout": "Düzen",
     "asSymbol": "Simge olarak",
     "asList": "Liste olarak"
+  },
+  "favorites": {
+    "favorites": "Favoriler",
+    "alreadyAddedFavorite": "Zaten favorilere eklenmiş",
+    "addedFavorite": "Favorilere eklendi",
+    "removeFromFavorites": "Favorilerden çıkar",
+    "removedFromFavorites": "Favorilerden çıkarıldı"
   },
   "directoryAdd": {
     "directoryAdd": "Klasör ekle",
@@ -59,5 +68,19 @@
   "openPdf": {
     "viewPdf": "Pdf görüntüle",
     "enterTextToSearch": "Aranacak metni girin\n"
+  },
+  "login": {
+    "signIn": "Giriş",
+    "email": "Email",
+    "phoneNumber": "Telefon",
+    "emailAdress": "Email Adresi",
+    "password": "Şifre",
+    "forgotPassword": "Şifremi Unuttum?",
+    "keepMeSignIn": "Oturumu Açık Bırak",
+    "login": "Giriş",
+    "orSignInWith": "veya şu şekilde giriş yapın",
+    "continueWithGoggle": "Google ile Devam Et",
+    "createAnAccount": "Hesap Oluştur",
+    "emailAdressNotCorrectFormat": "Email adresi doğru formatta değil"
   }
 }

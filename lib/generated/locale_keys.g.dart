@@ -11,6 +11,8 @@ abstract class  LocaleKeys {
   static const general_previous = 'general.previous';
   static const general_search = 'general.search';
   static const general_add = 'general.add';
+  static const general_share = 'general.share';
+  static const general_addFavorite = 'general.addFavorite';
   static const general = 'general';
   static const settings_theme = 'settings.theme';
   static const settings = 'settings';
@@ -27,6 +29,12 @@ abstract class  LocaleKeys {
   static const home_asSymbol = 'home.asSymbol';
   static const home_asList = 'home.asList';
   static const home = 'home';
+  static const favorites_favorites = 'favorites.favorites';
+  static const favorites_alreadyAddedFavorite = 'favorites.alreadyAddedFavorite';
+  static const favorites_addedFavorite = 'favorites.addedFavorite';
+  static const favorites_removeFromFavorites = 'favorites.removeFromFavorites';
+  static const favorites_removedFromFavorites = 'favorites.removedFromFavorites';
+  static const favorites = 'favorites';
   static const directoryAdd_directoryAdd = 'directoryAdd.directoryAdd';
   static const directoryAdd_fileTypeNotSelected = 'directoryAdd.fileTypeNotSelected';
   static const directoryAdd = 'directoryAdd';
@@ -50,5 +58,18 @@ abstract class  LocaleKeys {
   static const openPdf_viewPdf = 'openPdf.viewPdf';
   static const openPdf_enterTextToSearch = 'openPdf.enterTextToSearch';
   static const openPdf = 'openPdf';
+  static const login_signIn = 'login.signIn';
+  static const login_email = 'login.email';
+  static const login_phoneNumber = 'login.phoneNumber';
+  static const login_emailAdress = 'login.emailAdress';
+  static const login_password = 'login.password';
+  static const login_forgotPassword = 'login.forgotPassword';
+  static const login_keepMeSignIn = 'login.keepMeSignIn';
+  static const login_login = 'login.login';
+  static const login_orSignInWith = 'login.orSignInWith';
+  static const login_continueWithGoggle = 'login.continueWithGoggle';
+  static const login_createAnAccount = 'login.createAnAccount';
+  static const login_emailAdressNotCorrectFormat = 'login.emailAdressNotCorrectFormat';
+  static const login = 'login';
 
 }

@@ -29,7 +29,7 @@ class SearchDirectoryCubit extends Cubit<SearchDirectoryState> {
     );
     if (allDirectoryModel == null) {
       allDirectoryModel == null ? await createFirstAllDirectoryModel() : null;
-      initDatabase();
+      await initDatabase();
     } else {
       allDirectoryModelUpdateState(allDirectoryModel);
       emit(
@@ -78,7 +78,7 @@ class SearchDirectoryCubit extends Cubit<SearchDirectoryState> {
   ) {
     final results = state.allDirectoryModel!.allDirectory.where(
       (model) {
-        final String? name = model?.name;
+        final name = model?.name;
         if (name == null) {
           return false;
         } else {
@@ -89,5 +89,11 @@ class SearchDirectoryCubit extends Cubit<SearchDirectoryState> {
       },
     ).toList();
     return results;
+  }
+
+  @override
+  Future<void> close() {
+    _searchDirectoryController.dispose();
+    return super.close();
   }
 }

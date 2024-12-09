@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/theme_operation.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 import 'package:DocuSort/app/product/model/theme/theme_model.dart';
@@ -18,10 +17,7 @@ class ThemeManager {
 
   final ThemeOperation _themeOperation = GetItManager.getIt<ThemeOperation>();
 
-  ThemeModel _themeModel = ThemeModel(
-    id: null,
-    isLight: true,
-  );
+  ThemeModel _themeModel = ThemeModel();
 
   ThemeModel get themeModel => _themeModel;
 
@@ -31,7 +27,7 @@ class ThemeManager {
 
     final themeData = _themeOperation.getItem(ThemeModel.themeModelKey);
 
-    print('theme data ${themeData?.isLight.toString()}');
+    print('theme data ${themeData?.isLight}');
 
     if (themeData == null) {
       await _createFirstThemeData();
@@ -47,7 +43,6 @@ class ThemeManager {
     await _themeOperation.addOrUpdateItem(
       ThemeModel(
         id: IdGenerator.randomIntId,
-        isLight: true,
       ),
     );
   }

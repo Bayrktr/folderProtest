@@ -22,14 +22,29 @@ class SettingsView extends StatelessWidget with SettingsViewMixin {
         horizontal: context.sized.widthNormalValue,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           const SizedBox(
             height: 30,
           ),
+          SettingsListTile(
+            onTap: () {
+              context.tabsRouter.setActiveIndex(1);
+            },
+            leading: Icon(
+              Icons.person,
+              size: 30,
+              color: context.theme.getColor.iconColor,
+            ),
+            traling: const Icon(
+              Icons.arrow_forward_ios,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, state) {
-              final bool isLight = state.themeModel.isLight;
+              final isLight = state.themeModel.isLight;
               return SettingsListTile(
                 leading: Icon(
                   isLight ? Icons.sunny : Icons.sunny_snowing,
@@ -52,7 +67,7 @@ class SettingsView extends StatelessWidget with SettingsViewMixin {
           SettingsListTile(
             onTap: () {
               //context.router.push(const LanguageRoute());
-              context.tabsRouter.setActiveIndex(1);
+              context.tabsRouter.setActiveIndex(2);
             },
             leading: Icon(
               Icons.language,

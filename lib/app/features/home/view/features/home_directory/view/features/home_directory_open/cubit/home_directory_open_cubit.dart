@@ -1,21 +1,21 @@
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_repository.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_state.dart';
-import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
-import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
-import 'package:DocuSort/app/product/cache/hive/operation/home_directory_open_page_layout_operation.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/pdf/all_pdf_model.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/enum/page_layout_enum.dart';
-import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
-import 'package:DocuSort/app/product/model/file/file/file_base_model.dart';
+import 'package:DocuSort/app/product/model/file/file/base/file_base_model.dart';
+import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/product/model/page_layout/home_directory_open_layout_model/home_directory_open_page_layout_model.dart';
-import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
+import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
   HomeDirectoryOpenCubit(
-      this.fileListKey, this.fileTypeEnum, this._pdfRepository)
-      : super(HomeDirectoryOpenState());
+    this.fileListKey,
+    this.fileTypeEnum,
+    this._pdfRepository,
+    this._homeDirectoryOpenRepository,
+  ) : super(HomeDirectoryOpenState());
 
   final int? fileListKey;
   final FileTypeEnum fileTypeEnum;
@@ -24,24 +24,11 @@ class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
 
   final PdfRepository _pdfRepository;
 
+  final HomeDirectoryOpenRepository _homeDirectoryOpenRepository;
 
-  final HomeDirectoryOpenPageLayoutOperation _homeDirectoryPageLayoutOperation =
-      GetItManager.getIt<HomeDirectoryOpenPageLayoutOperation>();
 
   Future<void> initDatabase() async {
-    emit(
-      state.copyWith(
-        status: HomeDirectoryOpenStatus.loading,
-      ),
-    );
-
-    await _homeDirectoryPageLayoutOperation.start(
-      HomeDirectoryOpenPageLayoutModel.homeDirectoryOpenLayoutKey,
-    );
-
-    final homeOpenDirectoryLayout = _homeDirectoryPageLayoutOperation.getItem(
-      HomeDirectoryOpenPageLayoutModel.homeDirectoryOpenLayoutKey,
-    );
+    await _homeDirectoryOpenRepository.initDatabase();
 
     if (fileListKey == null) {
       emit(
@@ -50,27 +37,16 @@ class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
         ),
       );
     } else {
-      if (homeOpenDirectoryLayout == null) {
-        homeOpenDirectoryLayout == null ? await createFirstLayoutModel() : null;
-        initDatabase();
-      } else {
-        updateHomeOpenLayoutState(homeOpenDirectoryLayout);
-        switch (fileTypeEnum) {
-          case FileTypeEnum.pdf:
-            await _initPdfFile();
-        }
+      updateHomeOpenLayoutState(
+        _homeDirectoryOpenRepository.homeDirectoryOpenPageLayoutModel!,
+      );
+      switch (fileTypeEnum) {
+        case FileTypeEnum.pdf:
+          await _initPdfFile();
       }
     }
   }
 
-  Future<void> createFirstLayoutModel() async {
-    await _homeDirectoryPageLayoutOperation.addOrUpdateItem(
-      HomeDirectoryOpenPageLayoutModel(
-        id: IdGenerator.randomIntId,
-        pageLayoutEnum: PageLayoutEnum.list,
-      ),
-    );
-  }
 
   void updateHomeOpenLayoutState(HomeDirectoryOpenPageLayoutModel layoutModel) {
     emit(
@@ -85,7 +61,7 @@ class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
     final newPageLayoutModel = state.pageLayoutModel!.copyWith(
       pageLayoutEnum: layoutEnum,
     );
-    _homeDirectoryPageLayoutOperation.addOrUpdateItem(newPageLayoutModel);
+    _homeDirectoryOpenRepository.updateLayout(newPageLayoutModel);
     emit(
       state.copyWith(pageLayoutModel: newPageLayoutModel),
     );
@@ -134,7 +110,7 @@ class HomeDirectoryOpenCubit extends Cubit<HomeDirectoryOpenState> {
       allFiles: mutablePdfList,
     );
 
-    _pdfRepository.deletePdfFromDirectory(newAllPdfModel);
+    await _pdfRepository.deletePdfFromDirectory(newAllPdfModel);
 
     emit(
       state.copyWith(

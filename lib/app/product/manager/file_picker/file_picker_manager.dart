@@ -28,7 +28,7 @@ class FilePickerManager {
     );
 
     if (permissionStorage) {
-      Future<FilePickerResult?>? result = _filePicker.pickFiles(
+      final Future<FilePickerResult?>? result = _filePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: [
           _getCorrectExtention(fileTypeEnum),
@@ -61,10 +61,10 @@ class FilePickerManager {
         ),
       );
     } else {
-      File pdfFile = File(result.files.single.path!);
-      Directory appDocumentDir = await getApplicationDocumentsDirectory();
-      String appDocumentPath = appDocumentDir.path;
-      File newFile = File('$appDocumentPath/${result.files.single.name}');
+      final File pdfFile = File(result.files.single.path!);
+      final Directory appDocumentDir = await getApplicationDocumentsDirectory();
+      final String appDocumentPath = appDocumentDir.path;
+      final File newFile = File('$appDocumentPath/${result.files.single.name}');
       await pdfFile.copy(newFile.path);
 
       print('pdf dosyası kaydedildi ${newFile.path}');

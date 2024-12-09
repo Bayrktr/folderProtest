@@ -1,4 +1,4 @@
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:DocuSort/app/product/model/pdf_settings/pdf_settings_model.dart';
 

@@ -1,12 +1,15 @@
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
+import 'package:DocuSort/app/features/home/view/features/favorites/bloc/favorites_cubit.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/bloc/home_directory_cubit.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/bloc/home_directory_state.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/component/layouts/home_directory_list_layout.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/component/layouts/home_directory_symbol_layout.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/component/show_modal/home_directory_app_bar_show_model_sheet.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/component/snack_bar/home_directory_snack_bar.dart';
+import 'package:DocuSort/app/product/component/logo/app_logo.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/app/product/constant/hero_tags.dart';
 import 'package:DocuSort/app/product/enum/page_layout_enum.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
@@ -30,7 +33,7 @@ class HomeDirectoryView extends StatelessWidget {
           onPressed: () {
             context.router.push(DirectoryAddRoute());
           },
-          heroTag: 'directory_add',
+          heroTag: HeroTags.directoryAdd,
           child: const Icon(Icons.add),
         ),
         body: BlocConsumer<HomeDirectoryCubit, HomeDirectoryState>(
@@ -42,38 +45,57 @@ class HomeDirectoryView extends StatelessWidget {
                 duration: const Duration(seconds: 1),
               ).show(context);
             }
+
+            switch (state.favoriteSnackBarStatus) {
+              case HomeDirectoryFavoriteStatus.initial:
+                break;
+              case HomeDirectoryFavoriteStatus.addedSuccess:
+                context.read<FavoritesCubit>().updateFavoriteDirectorys(
+                      state.allFavoritesDirectoryModel,
+                    );
+                HomeDirectorySnackBar(
+                  message: LocaleKeys.favorites_addedFavorite.lang.tr,
+                  duration: const Duration(seconds: 1),
+                ).show(context);
+              case HomeDirectoryFavoriteStatus.couldNotAdded:
+                HomeDirectorySnackBar(
+                  color: Colors.redAccent,
+                  message: LocaleKeys.favorites_alreadyAddedFavorite.lang.tr,
+                  duration: const Duration(seconds: 1),
+                ).show(context);
+            }
           },
           builder: (context, state) {
             switch (state.status) {
               case HomeDirectoryStatus.initial:
                 return Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.sized.widthNormalValue,
-                    ),
-                    child: Column(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            context.router.push(const SearchDirectoryRoute());
-                          },
-                          child: const Icon(
-                            Icons.search,
-                          ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.sized.widthNormalValue,
+                  ),
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          context.router.push(const SearchDirectoryRoute());
+                        },
+                        child: const Icon(
+                          Icons.search,
                         ),
-                        Expanded(
-                          child: switch (
-                              state.pageLayoutModel?.pageLayoutEnum) {
-                            PageLayoutEnum.list => HomeDirectoryListLayout(
-                                allDirectoryModel: state.allDirectory,
-                              ),
-                            PageLayoutEnum.symbol => HomeDirectorySymbolLayout(
-                                allDirectoryModel: state.allDirectory,
-                              ),
-                            null => const SizedBox(),
-                          },
-                        ),
-                      ],
-                    ));
+                      ),
+                      Expanded(
+                        child: switch (state.pageLayoutModel?.pageLayoutEnum) {
+                          PageLayoutEnum.list => HomeDirectoryListLayout(
+                              allDirectoryModel: state.allDirectory,
+                            ),
+                          PageLayoutEnum.symbol => HomeDirectorySymbolLayout(
+                              allDirectoryModel: state.allDirectory,
+                            ),
+                          null => const SizedBox(),
+                        },
+                      ),
+                    ],
+                  ),
+                );
 
               case HomeDirectoryStatus.error:
                 return const Center(
@@ -95,12 +117,16 @@ class HomeDirectoryView extends StatelessWidget {
 
   AppBar _getAppBar(BuildContext context) {
     return AppBar(
+      leadingWidth: context.sized.dynamicWidth(0.4),
       centerTitle: true,
       automaticallyImplyLeading: false,
-      title: LocaleText(
+      leading: const AppLogo(),
+      /*
+      title: const LocaleText(
         text: LocaleKeys.home_directorys,
-        textStyle: context.theme.getTextStyle.headline1,
       ),
+
+       */
       actions: [
         BlocBuilder<HomeDirectoryCubit, HomeDirectoryState>(
           builder: (context, state) {

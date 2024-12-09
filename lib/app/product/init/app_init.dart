@@ -20,9 +20,9 @@ final class AppInit {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-    SystemChrome.setPreferredOrientations([
+    await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
 
@@ -44,7 +44,6 @@ final class AppInit {
       await themeOperation.addOrUpdateItem(
         ThemeModel(
           id: IdGenerator.randomIntId,
-          isLight: true,
         ),
       );
     }

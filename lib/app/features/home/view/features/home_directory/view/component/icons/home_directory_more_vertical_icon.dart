@@ -21,6 +21,12 @@ class HomeDirectoryMoreVerticalIcon extends StatelessWidget {
           context: context,
           widget: HomeDirectoryShowModelSheet(
             directoryModel: directoryModel,
+            alreadyFavorite: context
+                .read<HomeDirectoryCubit>()
+                .isAlreadyFavorite(directoryModel),
+            addFavorite: () {
+              context.read<HomeDirectoryCubit>().addToFavorite(directoryModel);
+            },
             onAdd: () {},
             onDelete: () {
               context

@@ -17,68 +17,68 @@ class SearchDirectoryView extends StatelessWidget {
       child: BlocConsumer<SearchDirectoryCubit, SearchDirectoryState>(
         builder: (context, state) {
           return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  onPressed: () {
-                    context.router.maybePop();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                  ),
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  context.router.maybePop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
                 ),
               ),
-              body: switch (state.status) {
-                SearchDirectoryStatus.start =>
-                  _getCircularProgressIndicator(context: context),
-                SearchDirectoryStatus.initial => Padding(
-                    padding: context.padding.normal,
-                    child: Column(
-                      children: [
-                        TextField(
-                          decoration:
-                              const InputDecoration(icon: Icon(Icons.search)),
-                          controller: context
+            ),
+            body: switch (state.status) {
+              SearchDirectoryStatus.start =>
+                _getCircularProgressIndicator(context: context),
+              SearchDirectoryStatus.initial => Padding(
+                  padding: context.padding.normal,
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration:
+                            const InputDecoration(icon: Icon(Icons.search)),
+                        controller: context
+                            .read<SearchDirectoryCubit>()
+                            .searchDirectoryController,
+                        onChanged: (value) {
+                          context
                               .read<SearchDirectoryCubit>()
-                              .searchDirectoryController,
-                          onChanged: (value) {
-                            context
-                                .read<SearchDirectoryCubit>()
-                                .updateSearchDirectoryController(value);
+                              .updateSearchDirectoryController(value);
+                        },
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.searchResultList?.length ?? 0,
+                          itemBuilder: (BuildContext context, int index) {
+                            final item = state.searchResultList![index];
+                            return item == null
+                                ? const SizedBox()
+                                : ListTile(
+                                    onTap: () {
+                                      context.router.push(
+                                        HomeDirectoryOpenRoute(
+                                          directoryModel: item,
+                                        ),
+                                      );
+                                    },
+                                    leading: Text(
+                                      item.name ?? '',
+                                    ),
+                                  );
                           },
                         ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: state.searchResultList?.length ?? 0,
-                            itemBuilder: (BuildContext context, int index) {
-                              final item = state.searchResultList![index];
-                              print(item);
-                              return item == null
-                                  ? const SizedBox()
-                                  : ListTile(
-                                      onTap: () {
-                                        context.router.push(
-                                          HomeDirectoryOpenRoute(
-                                            directoryModel: item,
-                                          ),
-                                        );
-                                      },
-                                      leading: Text(
-                                        item.name ?? '',
-                                      ),
-                                    );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                SearchDirectoryStatus.loading =>
-                  _getCircularProgressIndicator(context: context),
-                SearchDirectoryStatus.error =>
-                  _getCircularProgressIndicator(context: context),
-                SearchDirectoryStatus.finish =>
-                  _getCircularProgressIndicator(context: context),
-              });
+                ),
+              SearchDirectoryStatus.loading =>
+                _getCircularProgressIndicator(context: context),
+              SearchDirectoryStatus.error =>
+                _getCircularProgressIndicator(context: context),
+              SearchDirectoryStatus.finish =>
+                _getCircularProgressIndicator(context: context),
+            },
+          );
         },
         listener: (context, state) {},
       ),

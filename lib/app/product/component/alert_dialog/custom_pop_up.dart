@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
+import 'package:flutter/material.dart';
 
 class CustomPopup extends StatelessWidget {
   final String title;

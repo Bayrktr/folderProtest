@@ -4,10 +4,9 @@ import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/edit_pdf/bloc/edit_pdf_cubit.dart';
 import 'package:DocuSort/app/features/edit_pdf/bloc/edit_pdf_state.dart';
 import 'package:DocuSort/app/features/edit_pdf/view/component/edit_pdf_snack_bar.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
-import 'package:DocuSort/app/product/manager/routes/routes_manager.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/app/product/utility/validator/text_form_field_validator.dart';
@@ -104,18 +103,14 @@ class EditPdfView extends StatelessWidget {
                 message:
                     LocaleKeys.editPdf_thereIsAnotherPdfWithThisName.lang.tr,
               ).show(context);
-              break;
             case SavePdfStatus.success:
               //  context.read<HomeDirectoryOpenCubit>().initDatabase();
-            print(context.router.stack);
               context.router.popAndPush(
                 HomeDirectoryOpenRoute(
                   directoryModel: directoryModel,
                 ),
               );
 
-
-              break;
           }
         },
       ),

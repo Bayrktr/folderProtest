@@ -1,50 +1,52 @@
 part of 'edit_directory_view.dart';
 
 mixin _EditDirectoryMixin on StatelessWidget {
-  Widget getAllPdfListViewBuilder(
-      {required EditDirectoryState state, required BuildContext context}) {
-    return switch (state.allPdfStatus) {
-      EditDirectoryAllPdfStatus.start => const CircularProgressIndicator(),
-      EditDirectoryAllPdfStatus.initial => Container(
+  Widget getAllFileListViewBuilder({
+    required EditDirectoryState state,
+    required BuildContext context,
+  }) {
+    return switch (state.allFileStatus) {
+      EditDirectoryAllFileStatus.start => const CircularProgressIndicator(),
+      EditDirectoryAllFileStatus.initial => Container(
           decoration: BoxDecoration(
-              border: Border.all(
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(8)),
+            border: Border.all(),
+            borderRadius: BorderRadius.circular(8),
+          ),
           height: context.sized.dynamicHeight(0.2),
           child: ListView.builder(
             itemBuilder: (context, index) {
-              final item = state.allPdfModel?.allFiles?[index];
+              final item = state.allFileExtendBaseModel?.allFiles?[index];
               if (item == null) {
                 return const SizedBox();
               }
               return ListTile(
                 leading: Text(item.name.forNull.getGeneralNullMessage),
                 trailing: IconButton(
-                    onPressed: () {
-                      IShowDialog(
-                        context: context,
-                        widget: EditDirectoryShowModelSheet(
-                          onDelete: () {
-                            context
-                                .read<EditDirectoryCubit>()
-                                .deletePdfFromHive(item);
-                          },
-                          onEdit: () {},
-                          pdfModel: item,
-                        ),
-                      ).showBottomSheet();
-                    },
-                    icon: const Icon(
-                      Icons.more_vert,
-                    )),
+                  onPressed: () {
+                    IShowDialog(
+                      context: context,
+                      widget: EditDirectoryShowModelSheet(
+                        onDelete: () {
+                          context
+                              .read<EditDirectoryCubit>()
+                              .deleteFileFromDirectory(item);
+                        },
+                        onEdit: () {},
+                        fileModel: item,
+                      ),
+                    ).showBottomSheet();
+                  },
+                  icon: const Icon(
+                    Icons.more_vert,
+                  ),
+                ),
               );
             },
-            itemCount: state.allPdfModel?.allFiles?.length ?? 0,
+            itemCount: state.allFileExtendBaseModel?.allFiles?.length ?? 0,
           ),
         ),
-      EditDirectoryAllPdfStatus.loading => const CircularProgressIndicator(),
-      EditDirectoryAllPdfStatus.error => const LocaleText(
+      EditDirectoryAllFileStatus.loading => const CircularProgressIndicator(),
+      EditDirectoryAllFileStatus.error => const LocaleText(
           text: LocaleKeys.errors_nullErrorMessage,
         ),
     };

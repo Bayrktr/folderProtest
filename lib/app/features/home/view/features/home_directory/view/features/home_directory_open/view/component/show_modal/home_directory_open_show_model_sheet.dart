@@ -16,7 +16,24 @@ class HomeDirectoryOpenShowModelSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       children: <Widget>[
-
+        ListTile(
+          leading: const Icon(Icons.favorite_border),
+          title: const LocaleText(
+            text: LocaleKeys.general_addFavorite,
+          ),
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.share),
+          title: const LocaleText(
+            text: LocaleKeys.general_share,
+          ),
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+        ),
         ListTile(
           leading: const Icon(Icons.edit),
           title: const LocaleText(

@@ -24,10 +24,10 @@ class PdfSettingsCubit extends Cubit<PdfSettingsState> {
 
     late PdfSettingsModel pdfSettingsModel;
 
-    if (getPdfSettingsModel() == null) {
-      createFirstSettingsModel();
+    if (getPdfSettingsModel == null) {
+      await createFirstSettingsModel();
     } else {
-      pdfSettingsModel = getPdfSettingsModel()!;
+      pdfSettingsModel = getPdfSettingsModel!;
     }
 
     emit(
@@ -45,9 +45,9 @@ class PdfSettingsCubit extends Cubit<PdfSettingsState> {
       ),
     );
 
-    final PdfSettingsModel copyPdfSettingsModel = state.pdfSettingsModel!;
+    final copyPdfSettingsModel = state.pdfSettingsModel!;
 
-    final PdfSettingsModel newPdfSettingsModel = copyPdfSettingsModel.copyWith(
+    final newPdfSettingsModel = copyPdfSettingsModel.copyWith(
       swipeHorizontal: !copyPdfSettingsModel.swipeHorizontal,
     );
 
@@ -61,7 +61,7 @@ class PdfSettingsCubit extends Cubit<PdfSettingsState> {
     );
   }
 
-  PdfSettingsModel? getPdfSettingsModel() {
+  PdfSettingsModel? get getPdfSettingsModel {
     return _pdfSettingsOperation.getItem(PdfSettingsModel.pdfSettingsModelKey);
   }
 

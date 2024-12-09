@@ -1,35 +1,33 @@
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
-import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_cubit_mixin.dart';
+import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_repository.dart';
 import 'package:DocuSort/app/features/add_pdf/bloc/add_pdf_state.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
-import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/pdf/all_pdf_model.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/manager/detect_file_type/detect_file_type_manager.dart';
 import 'package:DocuSort/app/product/manager/file_picker/file_picker_manager.dart';
-import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
+part 'add_pdf_cubit_mixin.dart';
 
-class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
-  AddPdfCubit({this.directoryModel})
+class AddPdfCubit extends Cubit<AddPdfState> with _AddPdfCubitMixin {
+  AddPdfCubit({this.directoryModel, required this.addPdfRepository})
       : super(
           AddPdfState(
             selectedDirectory: directoryModel,
           ),
         );
 
+  final AddPdfRepository addPdfRepository;
+
   final DirectoryModel? directoryModel;
 
   final TextEditingController _pdfNameController = TextEditingController();
 
   TextEditingController get pdfNameController => _pdfNameController;
-
-  final AllPdfOperation _allPdfOperation =
-      GetItManager.getIt<AllPdfOperation>();
 
   String? get fileListKey => directoryModel?.fileListKey.toString();
 
@@ -46,7 +44,7 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
         ),
       );
     } else {
-      await _allPdfOperation.start(fileListKey!);
+      await addPdfRepository.start();
       emit(
         state.copyWith(
           status: AddPdfStatus.initial,
@@ -129,13 +127,14 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
         id: IdGenerator.randomIntId,
         name: pdfNameController.text,
         byte: state.pickFileResult?.files.first.bytes,
+        fileTypeEnum: FileTypeEnum.pdf,
       );
 
-      AllPdfModel? allPdfModel = await Future.microtask(() => _getPdfList());
+      AllPdfModel? allPdfModel = addPdfRepository.getAllPdfModel;
 
       if (allPdfModel == null) {
-        await _createFirstModel();
-        allPdfModel = await Future.microtask(() => _getPdfList());
+        await addPdfRepository.createFirstModel();
+        allPdfModel = addPdfRepository.getAllPdfModel;
       }
 
       final mutableAllPdf = List<PdfModel>.from(allPdfModel?.allFiles ?? []);
@@ -143,11 +142,13 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
       if (!isAlreadyExist(mutableAllPdf, newPdfModel)) {
         mutableAllPdf.insert(0, newPdfModel);
 
-        await Future.microtask(() => _allPdfOperation.addOrUpdateItem(
-              allPdfModel!.copyWith(
-                allFiles: mutableAllPdf,
-              ),
-            ));
+        await Future.microtask(
+          () => addPdfRepository.updateAllPdfModel(
+            allPdfModel!.copyWith(
+              allFiles: mutableAllPdf,
+            ),
+          ),
+        );
 
         emit(
           state.copyWith(
@@ -169,18 +170,5 @@ class AddPdfCubit extends Cubit<AddPdfState> with AddPdfCubitMixin {
     }
 
     _resetSavePdfStatus();
-  }
-
-  AllPdfModel? _getPdfList() {
-    return _allPdfOperation.getItem(directoryModel!.fileListKey.toString());
-  }
-
-  Future<void> _createFirstModel() async {
-    await _allPdfOperation.addOrUpdateItem(
-      AllPdfModel(
-        id: int.parse(fileListKey!),
-        allFiles: [],
-      ),
-    );
   }
 }

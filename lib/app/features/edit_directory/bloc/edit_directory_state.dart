@@ -1,26 +1,27 @@
-import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/all_pdf_model.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/pdf/all_pdf_model.dart';
+import 'package:DocuSort/app/product/model/file/all_file/all_file_base_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 
 class EditDirectoryState with EquatableMixin {
   EditDirectoryState({
     this.status = EditDirectoryStatus.start,
-    this.allPdfStatus = EditDirectoryAllPdfStatus.start,
-    this.allPdfSnackBarStatus = EditDirectoryAllPdfSnackBarStatus.initial,
+    this.allFileStatus = EditDirectoryAllFileStatus.start,
+    this.allFileSnackBarStatus = EditDirectoryAllFileSnackBarStatus.initial,
     this.allDirectoryStatus = EditDirectoryAllDirectoryStatus.initial,
     this.selectedDirectory,
-    this.allPdfModel,
+    this.allFileExtendBaseModel,
   });
 
   final EditDirectoryStatus status;
 
   final DirectoryModel? selectedDirectory;
 
-  final AllPdfModel? allPdfModel;
+  final AllFileExtendBaseModel? allFileExtendBaseModel;
 
-  final EditDirectoryAllPdfStatus allPdfStatus;
+  final EditDirectoryAllFileStatus allFileStatus;
 
-  final EditDirectoryAllPdfSnackBarStatus allPdfSnackBarStatus;
+  final EditDirectoryAllFileSnackBarStatus allFileSnackBarStatus;
 
   final EditDirectoryAllDirectoryStatus allDirectoryStatus;
 
@@ -28,26 +29,26 @@ class EditDirectoryState with EquatableMixin {
   List<Object?> get props => [
         status,
         selectedDirectory,
-        allPdfModel,
-        allPdfStatus,
-        allPdfSnackBarStatus,
+    allFileExtendBaseModel,
+    allFileStatus,
+    allFileSnackBarStatus,
         allDirectoryStatus,
       ];
 
   EditDirectoryState copyWith({
     EditDirectoryStatus? status,
     DirectoryModel? selectedDirectory,
-    AllPdfModel? allPdfModel,
-    EditDirectoryAllPdfStatus? allPdfStatus,
-    EditDirectoryAllPdfSnackBarStatus? allPdfSnackBarStatus,
+    AllFileExtendBaseModel? allFileExtendBaseModel,
+    EditDirectoryAllFileStatus? allFileStatus,
+    EditDirectoryAllFileSnackBarStatus? allFileSnackBarStatus,
     EditDirectoryAllDirectoryStatus? allDirectoryStatus,
   }) =>
       EditDirectoryState(
         status: status ?? this.status,
         selectedDirectory: selectedDirectory ?? this.selectedDirectory,
-        allPdfModel: allPdfModel ?? this.allPdfModel,
-        allPdfStatus: allPdfStatus ?? this.allPdfStatus,
-        allPdfSnackBarStatus: allPdfSnackBarStatus ?? this.allPdfSnackBarStatus,
+        allFileExtendBaseModel: allFileExtendBaseModel ?? this.allFileExtendBaseModel,
+        allFileStatus: allFileStatus ?? this.allFileStatus,
+        allFileSnackBarStatus: allFileSnackBarStatus ?? this.allFileSnackBarStatus,
         allDirectoryStatus: allDirectoryStatus ?? this.allDirectoryStatus,
       );
 }
@@ -59,14 +60,14 @@ enum EditDirectoryStatus {
   error,
 }
 
-enum EditDirectoryAllPdfStatus {
+enum EditDirectoryAllFileStatus {
   start,
   initial,
   loading,
   error,
 }
 
-enum EditDirectoryAllPdfSnackBarStatus {
+enum EditDirectoryAllFileSnackBarStatus {
   initial,
   success,
   error,

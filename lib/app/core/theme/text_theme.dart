@@ -15,4 +15,6 @@ final class CustomTextStyle {
 
   TextStyle get mediumBodyText1 =>
       _theme.textTheme.bodyMedium ?? const TextStyle();
+
+  TextStyle get highBodyText => _theme.textTheme.bodyLarge ?? const TextStyle();
 }

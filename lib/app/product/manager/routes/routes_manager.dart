@@ -7,20 +7,19 @@ class RoutesManager {
   final BuildContext context;
 
   void cleanSpecificRoutes(String routePath) {
-
     final filteredRoutes = context.router.stack
-        .where((route) =>
-            route.name !=
-            routePath)
-        .map((route) => PageRouteInfo<dynamic>(
-              route.routeData.name,
-            ))
+        .where(
+          (route) => route.name != routePath,
+        )
+        .map(
+          (route) => PageRouteInfo<dynamic>(
+            route.routeData.name,
+          ),
+        )
         .toList();
 
     // final newA = filteredRoutes.removeAt(filteredRoutes.length);
 
     context.router.replaceAll(filteredRoutes);
   }
-
-
 }

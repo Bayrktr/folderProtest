@@ -1,6 +1,8 @@
 import 'package:DocuSort/app/core/model/base_model.dart';
 import 'package:DocuSort/app/product/model/error/response_error_model.dart';
 
+
+
 class ResponseBaseModel<T extends BaseModel> {
   final T? data;
   final ResponseErrorModel? error;
@@ -10,12 +12,6 @@ class ResponseBaseModel<T extends BaseModel> {
     this.error,
   });
 
-  factory ResponseBaseModel.fromJson(Map<String, dynamic> json) {
-    return ResponseBaseModel(
-      data: json['data'],
-      error: json['error'],
-    );
-  }
 
   Map<String, dynamic> toJson() {
     return {

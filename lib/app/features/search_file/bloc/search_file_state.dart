@@ -1,5 +1,5 @@
 import 'package:DocuSort/app/product/model/file/all_file/all_file_base_model.dart';
-import 'package:DocuSort/app/product/model/file/file/file_base_model.dart';
+import 'package:DocuSort/app/product/model/file/file/base/file_base_model.dart';
 import 'package:equatable/equatable.dart';
 
 class SearchFileState with EquatableMixin {

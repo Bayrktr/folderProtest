@@ -3,12 +3,14 @@ import 'package:DocuSort/app/core/extention/string/null_string_extention.dart';
 import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_cubit.dart';
+import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_repository.dart';
 import 'package:DocuSort/app/features/edit_directory/bloc/edit_directory_state.dart';
 import 'package:DocuSort/app/features/edit_directory/view/component/edit_directory_show_model_sheet.dart';
 import 'package:DocuSort/app/features/edit_directory/view/component/edit_directory_snack_bar.dart';
 import 'package:DocuSort/app/product/component/alert_dialog/show_dialog.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
+import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/app/product/utility/validator/text_form_field_validator.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
 import 'package:auto_route/auto_route.dart';
@@ -37,7 +39,15 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
         directoryModel: directoryModel,
       ),
       body: BlocProvider(
-        create: (_) => EditDirectoryCubit(directoryModel),
+        create: (_) => EditDirectoryCubit(
+          directoryModel,
+          EditDirectoryRepository(
+            directoryModel,
+            PdfRepository(
+              directoryModel?.fileListKey,
+            ),
+          ),
+        ),
         child: BlocConsumer<EditDirectoryCubit, EditDirectoryState>(
           builder: (context, state) {
             if (state.status == EditDirectoryStatus.start) {
@@ -71,7 +81,7 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
                     const SizedBox(
                       height: 20,
                     ),
-                    getAllPdfListViewBuilder(
+                    getAllFileListViewBuilder(
                       state: state,
                       context: context,
                     ),
@@ -99,10 +109,10 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
             );
           },
           listener: (context, state) {
-            switch (state.allPdfSnackBarStatus) {
-              case EditDirectoryAllPdfSnackBarStatus.initial:
+            switch (state.allFileSnackBarStatus) {
+              case EditDirectoryAllFileSnackBarStatus.initial:
                 break;
-              case EditDirectoryAllPdfSnackBarStatus.success:
+              case EditDirectoryAllFileSnackBarStatus.success:
                 EditDirectorySnackBar(
                   message:
                       LocaleKeys.editDirectory_pdfDeletedSuccessfully.lang.tr,
@@ -110,7 +120,7 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
                   context,
                 );
 
-              case EditDirectoryAllPdfSnackBarStatus.error:
+              case EditDirectoryAllFileSnackBarStatus.error:
                 break;
             }
             switch (state.allDirectoryStatus) {

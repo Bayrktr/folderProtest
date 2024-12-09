@@ -1,16 +1,17 @@
-import 'package:DocuSort/app/features/home/view/features/home_directory/model/pdf_model.dart';
+import 'package:DocuSort/app/product/model/file/file/base/file_base_model.dart';
+import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:flutter/material.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
 
 class EditDirectoryShowModelSheet extends StatelessWidget {
-  final PdfModel pdfModel;
+  final FileExtendBaseModel fileModel;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
 
   const EditDirectoryShowModelSheet({
     super.key,
-    required this.pdfModel,
+    required this.fileModel,
     required this.onDelete,
     required this.onEdit,
   });
