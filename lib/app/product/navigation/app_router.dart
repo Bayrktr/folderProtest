@@ -21,6 +21,7 @@ import 'package:DocuSort/app/features/search_directory/view/search_directory_vie
 import 'package:DocuSort/app/features/search_favorite_directory/view/search_favorite_directory_view.dart';
 import 'package:DocuSort/app/features/search_file/view/search_file_view.dart';
 import 'package:DocuSort/app/features/splash/view/splash_view.dart';
+import 'package:DocuSort/app/features/verifications/view/features/email_verification/view/email_verification_view.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -130,6 +131,10 @@ class AppRouter extends RootStackRouter {
             ),
           ],
         ),
+        AdaptiveRoute<EmailVerificationRoute>(
+          page: EmailVerificationRoute.page,
+          path: RoutePath.emailVerification.path,
+        ),
       ];
 }
 
@@ -155,6 +160,7 @@ enum RoutePath {
   generalError('/generalError'),
   favorites('favorites'),
   searchFavoriteDirectory('/searchFavoriteDirectory'),
+  emailVerification('/emailVerification'),
   homeDirectoryOpen('/homeDirectoryOpen');
 
   const RoutePath(this.path);

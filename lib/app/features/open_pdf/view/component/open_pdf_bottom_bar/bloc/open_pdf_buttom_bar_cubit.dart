@@ -16,7 +16,6 @@ class OpenPdfBottomBarCubit extends Cubit<OpenPdfBottomBarState> {
     );
     if (isClosed) return;
     _changeIsShow();
-    print(state.isShow);
   }
 
   void _changeIsShow() {

@@ -70,6 +70,22 @@ abstract class  LocaleKeys {
   static const login_continueWithGoggle = 'login.continueWithGoggle';
   static const login_createAnAccount = 'login.createAnAccount';
   static const login_emailAdressNotCorrectFormat = 'login.emailAdressNotCorrectFormat';
+  static const login_logout = 'login.logout';
+  static const login_editMyProfile = 'login.editMyProfile';
   static const login = 'login';
+  static const register_createAnAccount = 'register.createAnAccount';
+  static const register_name = 'register.name';
+  static const register_password = 'register.password';
+  static const register_byContinuingYouAgreeToOur = 'register.byContinuingYouAgreeToOur';
+  static const register_termsOfService = 'register.termsOfService';
+  static const register_or = 'register.or';
+  static const register_alreadyHaveAnAccount = 'register.alreadyHaveAnAccount';
+  static const register_signInHere = 'register.signInHere';
+  static const register_signUp = 'register.signUp';
+  static const register = 'register';
+  static const emailVerification_weSentYouVerificationEmail = 'emailVerification.weSentYouVerificationEmail';
+  static const emailVerification_thankYouForSigningUp = 'emailVerification.thankYouForSigningUp';
+  static const emailVerification_congratulations = 'emailVerification.congratulations';
+  static const emailVerification = 'emailVerification';
 
 }

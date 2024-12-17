@@ -23,6 +23,7 @@ mixin _$UserAccountModel {
   String? get uid => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  bool get isVerified => throw _privateConstructorUsedError;
 
   /// Serializes this UserAccountModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +41,7 @@ abstract class $UserAccountModelCopyWith<$Res> {
           UserAccountModel value, $Res Function(UserAccountModel) then) =
       _$UserAccountModelCopyWithImpl<$Res, UserAccountModel>;
   @useResult
-  $Res call({String? uid, String? name, String? email});
+  $Res call({String? uid, String? name, String? email, bool isVerified});
 }
 
 /// @nodoc
@@ -61,6 +62,7 @@ class _$UserAccountModelCopyWithImpl<$Res, $Val extends UserAccountModel>
     Object? uid = freezed,
     Object? name = freezed,
     Object? email = freezed,
+    Object? isVerified = null,
   }) {
     return _then(_value.copyWith(
       uid: freezed == uid
@@ -75,6 +77,10 @@ class _$UserAccountModelCopyWithImpl<$Res, $Val extends UserAccountModel>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
+      isVerified: null == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -87,7 +93,7 @@ abstract class _$$DirectoryModelImplCopyWith<$Res>
       __$$DirectoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? uid, String? name, String? email});
+  $Res call({String? uid, String? name, String? email, bool isVerified});
 }
 
 /// @nodoc
@@ -106,6 +112,7 @@ class __$$DirectoryModelImplCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? name = freezed,
     Object? email = freezed,
+    Object? isVerified = null,
   }) {
     return _then(_$DirectoryModelImpl(
       uid: freezed == uid
@@ -120,6 +127,10 @@ class __$$DirectoryModelImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
+      isVerified: null == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -127,7 +138,9 @@ class __$$DirectoryModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$DirectoryModelImpl extends _DirectoryModel {
-  _$DirectoryModelImpl({this.uid, this.name, this.email}) : super._();
+  _$DirectoryModelImpl(
+      {this.uid, this.name, this.email, this.isVerified = false})
+      : super._();
 
   factory _$DirectoryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DirectoryModelImplFromJson(json);
@@ -138,10 +151,13 @@ class _$DirectoryModelImpl extends _DirectoryModel {
   final String? name;
   @override
   final String? email;
+  @override
+  @JsonKey()
+  final bool isVerified;
 
   @override
   String toString() {
-    return 'UserAccountModel(uid: $uid, name: $name, email: $email)';
+    return 'UserAccountModel(uid: $uid, name: $name, email: $email, isVerified: $isVerified)';
   }
 
   @override
@@ -151,12 +167,14 @@ class _$DirectoryModelImpl extends _DirectoryModel {
             other is _$DirectoryModelImpl &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, uid, name, email);
+  int get hashCode => Object.hash(runtimeType, uid, name, email, isVerified);
 
   /// Create a copy of UserAccountModel
   /// with the given fields replaced by the non-null parameter values.
@@ -179,7 +197,8 @@ abstract class _DirectoryModel extends UserAccountModel {
   factory _DirectoryModel(
       {final String? uid,
       final String? name,
-      final String? email}) = _$DirectoryModelImpl;
+      final String? email,
+      final bool isVerified}) = _$DirectoryModelImpl;
   _DirectoryModel._() : super._();
 
   factory _DirectoryModel.fromJson(Map<String, dynamic> json) =
@@ -191,6 +210,8 @@ abstract class _DirectoryModel extends UserAccountModel {
   String? get name;
   @override
   String? get email;
+  @override
+  bool get isVerified;
 
   /// Create a copy of UserAccountModel
   /// with the given fields replaced by the non-null parameter values.

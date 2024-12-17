@@ -1,4 +1,5 @@
 import 'package:DocuSort/app/features/login/view/features/sign_in/bloc/sign_in_cubit.dart';
+import 'package:DocuSort/app/features/login/view/features/sign_up/bloc/sign_up_cubit.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,14 @@ class LoginView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => SignInCubit(),
+          create: (_) => SignInCubit()..initDatabase(),
+        ),
+        BlocProvider(
+          create: (_) => SignUpCubit()..initDatabase(),
         ),
       ],
       child: AutoTabsRouter.tabBar(
-        routes: const [
+        routes: [
           SignInRoute(),
           SignUpRoute(),
         ],

@@ -4,12 +4,14 @@ import 'package:DocuSort/app/core/extention/build_context/build_context_extensio
 class SettingsListTile extends StatelessWidget {
   final Widget? leading;
   final Widget? traling;
+  final Widget? title;
   final void Function()? onTap;
 
   const SettingsListTile({
     super.key,
     this.leading,
     this.traling,
+    this.title,
     this.onTap,
   });
 
@@ -23,6 +25,7 @@ class SettingsListTile extends StatelessWidget {
         ),
       ),
       child: ListTile(
+        title: title,
         onTap: onTap,
         leading: leading,
         trailing: traling,

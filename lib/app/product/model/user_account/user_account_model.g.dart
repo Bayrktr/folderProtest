@@ -11,6 +11,7 @@ _$DirectoryModelImpl _$$DirectoryModelImplFromJson(Map<String, dynamic> json) =>
       uid: json['uid'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
+      isVerified: json['isVerified'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$DirectoryModelImplToJson(
@@ -19,4 +20,5 @@ Map<String, dynamic> _$$DirectoryModelImplToJson(
       'uid': instance.uid,
       'name': instance.name,
       'email': instance.email,
+      'isVerified': instance.isVerified,
     };

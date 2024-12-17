@@ -70,7 +70,7 @@
     "enterTextToSearch": "Aranacak metni girin\n"
   },
   "login": {
-    "signIn": "Giriş",
+    "signIn": "Üye ol",
     "email": "Email",
     "phoneNumber": "Telefon",
     "emailAdress": "Email Adresi",
@@ -81,6 +81,25 @@
     "orSignInWith": "veya şu şekilde giriş yapın",
     "continueWithGoggle": "Google ile Devam Et",
     "createAnAccount": "Hesap Oluştur",
-    "emailAdressNotCorrectFormat": "Email adresi doğru formatta değil"
+    "emailAdressNotCorrectFormat": "Email adresi doğru formatta değil",
+    "logout": "Çıkış",
+    "editMyProfile": "Profilimi Düzenle"
+  },
+  "register": {
+    "createAnAccount": "Hesap Oluştur",
+    "name": "İsim",
+    "password": "Şifre",
+    "byContinuingYouAgreeToOur": "Devam ederek şunları kabul etmiş olursunuz",
+    "termsOfService": "hizmet şartları",
+    "or": "ya da",
+    "alreadyHaveAnAccount": "Zaten bir hesaba sahip misin?",
+    "signInHere": "Burdan giriş yap",
+    "signUp": "Kayıt ol"
+  },
+  "emailVerification": {
+    "weSentYouVerificationEmail" : "size bir doğrulama e-postası gönderdik. lütfen gelen kutunuzu kontrol edin ve hesabınızı doğrulamak için talimatları izleyin.",
+    "thankYouForSigningUp": "Bize kaydolduğunuz için teşekkür ederiz!",
+    "congratulations": "Tebrikler!"
+
   }
 }

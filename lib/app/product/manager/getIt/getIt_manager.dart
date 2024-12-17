@@ -7,6 +7,8 @@ import 'package:DocuSort/app/product/cache/hive/operation/home_directory_page_la
 import 'package:DocuSort/app/product/cache/hive/operation/pdf_settings_operation.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/theme_operation.dart';
 import 'package:DocuSort/app/product/service/auth/firebase/firebase_auth.dart';
+import 'package:DocuSort/app/product/service/database/firebase/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -46,6 +48,11 @@ final class GetItManager {
       ..registerSingleton<IFirebaseAuth>(
         IFirebaseAuth(
           FirebaseAuth.instance,
+        ),
+      )
+      ..registerSingleton<FirebaseDatabase>(
+        FirebaseDatabase(
+          FirebaseFirestore.instance,
         ),
       );
   }

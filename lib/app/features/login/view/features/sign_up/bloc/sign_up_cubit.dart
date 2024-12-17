@@ -1,16 +1,17 @@
-import 'package:DocuSort/app/features/login/view/features/sign_in/bloc/sign_in_repository.dart';
-import 'package:DocuSort/app/features/login/view/features/sign_in/bloc/sign_in_state.dart';
-import 'package:DocuSort/app/product/model/user_account/user_account_model.dart';
+import 'package:DocuSort/app/features/login/view/features/sign_up/bloc/sign_up_repository.dart';
+import 'package:DocuSort/app/features/login/view/features/sign_up/bloc/sign_up_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignInCubit extends Cubit<SignInState> {
-  SignInCubit() : super(SignInState());
+class SignUpCubit extends Cubit<SignUpState> {
+  SignUpCubit() : super(SignUpState());
 
-  final SignInRepository _signInRepository = SignInRepository();
+  final SignUpRepository _signUpRepository = SignUpRepository();
 
-  UserAccountModel? get accountModel => _signInRepository.accountModel;
+  final TextEditingController _nameController = TextEditingController();
+
+  TextEditingController get nameController => _nameController;
 
   final TextEditingController _emailController = TextEditingController();
 
@@ -23,52 +24,56 @@ class SignInCubit extends Cubit<SignInState> {
   Future<void> initDatabase() async {
     emit(
       state.copyWith(
-        status: SignInStatus.initial,
+        status: SignUpStatus.initial,
       ),
     );
   }
 
-  Future<void> signIn() async {
+  Future<void> signUp() async {
     final email = _emailController.text;
     final password = _passwordController.text;
     if (email.isEmpty || password.isEmpty) {
       emit(
         state.copyWith(
-          popUpStatus: SignInPopUpStatus.cantBeEmpty,
+          popUpStatus: SignUpPopUpStatus.cantBeEmpty,
         ),
       );
       return;
     }
+
     emit(
       state.copyWith(
-        status: SignInStatus.loading,
+        status: SignUpStatus.loading,
       ),
     );
     try {
-      await _signInRepository.logOut(); // fixme
-      await _signInRepository.signIn(email: email, password: password);
-
-      if (accountModel != null) {
-        emit(
-          state.copyWith(
-            popUpStatus: SignInPopUpStatus.success,
-          ),
-        );
-      }
+      await _signUpRepository.signUp(email: email, password: password);
+      emit(
+        state.copyWith(
+          popUpStatus: SignUpPopUpStatus.navigateVerify,
+        ),
+      );
+      resetAll;
     } on FirebaseAuthException catch (e) {
       emit(
         state.copyWith(
           popUpException: e,
-          popUpStatus: SignInPopUpStatus.other,
+          popUpStatus: SignUpPopUpStatus.other,
         ),
       );
+      resetAll;
     } catch (_) {
       emit(
         state.copyWith(
-          status: SignInStatus.error,
+          status: SignUpStatus.error,
         ),
       );
     }
+  }
+
+  void updateNameController(String? value) {
+    if (value == null) return;
+    _nameController.text = value;
   }
 
   void updateEmailController(String? value) {
@@ -81,16 +86,19 @@ class SignInCubit extends Cubit<SignInState> {
     _passwordController.text = value;
   }
 
-  void changeKeepSigned() {
-    emit(
-      state.copyWith(isKeepSigned: !state.isKeepSigned),
-    );
-  }
-
-  void changePasswordVisible() {
+  void updatePasswordVisible() {
     emit(
       state.copyWith(
         isPasswordVisible: !state.isPasswordVisible,
+      ),
+    );
+  }
+
+  void get resetAll {
+    emit(
+      state.copyWith(
+        status: SignUpStatus.initial,
+        popUpStatus: SignUpPopUpStatus.initial,
       ),
     );
   }

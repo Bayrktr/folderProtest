@@ -81,7 +81,29 @@
     "orSignInWith": "or sign in with",
     "continueWithGoggle": "Continue with Google",
     "createAnAccount": "Create an account",
-    "emailAdressNotCorrectFormat": "Email address is not in the correct format"
+    "emailAdressNotCorrectFormat": "Email address is not in the correct format",
+    "logout": "LogOut",
+    "editMyProfile": "Edit my Profile"
+
+
+  },
+  "register": {
+    "createAnAccount": "Create an Account",
+    "name": "Name",
+    "password": "Password",
+    "byContinuingYouAgreeToOur": "By continuing, you agree to our",
+    "termsOfService": "terms of service",
+    "or": "or",
+    "alreadyHaveAnAccount": "Already have an account?",
+    "signInHere": "Sign in here",
+    "signUp": "Sign up"
+
+  },
+  "emailVerification": {
+    "weSentYouVerificationEmail" : "We've sent you a verification email, please check your inbox and follow the instructions to verifiy your accout",
+    "thankYouForSigningUp": "Thank you for signing up with us!",
+    "congratulations": "Congratulations!"
+
   }
 }
 

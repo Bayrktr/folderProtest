@@ -1,12 +1,13 @@
 import 'package:DocuSort/app/core/constant/settings.dart';
 import 'package:DocuSort/app/product/bloc/theme/theme_cubit.dart';
-import 'package:DocuSort/app/product/bloc/theme/theme_state.dart';
+import 'package:DocuSort/app/product/bloc/user_account/user_account_cubit.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/theme_operation.dart';
 import 'package:DocuSort/app/product/constant/app_theme.dart';
 import 'package:DocuSort/app/product/init/app_init.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 import 'package:DocuSort/app/product/model/theme/theme_model.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
+import 'package:DocuSort/app/product/service/auth/firebase/firebase_auth.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,10 +45,18 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => ThemeCubit(_themeModel),
         ),
+        BlocProvider(
+          create: (_) => UserAccountCubit(
+            IFirebaseAuth(null),
+          ),
+        ),
       ],
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, state) {
-          final isLight = state.themeModel.isLight;
+      child: Builder(
+        builder: (context) {
+          final themeState = context.watch<ThemeCubit>().state;
+          final userState = context.watch<UserAccountCubit>().state;
+
+          final isLight = themeState.themeModel.isLight;
 
           return MaterialApp.router(
             localizationsDelegates: context.localizationDelegates,
@@ -63,3 +72,21 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+/*
+ BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          final isLight = state.themeModel.isLight;
+
+          return MaterialApp.router(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            debugShowCheckedModeBanner: Settings.isDebugBannerOpen,
+            routerConfig: _appRouter.config(),
+            title: Settings.appName,
+            theme: isLight ? AppTheme.lightTheme : AppTheme.dartTheme,
+          );
+        },
+      ),
+ */

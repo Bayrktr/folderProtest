@@ -9,6 +9,7 @@ class UserAccountModel with _$UserAccountModel {
     String? uid,
     String? name,
     String? email,
+    @Default(false) bool isVerified,
   }) = _DirectoryModel;
 
   factory UserAccountModel.fromJson(Map<String, dynamic> json) =>

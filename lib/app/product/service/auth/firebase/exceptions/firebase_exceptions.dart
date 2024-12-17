@@ -48,5 +48,27 @@ final class LogInWithEmailAndPasswordFailure implements Exception {
   }
 }
 
-
 final class LogOutFailure implements Exception {}
+
+final class EmailVerificationFailure implements Exception {
+  const EmailVerificationFailure([
+    this.message = '',
+  ]);
+
+  final String message;
+
+  factory EmailVerificationFailure.fromCode(String code) {
+    switch (code) {
+      case FirebaseExceptionsConstant.emailAlreadyVerified:
+        return EmailVerificationFailure('');
+      case FirebaseExceptionsConstant.expiredActionCode:
+        return EmailVerificationFailure('');
+      case FirebaseExceptionsConstant.invalidActionCode:
+        return EmailVerificationFailure('');
+      case FirebaseExceptionsConstant.internalError:
+        return EmailVerificationFailure('');
+      default:
+        return const EmailVerificationFailure();
+    }
+  }
+}
