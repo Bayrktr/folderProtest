@@ -1,6 +1,6 @@
 enum FirestoreCollection {
   users('users'),
-  files('files'),
+  directory('directory'),
   ;
 
   const FirestoreCollection(this._value);

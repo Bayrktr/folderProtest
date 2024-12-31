@@ -72,3 +72,11 @@ final class EmailVerificationFailure implements Exception {
     }
   }
 }
+
+final class UserNotSignInFailure implements Exception {
+  const UserNotSignInFailure([
+    this.message = '',
+  ]);
+
+  final String message;
+}

@@ -1,6 +1,10 @@
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/features/home/view/component/home_bottom_sheet_item.dart';
 import 'package:DocuSort/app/features/home/view/features/favorites/bloc/favorites_cubit.dart';
+import 'package:DocuSort/app/features/home/view/features/home_directory/bloc/home_directory_cubit.dart';
+import 'package:DocuSort/app/features/home/view/features/public_home_directory/bloc/public_home_directory_cubit.dart';
+import 'package:DocuSort/app/product/bloc/user_account/user_account_cubit.dart';
+import 'package:DocuSort/app/product/bloc/user_account/user_account_state.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +21,29 @@ class HomeView extends StatelessWidget {
         BlocProvider(
           create: (_) => FavoritesCubit()..initDatabase(),
         ),
+        BlocProvider(
+          create: (_) => HomeDirectoryCubit()..initDatabase(),
+        ),
+        BlocProvider(
+          create: (_) => PublicHomeDirectoryCubit()..initDatabase(),
+          child: BlocListener<UserAccountCubit, UserAccountState>(
+            listener: (context, state) {},
+            listenWhen: (previousState, state) {
+              if (previousState.checkUser != state.checkUser) {
+                if (state.checkUser) {
+                  context.read<PublicHomeDirectoryCubit>().getDirectoryList();
+                  return true;
+                }
+              }
+              return false;
+            },
+          ),
+        ),
       ],
       child: AutoTabsRouter.tabBar(
         routes: const [
           HomeDirectoryRoute(),
+          PublicHomeDirectoryRoute(),
           FavoritesRoute(),
           SettingsHomeRoute(),
         ],
@@ -61,11 +84,16 @@ class HomeView extends StatelessWidget {
           HomeBottomSheetItem(
             selectedIndex: selectedIndex,
             itemIndex: 1,
-            iconData: Icons.favorite_border,
+            iconData: Icons.public,
           ),
           HomeBottomSheetItem(
             selectedIndex: selectedIndex,
             itemIndex: 2,
+            iconData: Icons.favorite_border,
+          ),
+          HomeBottomSheetItem(
+            selectedIndex: selectedIndex,
+            itemIndex: 3,
             iconData: Icons.settings,
           ),
         ],

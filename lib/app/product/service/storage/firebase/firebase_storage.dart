@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:DocuSort/app/product/service/storage/firebase/exceptions/firebase_exceptions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class IFirebaseStorage {
+final class IFirebaseStorage {
   IFirebaseStorage(FirebaseStorage? firebaseStorage)
       : _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance;
 

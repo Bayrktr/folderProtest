@@ -37,7 +37,7 @@ class IFirebaseAuth {
   }
 
   bool get isUserNull {
-    return currentUser == null ? false : true;
+    return currentUser == null ? true : false;
   }
 
   AuthEmailMethod get authEmailMethod {

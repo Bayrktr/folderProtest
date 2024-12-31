@@ -7,6 +7,7 @@ import 'package:DocuSort/app/features/error/features/general_error/view/general_
 import 'package:DocuSort/app/features/home/view/features/favorites/view/favorites_view.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/home_directory_open_view.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/home_directory_view.dart';
+import 'package:DocuSort/app/features/home/view/features/public_home_directory/view/public_home_directory_view.dart';
 import 'package:DocuSort/app/features/home/view/features/settings_home/view/features/language/view/language_view.dart';
 import 'package:DocuSort/app/features/home/view/features/settings_home/view/features/profile/view/profile_view.dart';
 import 'package:DocuSort/app/features/home/view/features/settings_home/view/features/settings/view/settings_view.dart';
@@ -22,7 +23,10 @@ import 'package:DocuSort/app/features/search_favorite_directory/view/search_favo
 import 'package:DocuSort/app/features/search_file/view/search_file_view.dart';
 import 'package:DocuSort/app/features/splash/view/splash_view.dart';
 import 'package:DocuSort/app/features/verifications/view/features/email_verification/view/email_verification_view.dart';
+import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
+import 'package:DocuSort/app/product/navigation/auth_guard/auth_guard.dart';
+import 'package:DocuSort/app/product/service/auth/firebase/firebase_auth.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -104,7 +108,16 @@ class AppRouter extends RootStackRouter {
           children: [
             AdaptiveRoute<HomeDirectoryRoute>(
               page: HomeDirectoryRoute.page,
-              path: RoutePath.homePdf.path,
+              path: RoutePath.homeDirectory.path,
+            ),
+            AdaptiveRoute<PublicHomeDirectoryRoute>(
+              page: PublicHomeDirectoryRoute.page,
+              path: RoutePath.publicHomeDirectory.path,
+              guards: [
+                AuthGuard(
+                  GetItManager.getIt<IFirebaseAuth>(),
+                ),
+              ],
             ),
             AdaptiveRoute<SettingsHomeRoute>(
               page: SettingsHomeRoute.page,
@@ -147,7 +160,7 @@ enum RoutePath {
   language('language'),
   directoryAdd('/directoryAdd'),
   settings('settings'),
-  homePdf('homeDirectory'),
+  homeDirectory('homeDirectory'),
   directoryEdit('/directoryEdit'),
   fileEdit('/fileEdit'),
   fileAdd('/fileAdd'),
@@ -158,6 +171,7 @@ enum RoutePath {
   searchFile('/searchFile'),
   pdfSettings('/pdfSettings'),
   generalError('/generalError'),
+  publicHomeDirectory('publicHomeDirectory'),
   favorites('favorites'),
   searchFavoriteDirectory('/searchFavoriteDirectory'),
   emailVerification('/emailVerification'),

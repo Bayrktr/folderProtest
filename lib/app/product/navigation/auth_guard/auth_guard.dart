@@ -8,7 +8,9 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
-    if (firebaseAuth.isUserNull) {
+    print(!firebaseAuth.isUserNull);
+    print('kontrol');
+    if (!firebaseAuth.isUserNull) {
       resolver.next();
     } else {
       print('auth degıl');

@@ -25,92 +25,89 @@ class HomeDirectoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => HomeDirectoryCubit()..initDatabase(),
-      child: Scaffold(
-        appBar: _getAppBar(context),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.router.push(DirectoryAddRoute());
-          },
-          heroTag: HeroTags.directoryAdd,
-          child: const Icon(Icons.add),
-        ),
-        body: BlocConsumer<HomeDirectoryCubit, HomeDirectoryState>(
-          listener: (context, state) {
-            if (state.snackBarStatus ==
-                HomeDirectorySnackBarStatus.deletedSuccess) {
+    return Scaffold(
+      appBar: _getAppBar(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.router.push(DirectoryAddRoute());
+        },
+        heroTag: HeroTags.directoryAdd,
+        child: const Icon(Icons.add),
+      ),
+      body: BlocConsumer<HomeDirectoryCubit, HomeDirectoryState>(
+        listener: (context, state) {
+          if (state.snackBarStatus ==
+              HomeDirectorySnackBarStatus.deletedSuccess) {
+            HomeDirectorySnackBar(
+              message: LocaleKeys.home_directoryDeletedSuccessfully.lang.tr,
+              duration: const Duration(seconds: 1),
+            ).show(context);
+          }
+
+          switch (state.favoriteSnackBarStatus) {
+            case HomeDirectoryFavoriteStatus.initial:
+              break;
+            case HomeDirectoryFavoriteStatus.addedSuccess:
+              context.read<FavoritesCubit>().updateFavoriteDirectorys(
+                    state.allFavoritesDirectoryModel,
+                  );
               HomeDirectorySnackBar(
-                message: LocaleKeys.home_directoryDeletedSuccessfully.lang.tr,
+                message: LocaleKeys.favorites_addedFavorite.lang.tr,
                 duration: const Duration(seconds: 1),
               ).show(context);
-            }
-
-            switch (state.favoriteSnackBarStatus) {
-              case HomeDirectoryFavoriteStatus.initial:
-                break;
-              case HomeDirectoryFavoriteStatus.addedSuccess:
-                context.read<FavoritesCubit>().updateFavoriteDirectorys(
-                      state.allFavoritesDirectoryModel,
-                    );
-                HomeDirectorySnackBar(
-                  message: LocaleKeys.favorites_addedFavorite.lang.tr,
-                  duration: const Duration(seconds: 1),
-                ).show(context);
-              case HomeDirectoryFavoriteStatus.couldNotAdded:
-                HomeDirectorySnackBar(
-                  color: Colors.redAccent,
-                  message: LocaleKeys.favorites_alreadyAddedFavorite.lang.tr,
-                  duration: const Duration(seconds: 1),
-                ).show(context);
-            }
-          },
-          builder: (context, state) {
-            switch (state.status) {
-              case HomeDirectoryStatus.initial:
-                return Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.sized.widthNormalValue,
-                  ),
-                  child: Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          context.router.push(const SearchDirectoryRoute());
-                        },
-                        child: const Icon(
-                          Icons.search,
-                        ),
+            case HomeDirectoryFavoriteStatus.couldNotAdded:
+              HomeDirectorySnackBar(
+                color: Colors.redAccent,
+                message: LocaleKeys.favorites_alreadyAddedFavorite.lang.tr,
+                duration: const Duration(seconds: 1),
+              ).show(context);
+          }
+        },
+        builder: (context, state) {
+          switch (state.status) {
+            case HomeDirectoryStatus.initial:
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.sized.widthNormalValue,
+                ),
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        context.router.push(const SearchDirectoryRoute());
+                      },
+                      child: const Icon(
+                        Icons.search,
                       ),
-                      Expanded(
-                        child: switch (state.pageLayoutModel?.pageLayoutEnum) {
-                          PageLayoutEnum.list => HomeDirectoryListLayout(
-                              allDirectoryModel: state.allDirectory,
-                            ),
-                          PageLayoutEnum.symbol => HomeDirectorySymbolLayout(
-                              allDirectoryModel: state.allDirectory,
-                            ),
-                          null => const SizedBox(),
-                        },
-                      ),
-                    ],
-                  ),
-                );
+                    ),
+                    Expanded(
+                      child: switch (state.pageLayoutModel?.pageLayoutEnum) {
+                        PageLayoutEnum.list => HomeDirectoryListLayout(
+                            allDirectoryModel: state.allDirectory,
+                          ),
+                        PageLayoutEnum.symbol => HomeDirectorySymbolLayout(
+                            allDirectoryModel: state.allDirectory,
+                          ),
+                        null => const SizedBox(),
+                      },
+                    ),
+                  ],
+                ),
+              );
 
-              case HomeDirectoryStatus.error:
-                return const Center(
-                  child: LocaleText(
-                    text: LocaleKeys.errors_nullErrorMessage,
-                  ),
-                );
+            case HomeDirectoryStatus.error:
+              return const Center(
+                child: LocaleText(
+                  text: LocaleKeys.errors_nullErrorMessage,
+                ),
+              );
 
-              case HomeDirectoryStatus.loading:
-                return _getCircularProgressIndicator(context: context);
-              case HomeDirectoryStatus.start:
-                return _getCircularProgressIndicator(context: context);
-            }
-          },
-        ),
+            case HomeDirectoryStatus.loading:
+              return _getCircularProgressIndicator(context: context);
+            case HomeDirectoryStatus.start:
+              return _getCircularProgressIndicator(context: context);
+          }
+        },
       ),
     );
   }

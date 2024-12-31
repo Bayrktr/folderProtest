@@ -472,6 +472,25 @@ class ProfileRouteArgs {
 }
 
 /// generated route for
+/// [PublicHomeDirectoryView]
+class PublicHomeDirectoryRoute extends PageRouteInfo<void> {
+  const PublicHomeDirectoryRoute({List<PageRouteInfo>? children})
+      : super(
+          PublicHomeDirectoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PublicHomeDirectoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PublicHomeDirectoryView();
+    },
+  );
+}
+
+/// generated route for
 /// [SearchDirectoryView]
 class SearchDirectoryRoute extends PageRouteInfo<void> {
   const SearchDirectoryRoute({List<PageRouteInfo>? children})
