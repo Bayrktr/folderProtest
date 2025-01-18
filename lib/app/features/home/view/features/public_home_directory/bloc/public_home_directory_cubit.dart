@@ -27,6 +27,9 @@ class PublicHomeDirectoryCubit extends Cubit<PublicHomeDirectoryState> {
 
     try {
       final response = await _publicHomeDirectoryRepository.getAllDirectory();
+      print('response');
+      print(response);
+
       emit(
         state.copyWith(
           status: PublicHomeDirectoryStatus.initial,

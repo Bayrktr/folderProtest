@@ -20,7 +20,7 @@ class FavoritesDirectoryModelAdapter
     return FavoritesDirectoryModel(
       id: fields[0] as int?,
       addedTime: fields[1] as DateTime?,
-      directoryModel: fields[2] as DirectoryModel?,
+      directoryModel: fields[2] as BaseDirectoryModel?,
     );
   }
 
@@ -60,7 +60,7 @@ _$FavoritesDirectoryModelImpl _$$FavoritesDirectoryModelImplFromJson(
           : DateTime.parse(json['addedTime'] as String),
       directoryModel: json['directoryModel'] == null
           ? null
-          : DirectoryModel.fromJson(
+          : BaseDirectoryModel.fromJson(
               json['directoryModel'] as Map<String, dynamic>),
     );
 

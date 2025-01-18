@@ -1,5 +1,6 @@
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/edit_pdf/bloc/edit_pdf_state.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/pdf/all_pdf_model.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
@@ -19,7 +20,7 @@ class EditPdfCubit extends Cubit<EditPdfState> with _EditPdfCubitMixin {
         ),
         super(EditPdfState());
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   final PdfRepository _pdfRepository;
 

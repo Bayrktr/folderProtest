@@ -9,6 +9,7 @@ import 'package:DocuSort/app/features/edit_directory/view/component/edit_directo
 import 'package:DocuSort/app/features/edit_directory/view/component/edit_directory_snack_bar.dart';
 import 'package:DocuSort/app/product/component/alert_dialog/show_dialog.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/app/product/utility/validator/text_form_field_validator.dart';
@@ -23,7 +24,7 @@ part 'edit_directory_mixin.dart';
 class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
   EditDirectoryView({super.key, this.directoryModel});
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -151,7 +152,7 @@ class EditDirectoryView extends StatelessWidget with _EditDirectoryMixin {
 
   AppBar _getAppbar({
     required BuildContext context,
-    DirectoryModel? directoryModel,
+    BaseDirectoryModel? directoryModel,
   }) {
     return AppBar(
       centerTitle: true,

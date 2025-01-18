@@ -49,11 +49,25 @@ class SplashView extends StatelessWidget {
             );
           },
           listener: (context, state) {
+            switch (state.deepLinkNavigatePages) {
+              case DeepLinkNavigatePages.initial:
+                break;
+              case DeepLinkNavigatePages.homeDirectoryOpen:
+                context.router.pushAndPopUntil(
+                  HomeDirectoryOpenRoute(
+                    directoryModel: state.deepLinkDirectory,
+                  ),
+                  predicate: (router) => false,
+                );
+              case DeepLinkNavigatePages.fileOpen:
+                break;
+            }
+
             switch (state.status) {
               case SplashStatus.start:
-                return;
+                break;
               case SplashStatus.error:
-                return;
+                break;
               case SplashStatus.finish:
                 context.router.pushAndPopUntil(
                   predicate: (router) => false,

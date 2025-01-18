@@ -1,27 +1,24 @@
-import 'package:DocuSort/app/product/service/database/firebase/model/base_firebase_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 
-abstract class DirectoryImplementBaseModel<T> {
-  T fromJson(Map<String, dynamic> json);
+abstract class BaseDirectoryModel {
+  factory BaseDirectoryModel.fromJson(Map<String, dynamic> json) {
+    throw UnimplementedError();
+  }
+
+  int? get id;
+
+  String? get name;
+
+  int? get fileListKey;
+
+  FileTypeEnum? get fileTypeEnum;
 
   Map<String, dynamic> toJson();
-}
 
-abstract class DirectoryExtendBaseModel {
-  int? id;
-  String? name;
-  int? fileListKey;
-}
-
-abstract class DirectoryFirebaseModel<T> extends DirectoryExtendBaseModel
-    implements BaseFirebaseModel<T> {
-  @override
-  T fromFirebase(DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final value = snapshot.data();
-    if (value == null) {
-      throw FirebaseException(plugin: 'firebase_firestore', code: 'data-null');
-    }
-
-    return fromJson(value);
-  }
+  BaseDirectoryModel copyWith({
+    int? id,
+    String? name,
+    int? fileListKey,
+    FileTypeEnum? fileTypeEnum,
+  });
 }

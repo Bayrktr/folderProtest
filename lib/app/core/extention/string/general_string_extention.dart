@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 final class GeneralStringExtension {
   GeneralStringExtension(String value) : _string = value;
 
@@ -19,7 +21,12 @@ final class GeneralStringExtension {
   }
 
   String get toLower {
-    if(_string.isEmpty) return _string;
+    if (_string.isEmpty) return _string;
     return _string.toLowerCase();
+  }
+
+  Color? get toColor {
+    if (_string.isEmpty) return null;
+    return Color(int.parse(_string, radix: 16));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/features/home/view/features/public_home_directory/bloc/public_home_directory_cubit.dart';
 import 'package:DocuSort/app/features/home/view/features/public_home_directory/bloc/public_home_directory_state.dart';
-import 'package:DocuSort/app/product/bloc/user_account/user_account_cubit.dart';
+import 'package:DocuSort/app/product/component/logo/app_logo.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,16 +16,7 @@ class PublicHomeDirectoryView extends StatelessWidget {
     return BlocConsumer<PublicHomeDirectoryCubit, PublicHomeDirectoryState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                context.router.maybePop();
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-              ),
-            ),
-          ),
+          appBar: _getAppBar(context),
           body: switch (state.status) {
             PublicHomeDirectoryStatus.start => _getCircularProgressIndicator,
             PublicHomeDirectoryStatus.initial => Padding(
@@ -56,6 +47,15 @@ class PublicHomeDirectoryView extends StatelessWidget {
       listener: (context, state) {
 
       },
+    );
+  }
+
+  AppBar _getAppBar(BuildContext context) {
+    return AppBar(
+      leadingWidth: context.sized.dynamicWidth(0.4),
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      leading: const AppLogo(),
     );
   }
 

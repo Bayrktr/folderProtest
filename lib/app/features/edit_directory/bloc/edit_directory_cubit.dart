@@ -8,6 +8,7 @@ import 'package:DocuSort/app/product/cache/hive/operation/all_pdf_operation.dart
 import 'package:DocuSort/app/product/cache/hive/operation/directory_operation.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/file/all_file/all_file_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/base/file_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
@@ -30,7 +31,7 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
 
   final EditDirectoryRepository _editDirectoryRepository;
 
-  final DirectoryModel? selectedDirectory;
+  final BaseDirectoryModel? selectedDirectory;
 
   final TextEditingController _directoryNameController;
 
@@ -151,7 +152,7 @@ class EditDirectoryCubit extends Cubit<EditDirectoryState>
         ),
       );
     } else {
-      final updatedList = <DirectoryModel?>[
+      final updatedList = <BaseDirectoryModel?>[
         updatedDirectoryModel,
         ...directoryList
             .where((model) => model?.id != updatedDirectoryModel.id),

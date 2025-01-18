@@ -1,6 +1,7 @@
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/core/extention/string/null_string_extention.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/icons/home_directory_open_more_vertical_icon.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
@@ -18,7 +19,7 @@ class HomeDirectoryOpenListLayout extends StatelessWidget {
   });
 
   final AllFileExtendBaseModel? allFileExtendBaseModel;
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   @override
   Widget build(BuildContext context) {

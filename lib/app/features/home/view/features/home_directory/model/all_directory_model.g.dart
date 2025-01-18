@@ -18,7 +18,7 @@ class AllDirectoryModelAdapter extends TypeAdapter<AllDirectoryModel> {
     };
     return AllDirectoryModel(
       id: fields[0] as int?,
-      allDirectory: (fields[1] as List).cast<DirectoryModel?>(),
+      allDirectory: (fields[1] as List).cast<BaseDirectoryModel?>(),
     );
   }
 
@@ -54,7 +54,7 @@ _$AllDirectoryModelImpl _$$AllDirectoryModelImplFromJson(
       allDirectory: (json['allDirectory'] as List<dynamic>?)
               ?.map((e) => e == null
                   ? null
-                  : DirectoryModel.fromJson(e as Map<String, dynamic>))
+                  : BaseDirectoryModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );

@@ -14,7 +14,7 @@ part of 'app_router.dart';
 class AddPdfRoute extends PageRouteInfo<AddPdfRouteArgs> {
   AddPdfRoute({
     Key? key,
-    DirectoryModel? directoryModel,
+    BaseDirectoryModel? directoryModel,
     List<PageRouteInfo>? children,
   }) : super(
           AddPdfRoute.name,
@@ -48,7 +48,7 @@ class AddPdfRouteArgs {
 
   final Key? key;
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   @override
   String toString() {
@@ -96,7 +96,7 @@ class DirectoryAddRouteArgs {
 class EditDirectoryRoute extends PageRouteInfo<EditDirectoryRouteArgs> {
   EditDirectoryRoute({
     Key? key,
-    DirectoryModel? directoryModel,
+    BaseDirectoryModel? directoryModel,
     List<PageRouteInfo>? children,
   }) : super(
           EditDirectoryRoute.name,
@@ -130,7 +130,7 @@ class EditDirectoryRouteArgs {
 
   final Key? key;
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   @override
   String toString() {
@@ -143,7 +143,7 @@ class EditDirectoryRouteArgs {
 class EditPdfRoute extends PageRouteInfo<EditPdfRouteArgs> {
   EditPdfRoute({
     Key? key,
-    DirectoryModel? directoryModel,
+    BaseDirectoryModel? directoryModel,
     PdfModel? pdfModel,
     List<PageRouteInfo>? children,
   }) : super(
@@ -181,7 +181,7 @@ class EditPdfRouteArgs {
 
   final Key? key;
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   final PdfModel? pdfModel;
 
@@ -253,7 +253,7 @@ class GeneralErrorRoute extends PageRouteInfo<void> {
 class HomeDirectoryOpenRoute extends PageRouteInfo<HomeDirectoryOpenRouteArgs> {
   HomeDirectoryOpenRoute({
     Key? key,
-    DirectoryModel? directoryModel,
+    BaseDirectoryModel? directoryModel,
     List<PageRouteInfo>? children,
   }) : super(
           HomeDirectoryOpenRoute.name,
@@ -287,7 +287,7 @@ class HomeDirectoryOpenRouteArgs {
 
   final Key? key;
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   @override
   String toString() {
@@ -533,7 +533,7 @@ class SearchFavoriteDirectoryRoute extends PageRouteInfo<void> {
 class SearchFileRoute extends PageRouteInfo<SearchFileRouteArgs> {
   SearchFileRoute({
     Key? key,
-    DirectoryModel? directoryModel,
+    BaseDirectoryModel? directoryModel,
     List<PageRouteInfo>? children,
   }) : super(
           SearchFileRoute.name,
@@ -567,7 +567,7 @@ class SearchFileRouteArgs {
 
   final Key? key;
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   @override
   String toString() {

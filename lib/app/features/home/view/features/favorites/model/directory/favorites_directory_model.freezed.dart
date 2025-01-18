@@ -26,7 +26,7 @@ mixin _$FavoritesDirectoryModel {
   @HiveField(1)
   DateTime? get addedTime => throw _privateConstructorUsedError;
   @HiveField(2)
-  DirectoryModel? get directoryModel => throw _privateConstructorUsedError;
+  BaseDirectoryModel? get directoryModel => throw _privateConstructorUsedError;
 
   /// Serializes this FavoritesDirectoryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,9 +47,7 @@ abstract class $FavoritesDirectoryModelCopyWith<$Res> {
   $Res call(
       {@HiveField(0) int? id,
       @HiveField(1) DateTime? addedTime,
-      @HiveField(2) DirectoryModel? directoryModel});
-
-  $DirectoryModelCopyWith<$Res>? get directoryModel;
+      @HiveField(2) BaseDirectoryModel? directoryModel});
 }
 
 /// @nodoc
@@ -84,22 +82,8 @@ class _$FavoritesDirectoryModelCopyWithImpl<$Res,
       directoryModel: freezed == directoryModel
           ? _value.directoryModel
           : directoryModel // ignore: cast_nullable_to_non_nullable
-              as DirectoryModel?,
+              as BaseDirectoryModel?,
     ) as $Val);
-  }
-
-  /// Create a copy of FavoritesDirectoryModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DirectoryModelCopyWith<$Res>? get directoryModel {
-    if (_value.directoryModel == null) {
-      return null;
-    }
-
-    return $DirectoryModelCopyWith<$Res>(_value.directoryModel!, (value) {
-      return _then(_value.copyWith(directoryModel: value) as $Val);
-    });
   }
 }
 
@@ -115,10 +99,7 @@ abstract class _$$FavoritesDirectoryModelImplCopyWith<$Res>
   $Res call(
       {@HiveField(0) int? id,
       @HiveField(1) DateTime? addedTime,
-      @HiveField(2) DirectoryModel? directoryModel});
-
-  @override
-  $DirectoryModelCopyWith<$Res>? get directoryModel;
+      @HiveField(2) BaseDirectoryModel? directoryModel});
 }
 
 /// @nodoc
@@ -152,7 +133,7 @@ class __$$FavoritesDirectoryModelImplCopyWithImpl<$Res>
       directoryModel: freezed == directoryModel
           ? _value.directoryModel
           : directoryModel // ignore: cast_nullable_to_non_nullable
-              as DirectoryModel?,
+              as BaseDirectoryModel?,
     ));
   }
 }
@@ -177,7 +158,7 @@ class _$FavoritesDirectoryModelImpl extends _FavoritesDirectoryModel {
   final DateTime? addedTime;
   @override
   @HiveField(2)
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   @override
   String toString() {
@@ -221,7 +202,7 @@ abstract class _FavoritesDirectoryModel extends FavoritesDirectoryModel {
   factory _FavoritesDirectoryModel(
           {@HiveField(0) final int? id,
           @HiveField(1) final DateTime? addedTime,
-          @HiveField(2) final DirectoryModel? directoryModel}) =
+          @HiveField(2) final BaseDirectoryModel? directoryModel}) =
       _$FavoritesDirectoryModelImpl;
   _FavoritesDirectoryModel._() : super._();
 
@@ -236,7 +217,7 @@ abstract class _FavoritesDirectoryModel extends FavoritesDirectoryModel {
   DateTime? get addedTime;
   @override
   @HiveField(2)
-  DirectoryModel? get directoryModel;
+  BaseDirectoryModel? get directoryModel;
 
   /// Create a copy of FavoritesDirectoryModel
   /// with the given fields replaced by the non-null parameter values.

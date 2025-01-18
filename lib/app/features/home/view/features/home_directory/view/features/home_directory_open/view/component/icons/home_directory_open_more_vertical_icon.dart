@@ -1,4 +1,5 @@
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/cubit/home_directory_open_cubit.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/view/component/show_modal/home_directory_open_show_model_sheet.dart';
@@ -17,8 +18,8 @@ class HomeDirectoryOpenMoreVerticalIcon extends StatelessWidget {
     required this.item,
   });
 
-  final DirectoryModel? directoryModel;
-  final FileExtendBaseModel item;
+  final BaseDirectoryModel? directoryModel;
+  final FileExtendBaseModel<dynamic> item;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class HomeDirectoryOpenMoreVerticalIcon extends StatelessWidget {
           context: context,
           widget: HomeDirectoryOpenShowModelSheet(
             onEdit: () {
+              //fixme
               context.router.push(
                 getNavigateEditPageRoute(
                   directoryModel!.fileTypeEnum,

@@ -84,7 +84,6 @@ class DirectoryAddView extends StatelessWidget with DirectoryAddViewMixin {
                                       .text,
                                   fileListKey: IdGenerator.randomIntId,
                                   fileTypeEnum: state.selectedFileTypeEnum,
-                                  // fixme tagColor:
                                 ),
                               );
                         }

@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:DocuSort/app/features/home/view/features/public_home_directory/model/public_directory_model.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
@@ -33,10 +32,12 @@ class PublicHomeDirectoryRepository implements IPublicHomeDirectoryRepository {
         .collection(FirestoreCollection.users.path)
         .doc(userId)
         .collection(FirestoreCollection.directory.path);
-    final response = _firebaseDatabase.fetchList<PublicDirectoryModel>(
-      PublicDirectoryModel(),
+    final response = await _firebaseDatabase.fetchList<PublicDirectoryModel>(
+      const PublicDirectoryModel(),
       collectionReference,
     );
     return response;
   }
+
+
 }

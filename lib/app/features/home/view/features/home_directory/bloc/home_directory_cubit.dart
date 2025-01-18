@@ -6,6 +6,7 @@ import 'package:DocuSort/app/features/home/view/features/home_directory/model/al
 import 'package:DocuSort/app/product/cache/hive/operation/home_directory_page_layout_operation.dart';
 import 'package:DocuSort/app/product/enum/page_layout_enum.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/page_layout/home_directory_page_layout/home_directory_page_layout_model.dart';
 import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
 import 'package:DocuSort/app/product/repository/favorite/directory_favorite_repository.dart';
@@ -81,7 +82,7 @@ class HomeDirectoryCubit extends Cubit<HomeDirectoryState>
   }
 
   Future<void> deleteDirectoryFromAllDirectory(
-    DirectoryModel? directoryModel,
+    BaseDirectoryModel? directoryModel,
   ) async {
     emit(
       state.copyWith(
@@ -122,7 +123,7 @@ class HomeDirectoryCubit extends Cubit<HomeDirectoryState>
     resetSnackBarStatus();
   }
 
-  Future<void> addToFavorite(DirectoryModel directoryModel) async {
+  Future<void> addToFavorite(BaseDirectoryModel directoryModel) async {
     final allFavoritesDirectoryModel =
         _favoriteRepository.allFavoritesDirectoryModel;
     if (allFavoritesDirectoryModel == null) {
@@ -173,7 +174,7 @@ class HomeDirectoryCubit extends Cubit<HomeDirectoryState>
     );
   }
 
-  bool isAlreadyFavorite(DirectoryModel? directoryModel) {
+  bool isAlreadyFavorite(BaseDirectoryModel? directoryModel) {
     if (directoryModel == null) return false;
     final isAlreadyExist = _favoriteRepository
         .allFavoritesDirectoryModel!.allFavoritesDirectory

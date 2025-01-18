@@ -1,4 +1,6 @@
 import 'package:DocuSort/app/core/constant/settings.dart';
+import 'package:DocuSort/app/product/bloc/deep_link/deep_link_cubit.dart';
+import 'package:DocuSort/app/product/bloc/deep_link/deep_link_state.dart';
 import 'package:DocuSort/app/product/bloc/theme/theme_cubit.dart';
 import 'package:DocuSort/app/product/bloc/user_account/user_account_cubit.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/theme_operation.dart';
@@ -17,6 +19,7 @@ Future<void> main() async {
   //return;
   await AppInit.mainInit();
 
+
   runApp(
     EasyLocalization(
       startLocale: Settings.startLocale,
@@ -32,11 +35,12 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final _appRouter = AppRouter();
+ final _appRouter = GetItManager.getIt<AppRouter>();
 
   final ThemeModel _themeModel =
       GetItManager.getIt<ThemeOperation>().getItem(ThemeModel.themeModelKey) ??
           ThemeModel();
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,43 +54,48 @@ class MyApp extends StatelessWidget {
             IFirebaseAuth(null),
           ),
         ),
+        BlocProvider(
+          create: (_) => DeepLinkCubit(),
+        ),
       ],
-      child: Builder(
-        builder: (context) {
-          final themeState = context.watch<ThemeCubit>().state;
-          final userState = context.watch<UserAccountCubit>().state;
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<DeepLinkCubit, DeepLinkState>(
+            listener: (context, state) {
+              switch (state.navigate) {
+                case DeepLinkNavigate.initial:
+                  break;
+                case DeepLinkNavigate.openDirectory:
+                  GetItManager.getIt<AppRouter>().push(
+                    HomeDirectoryOpenRoute(
+                      directoryModel: state.directoryModel,
+                    ),
+                  );
+                case DeepLinkNavigate.openFile:
+                  break;
+              }
+            },
+          ),
+        ],
+        child: Builder(
+          builder: (context) {
+            context.read<DeepLinkCubit>().initDeepLinkHandling();
 
-          final isLight = themeState.themeModel.isLight;
+            final themeState = context.watch<ThemeCubit>().state;
+            final isLight = themeState.themeModel.isLight;
 
-          return MaterialApp.router(
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            debugShowCheckedModeBanner: Settings.isDebugBannerOpen,
-            routerConfig: _appRouter.config(),
-            title: Settings.appName,
-            theme: isLight ? AppTheme.lightTheme : AppTheme.dartTheme,
-          );
-        },
+            return MaterialApp.router(
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              debugShowCheckedModeBanner: Settings.isDebugBannerOpen,
+              routerConfig: _appRouter.config(),
+              title: Settings.appName,
+              theme: isLight ? AppTheme.lightTheme : AppTheme.dartTheme,
+            );
+          },
+        ),
       ),
     );
   }
 }
-
-/*
- BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, state) {
-          final isLight = state.themeModel.isLight;
-
-          return MaterialApp.router(
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            debugShowCheckedModeBanner: Settings.isDebugBannerOpen,
-            routerConfig: _appRouter.config(),
-            title: Settings.appName,
-            theme: isLight ? AppTheme.lightTheme : AppTheme.dartTheme,
-          );
-        },
-      ),
- */

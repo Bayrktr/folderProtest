@@ -6,6 +6,7 @@ import 'package:DocuSort/app/features/home/view/features/home_directory/view/fea
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/manager/detect_file_type/detect_file_type_manager.dart';
 import 'package:DocuSort/app/product/manager/file_picker/file_picker_manager.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +24,7 @@ class AddPdfCubit extends Cubit<AddPdfState> with _AddPdfCubitMixin {
 
   final AddPdfRepository addPdfRepository;
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   final TextEditingController _pdfNameController = TextEditingController();
 

@@ -23,7 +23,8 @@ mixin _$AllDirectoryModel {
   @HiveField(0)
   int? get id => throw _privateConstructorUsedError;
   @HiveField(1)
-  List<DirectoryModel?> get allDirectory => throw _privateConstructorUsedError;
+  List<BaseDirectoryModel?> get allDirectory =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this AllDirectoryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $AllDirectoryModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0) int? id,
-      @HiveField(1) List<DirectoryModel?> allDirectory});
+      @HiveField(1) List<BaseDirectoryModel?> allDirectory});
 }
 
 /// @nodoc
@@ -72,7 +73,7 @@ class _$AllDirectoryModelCopyWithImpl<$Res, $Val extends AllDirectoryModel>
       allDirectory: null == allDirectory
           ? _value.allDirectory
           : allDirectory // ignore: cast_nullable_to_non_nullable
-              as List<DirectoryModel?>,
+              as List<BaseDirectoryModel?>,
     ) as $Val);
   }
 }
@@ -87,7 +88,7 @@ abstract class _$$AllDirectoryModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@HiveField(0) int? id,
-      @HiveField(1) List<DirectoryModel?> allDirectory});
+      @HiveField(1) List<BaseDirectoryModel?> allDirectory});
 }
 
 /// @nodoc
@@ -114,7 +115,7 @@ class __$$AllDirectoryModelImplCopyWithImpl<$Res>
       allDirectory: null == allDirectory
           ? _value._allDirectory
           : allDirectory // ignore: cast_nullable_to_non_nullable
-              as List<DirectoryModel?>,
+              as List<BaseDirectoryModel?>,
     ));
   }
 }
@@ -124,7 +125,7 @@ class __$$AllDirectoryModelImplCopyWithImpl<$Res>
 class _$AllDirectoryModelImpl extends _AllDirectoryModel {
   _$AllDirectoryModelImpl(
       {@HiveField(0) this.id,
-      @HiveField(1) final List<DirectoryModel?> allDirectory = const []})
+      @HiveField(1) final List<BaseDirectoryModel?> allDirectory = const []})
       : _allDirectory = allDirectory,
         super._();
 
@@ -134,11 +135,11 @@ class _$AllDirectoryModelImpl extends _AllDirectoryModel {
   @override
   @HiveField(0)
   final int? id;
-  final List<DirectoryModel?> _allDirectory;
+  final List<BaseDirectoryModel?> _allDirectory;
   @override
   @JsonKey()
   @HiveField(1)
-  List<DirectoryModel?> get allDirectory {
+  List<BaseDirectoryModel?> get allDirectory {
     if (_allDirectory is EqualUnmodifiableListView) return _allDirectory;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_allDirectory);
@@ -184,7 +185,7 @@ class _$AllDirectoryModelImpl extends _AllDirectoryModel {
 abstract class _AllDirectoryModel extends AllDirectoryModel {
   factory _AllDirectoryModel(
           {@HiveField(0) final int? id,
-          @HiveField(1) final List<DirectoryModel?> allDirectory}) =
+          @HiveField(1) final List<BaseDirectoryModel?> allDirectory}) =
       _$AllDirectoryModelImpl;
   _AllDirectoryModel._() : super._();
 
@@ -196,7 +197,7 @@ abstract class _AllDirectoryModel extends AllDirectoryModel {
   int? get id;
   @override
   @HiveField(1)
-  List<DirectoryModel?> get allDirectory;
+  List<BaseDirectoryModel?> get allDirectory;
 
   /// Create a copy of AllDirectoryModel
   /// with the given fields replaced by the non-null parameter values.

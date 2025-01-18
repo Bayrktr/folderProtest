@@ -1,4 +1,5 @@
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/view/features/home_directory_open/model/pdf/all_pdf_model.dart';
 import 'package:DocuSort/app/features/search_file/bloc/search_file_state.dart';
@@ -13,7 +14,7 @@ class SearchFileCubit extends Cubit<SearchFileState> {
 
   final PdfRepository _pdfRepository;
 
-  final DirectoryModel? _directoryModel;
+  final BaseDirectoryModel? _directoryModel;
 
   int? get fileListKey => _directoryModel?.fileListKey;
 

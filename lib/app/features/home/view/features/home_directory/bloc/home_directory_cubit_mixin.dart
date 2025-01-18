@@ -5,7 +5,7 @@ part of 'home_directory_cubit.dart';
 mixin _HomeDirectoryCubitMixin on Cubit<HomeDirectoryState>{
   bool isAlreadyExist(
       List<FavoritesDirectoryModel?>? favoriteDirectoryModel,
-      DirectoryModel directoryModel,
+      BaseDirectoryModel directoryModel,
       ) {
     final isAlreadyExist =
     favoriteDirectoryModel!.any((element) {

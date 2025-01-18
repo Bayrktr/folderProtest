@@ -32,4 +32,6 @@ final class Settings {
 
   static const String langPath = '${Settings.assetPath}lang';
 
+  static const String host = 'share';
+
 }

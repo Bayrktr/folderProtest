@@ -1,5 +1,6 @@
 import 'package:DocuSort/app/core/extention/build_context/build_context_extension.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/app/features/search_file/bloc/search_file_cubit.dart';
@@ -17,7 +18,7 @@ part 'search_file_mixin.dart';
 class SearchFileView extends StatelessWidget with _SearchFileMixin {
   const SearchFileView({super.key, this.directoryModel});
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   @override
   Widget build(BuildContext context) {

@@ -12,6 +12,7 @@ import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/app/product/constant/hero_tags.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/enum/page_layout_enum.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
@@ -29,7 +30,7 @@ class HomeDirectoryOpenView extends StatelessWidget
     this.directoryModel,
   });
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +137,7 @@ class HomeDirectoryOpenView extends StatelessWidget
 
   AppBar _getAppBar({
     required BuildContext context,
-    DirectoryModel? directoryModel,
+    BaseDirectoryModel? directoryModel,
   }) {
     return AppBar(
       centerTitle: true,
@@ -148,7 +149,8 @@ class HomeDirectoryOpenView extends StatelessWidget
         icon: const Icon(Icons.arrow_back),
       ),
       title: Text(
-        directoryModel?.fileTypeEnum?.name.general.capitalize ?? '',
+       // fixme  directoryModel?.fileTypeEnum?.name.general.capitalize ?? '',
+        ''
       ),
       actions: [
         BlocBuilder<HomeDirectoryOpenCubit, HomeDirectoryOpenState>(
@@ -177,7 +179,7 @@ class HomeDirectoryOpenView extends StatelessWidget
 
   FloatingActionButton _getFloatingActionButton({
     required BuildContext context,
-    required DirectoryModel directoryModel,
+    required BaseDirectoryModel directoryModel,
   }) {
     return FloatingActionButton(
       onPressed: () {
@@ -192,7 +194,7 @@ class HomeDirectoryOpenView extends StatelessWidget
     );
   }
 
-  PageRouteInfo<dynamic> _getNavigatePageRoute(DirectoryModel? directoryModel) {
+  PageRouteInfo<dynamic> _getNavigatePageRoute(BaseDirectoryModel? directoryModel) {
     switch (directoryModel?.fileTypeEnum) {
       case null:
         return const GeneralErrorRoute();

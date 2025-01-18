@@ -1,3 +1,4 @@
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
@@ -11,7 +12,7 @@ part 'all_directory_model.g.dart';
 class AllDirectoryModel with _$AllDirectoryModel, HiveModelMixin {
   factory AllDirectoryModel({
     @HiveField(0) int? id,
-    @HiveField(1) @Default([]) List<DirectoryModel?> allDirectory,
+    @HiveField(1) @Default([]) List<BaseDirectoryModel?> allDirectory,
   }) = _AllDirectoryModel;
 
   factory AllDirectoryModel.fromJson(Map<String, dynamic> json) =>

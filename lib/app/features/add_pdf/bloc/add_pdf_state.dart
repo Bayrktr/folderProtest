@@ -1,6 +1,6 @@
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 
 class AddPdfState with EquatableMixin {
   AddPdfState({
@@ -12,7 +12,7 @@ class AddPdfState with EquatableMixin {
 
   final AddPdfStatus status;
   final SavePdfStatus savePdfStatus;
-  final DirectoryModel? selectedDirectory;
+  final BaseDirectoryModel? selectedDirectory;
   final FilePickerResult? pickFileResult;
 
   @override
@@ -26,7 +26,7 @@ class AddPdfState with EquatableMixin {
   AddPdfState copyWith({
     AddPdfStatus? status,
     SavePdfStatus? savePdfStatus,
-    DirectoryModel? selectedDirectory,
+    BaseDirectoryModel? selectedDirectory,
     FilePickerResult? pickFileResult,
   }) =>
       AddPdfState(

@@ -9,6 +9,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 final class AppInit {
   const AppInit._();
@@ -26,6 +27,9 @@ final class AppInit {
       DeviceOrientation.portraitUp,
     ]);
 
+    await dotenv.load();
+
+
     await EasyLocalization.ensureInitialized();
     GetItManager.setup();
     await HiveCacheManager().start();
@@ -37,7 +41,7 @@ final class AppInit {
   }
 
   static Future<void> _startInitialHiveOperations() async {
-    final ThemeOperation themeOperation = GetItManager.getIt<ThemeOperation>();
+    final themeOperation = GetItManager.getIt<ThemeOperation>();
 
     await themeOperation.start(ThemeModel.themeModelKey);
     if (themeOperation.getItem(ThemeModel.themeModelKey)?.id == null) {

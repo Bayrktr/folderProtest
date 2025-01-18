@@ -24,6 +24,7 @@ import 'package:DocuSort/app/features/search_file/view/search_file_view.dart';
 import 'package:DocuSort/app/features/splash/view/splash_view.dart';
 import 'package:DocuSort/app/features/verifications/view/features/email_verification/view/email_verification_view.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/product/navigation/auth_guard/auth_guard.dart';
 import 'package:DocuSort/app/product/service/auth/firebase/firebase_auth.dart';
@@ -34,6 +35,7 @@ part 'app_router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'View,Route')
 class AppRouter extends RootStackRouter {
+
   @override
   List<AutoRoute> get routes => [
         AdaptiveRoute<SplashRoute>(

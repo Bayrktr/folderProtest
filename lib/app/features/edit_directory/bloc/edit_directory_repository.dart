@@ -4,12 +4,13 @@ import 'package:DocuSort/app/product/cache/hive/operation/all_directory_operatio
 import 'package:DocuSort/app/product/cache/hive/operation/directory_operation.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/repository/file/pdf_repository.dart';
 
 abstract class IEditDirectoryRepository {
   int? get fileListKey;
 
-  DirectoryModel? get selectedDirectoryModel;
+  BaseDirectoryModel? get selectedDirectoryModel;
 
   PdfRepository get pdfRepository;
 
@@ -27,13 +28,13 @@ class EditDirectoryRepository extends IEditDirectoryRepository {
   final DirectoryOperation _directoryOperation =
       GetItManager.getIt<DirectoryOperation>();
 
-  final DirectoryModel? _selectedDirectoryModel;
+  final BaseDirectoryModel? _selectedDirectoryModel;
 
   @override
   int? get fileListKey => _selectedDirectoryModel?.fileListKey;
 
   @override
-  DirectoryModel? get selectedDirectoryModel => _selectedDirectoryModel;
+  BaseDirectoryModel? get selectedDirectoryModel => _selectedDirectoryModel;
 
   @override
   PdfRepository get pdfRepository => _pdfRepository;

@@ -1,7 +1,7 @@
 part of 'home_directory_open_view.dart';
 
 mixin _HomeDirectoryOpenMixin on StatelessWidget {
-  bool nullCheck(DirectoryModel? directoryModel) {
+  bool nullCheck(BaseDirectoryModel? directoryModel) {
     if (directoryModel == null ||
         directoryModel.fileTypeEnum == null ||
         directoryModel.fileListKey == null) {

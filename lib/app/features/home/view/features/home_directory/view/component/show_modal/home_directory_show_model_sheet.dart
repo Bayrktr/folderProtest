@@ -2,6 +2,7 @@ import 'package:DocuSort/app/core/extention/string/string_extention.dart';
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:DocuSort/generated/locale_keys.g.dart';
 import 'package:auto_route/auto_route.dart';
@@ -18,7 +19,7 @@ class HomeDirectoryShowModelSheet extends StatelessWidget {
     this.alreadyFavorite = false,
   });
 
-  final DirectoryModel directoryModel;
+  final BaseDirectoryModel directoryModel;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
   final VoidCallback onAdd;

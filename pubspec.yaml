@@ -87,6 +87,14 @@ dependencies:
   firebase_storage: ^12.3.7
 
 
+  #Crypto
+  encrypt: ^5.0.0
+  pointycastle: ^3.0.0
+
+  #SecureStorage
+  flutter_dotenv: ^5.2.1
+
+
 
 
 
@@ -94,7 +102,7 @@ dependencies:
   #Other
   uuid: ^4.1.0
   flutter_svg: ^2.0.15
-
+  uni_links: ^0.5.1
 
 
 
@@ -145,6 +153,7 @@ flutter:
     - asset/testPdf/
     - asset/image/logo/
     - asset/image/icons/
+    - .env
 
 
   fonts:

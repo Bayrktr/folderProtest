@@ -5,6 +5,7 @@ import 'package:DocuSort/app/features/home/view/features/favorites/bloc/favorite
 import 'package:DocuSort/app/features/home/view/features/favorites/model/directory/favorites_directory_model.dart';
 import 'package:DocuSort/app/features/home/view/features/favorites/view/component/favorite_directory/favorite_directory_item_show_modal_sheet.dart';
 import 'package:DocuSort/app/product/component/alert_dialog/show_dialog.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/navigation/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class FavoriteDirectoryItem extends StatelessWidget {
 
   final FavoritesDirectoryModel? favoriteDirectoryModel;
 
-  DirectoryModel? get _item => favoriteDirectoryModel?.directoryModel;
+  BaseDirectoryModel? get _item => favoriteDirectoryModel?.directoryModel;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class FavoriteDirectoryItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(28),
           border: Border.all(
-            color: _item!.tagColor ?? context.theme.getColor.borderColor,
+           // fixme color: _item!.tagColor ?? context.theme.getColor.borderColor,
           ),
         ),
         child: Column(

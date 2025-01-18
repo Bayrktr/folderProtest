@@ -4,6 +4,7 @@ import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/edit_pdf/bloc/edit_pdf_cubit.dart';
 import 'package:DocuSort/app/features/edit_pdf/bloc/edit_pdf_state.dart';
 import 'package:DocuSort/app/features/edit_pdf/view/component/edit_pdf_snack_bar.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/model/file/file/pdf/pdf_model.dart';
 import 'package:DocuSort/app/product/component/text/locale_text.dart';
 import 'package:DocuSort/app/product/enum/file_type_enum.dart';
@@ -21,7 +22,7 @@ class EditPdfView extends StatelessWidget {
 
   final PdfModel? pdfModel;
 
-  final DirectoryModel? directoryModel;
+  final BaseDirectoryModel? directoryModel;
 
   final _formKey = GlobalKey<FormState>();
 

@@ -45,7 +45,7 @@ class FavoritesView extends StatelessWidget {
                           IconButton(
                             onPressed: () {
                               context.router.push(
-                                SearchFavoriteDirectoryRoute(),
+                                const SearchFavoriteDirectoryRoute(),
                               );
                             },
                             icon: const Icon(

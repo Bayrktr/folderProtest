@@ -1,8 +1,8 @@
-import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/features/home/view/features/home_directory/model/all_directory_model.dart';
 import 'package:DocuSort/app/features/search_directory/bloc/search_directory_state.dart';
 import 'package:DocuSort/app/product/cache/hive/operation/all_directory_operation.dart';
 import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:DocuSort/app/product/package/uuid/id_generator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +63,7 @@ class SearchDirectoryCubit extends Cubit<SearchDirectoryState> {
     if (value == null) return;
     _searchDirectoryController.text = value;
 
-    final List<DirectoryModel?> directoryListResult =
+    final directoryListResult =
         _directoryListResult(value);
 
     emit(
@@ -73,7 +73,7 @@ class SearchDirectoryCubit extends Cubit<SearchDirectoryState> {
     );
   }
 
-  List<DirectoryModel?> _directoryListResult(
+  List<BaseDirectoryModel?> _directoryListResult(
     String value,
   ) {
     final results = state.allDirectoryModel!.allDirectory.where(

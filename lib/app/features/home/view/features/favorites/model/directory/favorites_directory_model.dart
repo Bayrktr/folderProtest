@@ -1,5 +1,6 @@
 import 'package:DocuSort/app/features/directory_add/model/directory_model.dart';
 import 'package:DocuSort/app/product/cache/hive/model/hive_model.dart';
+import 'package:DocuSort/app/product/model/directory/directory_base_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -12,7 +13,7 @@ class FavoritesDirectoryModel with _$FavoritesDirectoryModel, HiveModelMixin {
   factory FavoritesDirectoryModel({
     @HiveField(0) int? id,
     @HiveField(1) DateTime? addedTime,
-    @HiveField(2) DirectoryModel? directoryModel
+    @HiveField(2) BaseDirectoryModel? directoryModel
   }) = _FavoritesDirectoryModel;
 
   factory FavoritesDirectoryModel.fromJson(Map<String, dynamic> json) =>

@@ -54,7 +54,7 @@ mixin _EditDirectoryMixin on StatelessWidget {
 
   Widget getAddPdfButton({
     required BuildContext context,
-    required DirectoryModel directoryModel,
+    required BaseDirectoryModel directoryModel,
   }) {
     return ElevatedButton.icon(
       style: ButtonStyle(
