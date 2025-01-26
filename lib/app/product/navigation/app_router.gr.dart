@@ -10,39 +10,306 @@
 part of 'app_router.dart';
 
 /// generated route for
-/// [HomePdfOpenView]
-class HomePdfOpenRoute extends PageRouteInfo<void> {
-  const HomePdfOpenRoute({List<PageRouteInfo>? children})
-      : super(
-          HomePdfOpenRoute.name,
+/// [AddPdfView]
+class AddPdfRoute extends PageRouteInfo<AddPdfRouteArgs> {
+  AddPdfRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AddPdfRoute.name,
+          args: AddPdfRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+          ),
           initialChildren: children,
         );
 
-  static const String name = 'HomePdfOpenRoute';
+  static const String name = 'AddPdfRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const HomePdfOpenView();
+      final args =
+          data.argsAs<AddPdfRouteArgs>(orElse: () => const AddPdfRouteArgs());
+      return AddPdfView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+      );
+    },
+  );
+}
+
+class AddPdfRouteArgs {
+  const AddPdfRouteArgs({
+    this.key,
+    this.directoryModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  @override
+  String toString() {
+    return 'AddPdfRouteArgs{key: $key, directoryModel: $directoryModel}';
+  }
+}
+
+/// generated route for
+/// [DirectoryAddView]
+class DirectoryAddRoute extends PageRouteInfo<DirectoryAddRouteArgs> {
+  DirectoryAddRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DirectoryAddRoute.name,
+          args: DirectoryAddRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'DirectoryAddRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DirectoryAddRouteArgs>(
+          orElse: () => const DirectoryAddRouteArgs());
+      return DirectoryAddView(key: args.key);
+    },
+  );
+}
+
+class DirectoryAddRouteArgs {
+  const DirectoryAddRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DirectoryAddRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [EditDirectoryView]
+class EditDirectoryRoute extends PageRouteInfo<EditDirectoryRouteArgs> {
+  EditDirectoryRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditDirectoryRoute.name,
+          args: EditDirectoryRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditDirectoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<EditDirectoryRouteArgs>(
+          orElse: () => const EditDirectoryRouteArgs());
+      return EditDirectoryView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+      );
+    },
+  );
+}
+
+class EditDirectoryRouteArgs {
+  const EditDirectoryRouteArgs({
+    this.key,
+    this.directoryModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  @override
+  String toString() {
+    return 'EditDirectoryRouteArgs{key: $key, directoryModel: $directoryModel}';
+  }
+}
+
+/// generated route for
+/// [EditPdfView]
+class EditPdfRoute extends PageRouteInfo<EditPdfRouteArgs> {
+  EditPdfRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    PdfModel? pdfModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditPdfRoute.name,
+          args: EditPdfRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+            pdfModel: pdfModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditPdfRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<EditPdfRouteArgs>(orElse: () => const EditPdfRouteArgs());
+      return EditPdfView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+        pdfModel: args.pdfModel,
+      );
+    },
+  );
+}
+
+class EditPdfRouteArgs {
+  const EditPdfRouteArgs({
+    this.key,
+    this.directoryModel,
+    this.pdfModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  final PdfModel? pdfModel;
+
+  @override
+  String toString() {
+    return 'EditPdfRouteArgs{key: $key, directoryModel: $directoryModel, pdfModel: $pdfModel}';
+  }
+}
+
+/// generated route for
+/// [EmailVerificationView]
+class EmailVerificationRoute extends PageRouteInfo<void> {
+  const EmailVerificationRoute({List<PageRouteInfo>? children})
+      : super(
+          EmailVerificationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EmailVerificationRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const EmailVerificationView();
     },
   );
 }
 
 /// generated route for
-/// [HomePdfView]
-class HomePdfRoute extends PageRouteInfo<void> {
-  const HomePdfRoute({List<PageRouteInfo>? children})
+/// [FavoritesView]
+class FavoritesRoute extends PageRouteInfo<void> {
+  const FavoritesRoute({List<PageRouteInfo>? children})
       : super(
-          HomePdfRoute.name,
+          FavoritesRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomePdfRoute';
+  static const String name = 'FavoritesRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const HomePdfView();
+      return const FavoritesView();
+    },
+  );
+}
+
+/// generated route for
+/// [GeneralErrorView]
+class GeneralErrorRoute extends PageRouteInfo<void> {
+  const GeneralErrorRoute({List<PageRouteInfo>? children})
+      : super(
+          GeneralErrorRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'GeneralErrorRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const GeneralErrorView();
+    },
+  );
+}
+
+/// generated route for
+/// [HomeDirectoryOpenView]
+class HomeDirectoryOpenRoute extends PageRouteInfo<HomeDirectoryOpenRouteArgs> {
+  HomeDirectoryOpenRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          HomeDirectoryOpenRoute.name,
+          args: HomeDirectoryOpenRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeDirectoryOpenRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<HomeDirectoryOpenRouteArgs>(
+          orElse: () => const HomeDirectoryOpenRouteArgs());
+      return HomeDirectoryOpenView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+      );
+    },
+  );
+}
+
+class HomeDirectoryOpenRouteArgs {
+  const HomeDirectoryOpenRouteArgs({
+    this.key,
+    this.directoryModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  @override
+  String toString() {
+    return 'HomeDirectoryOpenRouteArgs{key: $key, directoryModel: $directoryModel}';
+  }
+}
+
+/// generated route for
+/// [HomeDirectoryView]
+class HomeDirectoryRoute extends PageRouteInfo<void> {
+  const HomeDirectoryRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeDirectoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeDirectoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HomeDirectoryView();
     },
   );
 }
@@ -105,6 +372,229 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [OpenPdfView]
+class OpenPdfRoute extends PageRouteInfo<OpenPdfRouteArgs> {
+  OpenPdfRoute({
+    Key? key,
+    required PdfModel? pdfModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          OpenPdfRoute.name,
+          args: OpenPdfRouteArgs(
+            key: key,
+            pdfModel: pdfModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'OpenPdfRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<OpenPdfRouteArgs>();
+      return OpenPdfView(
+        key: args.key,
+        pdfModel: args.pdfModel,
+      );
+    },
+  );
+}
+
+class OpenPdfRouteArgs {
+  const OpenPdfRouteArgs({
+    this.key,
+    required this.pdfModel,
+  });
+
+  final Key? key;
+
+  final PdfModel? pdfModel;
+
+  @override
+  String toString() {
+    return 'OpenPdfRouteArgs{key: $key, pdfModel: $pdfModel}';
+  }
+}
+
+/// generated route for
+/// [PdfSettingsView]
+class PdfSettingsRoute extends PageRouteInfo<void> {
+  const PdfSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          PdfSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PdfSettingsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PdfSettingsView();
+    },
+  );
+}
+
+/// generated route for
+/// [ProfileView]
+class ProfileRoute extends PageRouteInfo<ProfileRouteArgs> {
+  ProfileRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ProfileRoute.name,
+          args: ProfileRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<ProfileRouteArgs>(orElse: () => const ProfileRouteArgs());
+      return ProfileView(key: args.key);
+    },
+  );
+}
+
+class ProfileRouteArgs {
+  const ProfileRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ProfileRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [PublicHomeDirectoryView]
+class PublicHomeDirectoryRoute extends PageRouteInfo<void> {
+  const PublicHomeDirectoryRoute({List<PageRouteInfo>? children})
+      : super(
+          PublicHomeDirectoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PublicHomeDirectoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PublicHomeDirectoryView();
+    },
+  );
+}
+
+/// generated route for
+/// [SearchDirectoryView]
+class SearchDirectoryRoute extends PageRouteInfo<void> {
+  const SearchDirectoryRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchDirectoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchDirectoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchDirectoryView();
+    },
+  );
+}
+
+/// generated route for
+/// [SearchFavoriteDirectoryView]
+class SearchFavoriteDirectoryRoute extends PageRouteInfo<void> {
+  const SearchFavoriteDirectoryRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchFavoriteDirectoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchFavoriteDirectoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchFavoriteDirectoryView();
+    },
+  );
+}
+
+/// generated route for
+/// [SearchFileView]
+class SearchFileRoute extends PageRouteInfo<SearchFileRouteArgs> {
+  SearchFileRoute({
+    Key? key,
+    DirectoryModel? directoryModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SearchFileRoute.name,
+          args: SearchFileRouteArgs(
+            key: key,
+            directoryModel: directoryModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchFileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SearchFileRouteArgs>(
+          orElse: () => const SearchFileRouteArgs());
+      return SearchFileView(
+        key: args.key,
+        directoryModel: args.directoryModel,
+      );
+    },
+  );
+}
+
+class SearchFileRouteArgs {
+  const SearchFileRouteArgs({
+    this.key,
+    this.directoryModel,
+  });
+
+  final Key? key;
+
+  final DirectoryModel? directoryModel;
+
+  @override
+  String toString() {
+    return 'SearchFileRouteArgs{key: $key, directoryModel: $directoryModel}';
+  }
+}
+
+/// generated route for
+/// [SettingsHomeView]
+class SettingsHomeRoute extends PageRouteInfo<void> {
+  const SettingsHomeRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingsHomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingsHomeRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SettingsHomeView();
+    },
+  );
+}
+
+/// generated route for
 /// [SettingsView]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})
@@ -119,6 +609,95 @@ class SettingsRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SettingsView();
+    },
+  );
+}
+
+/// generated route for
+/// [SignInView]
+class SignInRoute extends PageRouteInfo<SignInRouteArgs> {
+  SignInRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SignInRoute.name,
+          args: SignInRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'SignInRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<SignInRouteArgs>(orElse: () => const SignInRouteArgs());
+      return SignInView(key: args.key);
+    },
+  );
+}
+
+class SignInRouteArgs {
+  const SignInRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SignInRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [SignUpView]
+class SignUpRoute extends PageRouteInfo<SignUpRouteArgs> {
+  SignUpRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SignUpRoute.name,
+          args: SignUpRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'SignUpRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<SignUpRouteArgs>(orElse: () => const SignUpRouteArgs());
+      return SignUpView(key: args.key);
+    },
+  );
+}
+
+class SignUpRouteArgs {
+  const SignUpRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SignUpRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [SplashView]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SplashView();
     },
   );
 }

@@ -1,15 +1,21 @@
+import 'package:DocuSort/app/core/constant/settings.dart';
+import 'package:DocuSort/app/product/bloc/theme/theme_cubit.dart';
+import 'package:DocuSort/app/product/bloc/user_account/user_account_cubit.dart';
+import 'package:DocuSort/app/product/cache/hive/operation/theme_operation.dart';
+import 'package:DocuSort/app/product/constant/app_theme.dart';
+import 'package:DocuSort/app/product/init/app_init.dart';
+import 'package:DocuSort/app/product/manager/getIt/getIt_manager.dart';
+import 'package:DocuSort/app/product/model/theme/theme_model.dart';
+import 'package:DocuSort/app/product/navigation/app_router.dart';
+import 'package:DocuSort/app/product/service/auth/firebase/firebase_auth.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pdf_app/app/core/constant/settings.dart';
-import 'package:pdf_app/app/product/bloc/theme/theme_cubit.dart';
-import 'package:pdf_app/app/product/bloc/theme/theme_state.dart';
-import 'package:pdf_app/app/product/navigation/app_router.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await EasyLocalization.ensureInitialized();
+  // await Hive.deleteBoxFromDisk('pdfApp');
+  //return;
+  await AppInit.mainInit();
 
   runApp(
     EasyLocalization(
@@ -19,6 +25,8 @@ Future<void> main() async {
       child: MyApp(),
     ),
   );
+
+  //  runApp(TestApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,12 +34,30 @@ class MyApp extends StatelessWidget {
 
   final _appRouter = AppRouter();
 
+  final ThemeModel _themeModel =
+      GetItManager.getIt<ThemeOperation>().getItem(ThemeModel.themeModelKey) ??
+          ThemeModel();
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => ThemeCubit())],
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, state) {
+      providers: [
+        BlocProvider(
+          create: (_) => ThemeCubit(_themeModel),
+        ),
+        BlocProvider(
+          create: (_) => UserAccountCubit(
+            IFirebaseAuth(null),
+          ),
+        ),
+      ],
+      child: Builder(
+        builder: (context) {
+          final themeState = context.watch<ThemeCubit>().state;
+          final userState = context.watch<UserAccountCubit>().state;
+
+          final isLight = themeState.themeModel.isLight;
+
           return MaterialApp.router(
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
@@ -39,10 +65,28 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: Settings.isDebugBannerOpen,
             routerConfig: _appRouter.config(),
             title: Settings.appName,
-            theme: state.theme,
+            theme: isLight ? AppTheme.lightTheme : AppTheme.dartTheme,
           );
         },
       ),
     );
   }
 }
+
+/*
+ BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          final isLight = state.themeModel.isLight;
+
+          return MaterialApp.router(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            debugShowCheckedModeBanner: Settings.isDebugBannerOpen,
+            routerConfig: _appRouter.config(),
+            title: Settings.appName,
+            theme: isLight ? AppTheme.lightTheme : AppTheme.dartTheme,
+          );
+        },
+      ),
+ */

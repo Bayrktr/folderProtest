@@ -1,3 +1,4 @@
+import 'package:DocuSort/app/core/extention/build_context/icon_size_extension.dart';
 import 'package:flutter/material.dart';
 
 /// Context Size Extension
@@ -11,6 +12,7 @@ final class ContextSizeExtension {
 
   /// width size
   double get widthSize => MediaQuery.sizeOf(_context).width;
+
 
   /// height
   double get height => heightSize;

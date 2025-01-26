@@ -1,6 +1,6 @@
 {
-    "name": "pdf_app",
-    "short_name": "pdf_app",
+    "name": "DocuSort",
+    "short_name": "DocuSort",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

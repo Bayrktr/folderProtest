@@ -1,11 +1,12 @@
-import 'package:pdf_app/app/core/constant/settings.dart';
-import 'package:pdf_app/app/core/extention/string/string_extention.dart';
-import 'package:pdf_app/generated/locale_keys.g.dart';
+import 'package:DocuSort/app/core/constant/settings.dart';
+import 'package:DocuSort/app/core/extention/string/string_extention.dart';
+import 'package:DocuSort/generated/locale_keys.g.dart';
 
-final class NullCheckExtention {
+
+final class NullCheckExtension {
   final String? _string;
 
-  NullCheckExtention(String? value) : _string = value;
+  NullCheckExtension(String? value) : _string = value;
 
   String get getImageNotFoundAsset {
     if (_string == null) {

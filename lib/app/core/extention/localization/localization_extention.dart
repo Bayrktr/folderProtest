@@ -1,12 +1,14 @@
 import 'dart:ui';
 
-import 'package:pdf_app/app/core/constant/settings.dart';
+import 'package:DocuSort/app/core/constant/settings.dart';
 
 extension LocalizationExtention on Locale {
   String? get getCountryName {
     switch (this) {
       case Settings.trLocale:
         return 'Türkiye';
+      case Settings.enLocale:
+        return 'United States';
     }
     return null;
   }
@@ -19,6 +21,8 @@ extension LocalizationExtention on Locale {
     switch (this) {
       case Settings.trLocale:
         return 'tr';
+      case Settings.enLocale:
+        return 'en';
     }
     return null;
   }
